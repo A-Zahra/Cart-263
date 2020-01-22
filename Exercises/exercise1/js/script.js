@@ -82,12 +82,12 @@ function rotate(e) {
   else if (e.keyCode === 37) {
     // Lowers rotation degree by 1 
     rotation += -1;
+    // Assigns a new color to the pixel
+    let r = Math.random() * 10;
+    let g = Math.random() * 255;
+    let b = Math.random() * 10;
     for (let i = 0; i < 1000; i++) {
       allPixels[i].style.transform = "rotate(" + rotation + "deg)";
-      // Assigns a new color to the pixel
-      let r = Math.random() * 10;
-      let g = Math.random() * 255;
-      let b = Math.random() * 10;
       allPixels[i].style.backgroundColor = `rgb(${r},${g},${b})`;
     }
   }
