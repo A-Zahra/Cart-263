@@ -1,0 +1,10 @@
+body {
+
+}
+.pixel {
+  background-color: black;
+  width: 30px;
+  height: 30px;
+  /* display: inline-block; */
+  float: left;
+}
