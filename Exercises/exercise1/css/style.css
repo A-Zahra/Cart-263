@@ -1,10 +1,9 @@
 body {
-
 }
+/* Sets pixel div intial properties*/
 .pixel {
   background-color: black;
   width: 30px;
   height: 30px;
-  /* display: inline-block; */
   float: left;
 }
