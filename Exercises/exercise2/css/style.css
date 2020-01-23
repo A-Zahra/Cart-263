@@ -1,0 +1,16 @@
+body {
+
+}
+p {
+  margin: 5vw;
+  margin-bottom: 0vw;
+  font-size: 1.5em;
+}
+.redacted {
+  background-color: black;
+  color: transparent;
+}
+.revealed {
+  background-color: transparent;
+  color: red;
+}
