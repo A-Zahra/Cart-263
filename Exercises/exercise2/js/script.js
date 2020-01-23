@@ -20,6 +20,7 @@ function setup() {
   $spans.on("click", spanClicked);
   secretsTotal = $('.secret').length;
  $('#totalSecret').text(secretsTotal);
+ $('.secret').on("mouseover", foundIt);
 
 }
 

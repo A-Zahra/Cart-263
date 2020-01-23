@@ -19,7 +19,22 @@ h3 {
   margin-left: 10vw;
   margin-right: 10vw;
 }
-
+p {
+  font-size: 1.5em;
+  font-family: 'calibri';
+}
+.redacted {
+  background-color: white;
+  color: transparent;
+}
+.revealed {
+  background-color: transparent;
+  color: red;
+}
+.secret {
+  color: black;
+  font-family: 'Arial', sans-serif;
+}
 .found {
   background-color: Orange;
 }
