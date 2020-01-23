@@ -11,14 +11,17 @@ to match your project! Write JavaScript to do amazing things below!
 *********************************************************************/
 
 $(document).ready(setup);
-
+let $spans;
+let secretsFound = 0;
+let secretsTotal;
 function setup() {
   setInterval(update, 1000);
-  $('span').on("click", spanClicked);
+  $spans = $('span');
+  $spans.on("click", spanClicked);
 }
 
 function update() {
-  $('span').each(updateSpan);
+  $spans.each(updateSpan);
 }
 
 function updateSpan() {
@@ -33,3 +36,5 @@ function spanClicked() {
   $(this).removeClass("revealed");
   $(this).addClass("redacted");
 }
+
+
