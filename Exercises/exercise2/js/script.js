@@ -41,4 +41,9 @@ function spanClicked() {
   $(this).addClass("redacted");
 }
 
-
+function foundIt() {
+  $(this).addClass("found");
+  secretsFound += 1;
+  $('#foundSecret').text(secretsFound); 
+  $(this).off("mouseover"); 
+}
