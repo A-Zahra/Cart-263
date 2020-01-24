@@ -2,11 +2,13 @@
 
 /********************************************************************
 
-Title of Project
-Author Name
+Raving Redactionist Redux
+Zahra Ahmadi
 
-This is a template. Fill in the title, author, and this description
-to match your project! Write JavaScript to do amazing things below!
+The purpose behind this program is to keep redacting specified phrases 
+and find the six words embedded in the paraghraphs. Total number 
+of secret words plus number of words found by the user is shown on 
+top left corner of the canvas.
 
 *********************************************************************/
 $(document).ready(setup);
@@ -28,9 +30,9 @@ function setup() {
   // Stores number of secret words
   secretsTotal = $('.secret').length;
   // Assigns total number of secrets to totalSecret
- $('#totalSecret').text(secretsTotal);
- // If mouse went over secret word, applies foundIt function to 
- $('.secret').on("mouseover", foundIt);
+  $('#totalSecret').text(secretsTotal);
+  // If mouse went over secret word, applies foundIt function to 
+  $('.secret').on("mouseover", foundIt);
 }
 
 // update()
@@ -66,7 +68,7 @@ function foundIt() {
   $(this).addClass("found");
   // Adds one to the number of found secrets
   secretsFound += 1;
-  $('#foundSecret').text(secretsFound); 
+  $('#foundSecret').text(secretsFound);
   // Removes mouseover from that word
-  $(this).off("mouseover"); 
+  $(this).off("mouseover");
 }
