@@ -1,40 +1,55 @@
 body {
 }
-
+/*Properties of secret counter heading*/
 h3 {
   background-color: #00BFBF;
   width: 21vw;
   padding: 20px;
   border-radius: 20px;
 }
-
 #secretCounter {
   margin-left: 5vw;
   font-size: 2em;
   font-family: 'Corbel';
 }
-
+/*Properties of second heading*/
+h4 {
+  background-color: orange;
+  padding: 20px;
+  border-radius: 20px;
+  width: 31vw;
+  margin-top: 3vw;
+  margin-left: 32vw;
+  font-size: 1.5em;
+  font-family: 'Corbel';
+}
+/*Properties of container div*/
 .container {
-  margin-top: 5vw;
+  margin-top: 3vw;
   margin-left: 10vw;
   margin-right: 10vw;
 }
+/*Properties of paragraphs*/
 p {
   font-size: 1.5em;
   font-family: 'calibri';
 }
+/*Properties of spanned phrases*/
 .redacted {
   background-color: white;
   color: transparent;
 }
+/*Properties which will be applied to spanned phrases*/
 .revealed {
   background-color: transparent;
   color: red;
 }
+/*Properties of secret words*/
 .secret {
   color: black;
   font-family: 'Arial', sans-serif;
 }
+/*Property which will be applied to secret words*/
 .found {
   background-color: Orange;
 }
