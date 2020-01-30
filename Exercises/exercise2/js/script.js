@@ -5,9 +5,9 @@
 Raving Redactionist Redux
 Zahra Ahmadi
 
-The purpose behind this program is to keep redacting specified phrases 
-and find the six words embedded in the paraghraphs. Total number 
-of secret words plus number of words found by the user is shown on 
+The purpose behind this program is to keep redacting specified phrases
+and find the six words embedded in the paraghraphs. Total number
+of secret words plus number of words found by the user is shown on
 top left corner of the canvas.
 
 *********************************************************************/
@@ -15,14 +15,16 @@ $(document).ready(setup);
 
 let $spans; // Stores all spans
 let secretsFound = 0; // Stores number of secrets counted
-let secretsTotal; //
+let secretsTotal; // Total number of secrets
+let intervalTime = 1000;
+let revealTime = 0.1;
 
 // setup()
 //
 // Sets up all the properties related to html file elements
 function setup() {
   // Displays update function every second
-  setInterval(update, 1000);
+  setInterval(update, intervalTime);
   // Assigns spans to the span variable
   $spans = $('span');
   // Applies spanClicked function to the spans once mouse clicked
@@ -31,7 +33,7 @@ function setup() {
   secretsTotal = $('.secret').length;
   // Assigns total number of secrets to totalSecret
   $('#totalSecret').text(secretsTotal);
-  // If mouse went over secret word, applies foundIt function to 
+  // If mouse went over secret word, applies foundIt function to
   $('.secret').on("mouseover", foundIt);
 }
 
@@ -47,7 +49,7 @@ function update() {
 // Randomly reveals redacted phrases
 function updateSpan() {
   let randomNum = Math.random();
-  if (randomNum < 0.1) {
+  if (randomNum < revealTime) {
     $(this).removeClass("redacted");
     $(this).addClass("revealed");
   }
