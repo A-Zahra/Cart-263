@@ -1,3 +1,23 @@
 body {
-
+  background-color: orange;
+}
+#mainContainer{
+  background-color: black;
+  height: 735px;
+}
+.bar{
+  background-color: black;
+  width: 100px;
+  height: 100px;
+  margin-top: 270px;
+  margin-left: 38px;
+  float: left;
+}
+#trashBin{
+  background-color: green;
+  width: 100px;
+  height: 100px;
+  margin-top: 620px;
+  margin-left: 38px;
+  float: left;
 }
