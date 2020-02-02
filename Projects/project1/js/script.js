@@ -2,28 +2,52 @@
 
 /********************************************************************
 
-Clean the room inspired by Sisyphus myth
+Clean the room game inspired by Sisyphus myth
 Zahra Ahmadi
 
 This is a game which will never have a winner. The purpose behind this game
 is to drop all trashes in trash bin before time ends. However, the player can
 never finish this task, because his time is limited.
+
+Reference
+- Background image:
+https://photodune.net/item/rustic-wooden-board-texture-table-top-view/18736293
+- Waste paper image:
+https://pixabay.com/vectors/wastepaper-discard-trash-paper-97619/
+- Trash bin:
+https://pnghunter.com/png/recycle-bin-15/
+
+Codes borrowed from:
+- https://codepen.io/kaypooma/pen/tAfwm
+- https://www.geeksforgeeks.org/how-to-change-the-background-image-using-jquery/
+
+Sounds:
+- https://freesound.org/people/DeantheDinosauce/sounds/177853/
 *********************************************************************/
 
 $(document).ready(setup);
 
 let $allPapers = []; // Stores all papers
 let newpapers = []; // Stores new paper id
-const numPapers = 150; // Number of total papers
+const numPapers = 100; // Number of total papers
 let paper; // Holds paper div
 let paperName; // Sets new paper id name as the newly generated div
 let $trashBin; // Stores trash bin image
 let randPosX; // Stores random numebr for X position
 let randPosY; // Stores random number for Y position
-
+// Limiting papers display to the background area
+let borderLeft;
+let borderTop;
+let borderBottom;
 let seconds = 10; // Timer value
 let intervalTime = 1000; // Interval time
 let $playButton; //
+
+// Paper crush sound
+let paperCrushSFX = new Audio ("../assets/sounds/paper-crush.mp3");
+// Throwing paper away sound
+let throwingAwaySFX = new Audio ("../assets/sounds/throwing-paper-away.mp3");
+
 
 // setup()
 //
@@ -46,7 +70,7 @@ function setup() {
   $trashBin.droppable({
     drop: onDrop,
   });
-
+  // Hides both trash bin and timer
   $trashBin.hide();
   $('#timer').hide();
 
@@ -57,7 +81,6 @@ function setup() {
 // Displays game short description + start button
 // On click, shows paper trashes + trash bin and the timer
 function startGame() {
-
   // Hides play button
   $playButton.hide();
   // Hides description
@@ -94,6 +117,9 @@ function makePapers() {
 //
 // Assigns all papers to an array + Gives random position to + ....
 function assignPapersProperties() {
+  borderLeft = 730;
+  borderBottom = 560;
+  borderTop = 100;
 
   for (let i = 0; i < numPapers; i++) {
     // Generates random numbers
@@ -106,7 +132,7 @@ function assignPapersProperties() {
     $allPapers[i] = $(`.paper${i}`);
 
     // Checks if the paper is inside mainContainer div
-    if (randPosX > 730 && randPosY < 560 && randPosY > 100) {
+    if (randPosX > borderLeft && randPosY < borderBottom && randPosY > borderTop) {
       $allPapers[i].offset({
         "top": randPosY,
         "left": randPosX
@@ -130,7 +156,14 @@ function assignPapersProperties() {
 
     // Makes them all draggable
     $allPapers[i].draggable({
-      containment: "parent"
+      containment: "parent",
+      start: function () {
+          paperCrushSFX.loop = true;
+          paperCrushSFX.play();
+        },
+      stop: function () {
+          paperCrushSFX.pause();
+        }
     });
   }
 }
@@ -142,6 +175,8 @@ function onDrop(event, ui) {
   console.log("dropped!");
   for (let i = 0; i < numPapers; i++) {
     ui.draggable.remove();
+    throwingAwaySFX.loop = false;
+    throwingAwaySFX.play();
   }
 }
 
