@@ -2,21 +2,38 @@ body {
   background-color: #00AAB3;
 }
 
+/*GameDescription properties*/
+#gameDescription {
+  font-family: 'Arial', sans-serif;
+  font-size: 1.5vw;
+  background-color: #00AAB3;
+  line-height: 30px;
+  color: white;
+  width: 52.5%;
+  padding: 10px;
+  position: absolute;
+  text-align: center;
+  margin-top: 10vw;
+  margin-left: -10px;
+}
+
+/*PlayButton properties*/
 #playButton {
   font-family: 'Arial', sans-serif;
-  font-size: 3vw;
+  font-size: 2vw;
   background-color: #00AAB3;
   color: white;
-  width:10%;
+  width: 10%;
   padding: 10px;
   position: absolute;
   text-align: center;
   border-radius: 10px;
-  margin-top: 15vw;
+  margin-top: 18vw;
   margin-left: 305px;
-
 }
-#mainContainer{
+
+/*MainContainer properties*/
+#mainContainer {
   background-image: url("../assets/images/background2.jpg");
   background-size: cover;
   height: 550px;
@@ -26,7 +43,8 @@ body {
   border-radius: 15px;
 }
 
-#trashBin{
+/*TrashBin properties*/
+#trashBin {
   width: 200px;
   height: 200px;
   margin-top: 500px;
@@ -35,6 +53,7 @@ body {
   z-index: 2;
 }
 
+/*Timer properties*/
 #timer {
   font-size: 30px;
   float: right;
