@@ -151,7 +151,7 @@ function assignPapersProperties() {
 
 
     // Sets paper properties
-    let imageUrl = "../assets/images/wastepaper.png";
+    let imageUrl = "../assets/images/wastePaperImg.png";
     $allPapers[i].css({
       "background-image": "url(" + imageUrl + ")",
       "width": "70px",
