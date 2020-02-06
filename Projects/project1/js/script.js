@@ -25,7 +25,7 @@ Sounds:
 - https://freesound.org/people/DeantheDinosauce/sounds/177853/
 *********************************************************************/
 
-$(document).ready(setup);
+window.onload = setup;
 
 let $allPapers = []; // Stores all papers
 let newpapers = []; // Stores new paper id
