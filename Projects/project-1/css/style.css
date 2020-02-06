@@ -1,0 +1,69 @@
+body {
+  background-color: #00AAB3;
+}
+
+/*MainContainer properties*/
+#mainContainer {
+  background-image: url("../assets/images/background2.jpg");
+  background-size: cover;
+  height: 550px;
+  width: 800px;
+  margin: auto;
+  margin-top: 50px;
+  border-radius: 15px;
+}
+
+/*Properties of the div containing the elements like gameDescription and play button*/
+.gameStart {
+  position: absolute;
+  width: inherit;
+}
+
+/*GameDescription properties*/
+#gameDescription {
+  font-family: 'Arial', sans-serif;
+  font-size: 1.5vw;
+  background-color: #00AAB3;
+  line-height: 30px;
+  color: white;
+  width: 100%;
+  padding: 10px;
+  position: relative;
+  text-align: center;
+  top: 12vw;
+  margin: auto;
+}
+
+/*PlayButton properties*/
+#playButton {
+  font-family: 'Arial', sans-serif;
+  font-size: 2vw;
+  background-color: #00AAB3;
+  color: white;
+  width: 15%;
+  padding: 10px;
+  position: relative;
+  text-align: center;
+  border-radius: 10px;
+  top: 15vw;
+  margin: auto;
+}
+
+/*TrashBin properties*/
+#trashBin {
+  width: 200px;
+  height: 200px;
+  margin-top: 500px;
+  margin-left: 20px;
+  float: left;
+  position: relative;
+  z-index: 1;
+}
+
+/*Timer properties*/
+#timer {
+  font-size: 30px;
+  float: right;
+  margin-right: 25vw;
+  font-family: 'calibri', sans-serif;
+}
