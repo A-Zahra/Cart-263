@@ -47,14 +47,14 @@ let $playButton; //
 let paperCrushSFX = new Audio ("../assets/sounds/paper-crush.mp3");
 // Throwing paper away sound
 let throwingAwaySFX = new Audio ("../assets/sounds/throwing-paper-away.mp3");
-
+let timer;
 
 // setup()
 //
 // Sets up everything
 function setup() {
 
-  // declare and assigns paper divs
+  // Declares and assigns paper divs
   makePapers();
   // Sets paper properties + assigns functions to
   assignPapersProperties();
@@ -95,12 +95,12 @@ function startGame() {
   // shows timer
   $('#timer').show();
   // Decreases time by 1 per second
-  setInterval(updateTime, intervalTime);
+  timer  = setInterval(updateTime, intervalTime);
 }
 
 // makePapers
 //
-// Declare variables and assigns paper divs
+// Declares variables and assigns paper divs
 // Gives specific attribute to each
 // Append them to mainContainer div
 function makePapers() {
@@ -190,14 +190,22 @@ function updateTime() {
   } else {
     // If time became 0, hides everything and show help again button
     $trashBin.hide();
-    $('#timer').hide();
-    for (let i = 0; i < numPapers; i++) {
-      $allPapers[i].hide();
-    }
+   $('#timer').hide();
     seconds = 10;
-    intervalTime = 1000;
+    clearInterval(timer);
+    // Replay button
     $playButton.text('Help Again!');
     $playButton.show();
     $playButton.one("click", startGame);
+
+    // Removes all papers
+    for (let i = 0; i < numPapers; i++) {
+      $allPapers[i].remove();
+    }
+    // Declares and assigns paper divs again
+    makePapers();
+    // Sets paper properties + assigns functions to again
+    assignPapersProperties();
+
   }
 }
