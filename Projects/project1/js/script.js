@@ -29,24 +29,23 @@ $(document).ready(setup);
 
 let $allPapers = []; // Stores all papers
 let newpapers = []; // Stores new paper id
-const numPapers = 100; // Number of total papers
+const numPapers = 20; // Number of total papers
 let paper; // Holds paper div
 let paperName; // Sets new paper id name as the newly generated div
 let $trashBin; // Stores trash bin image
-let randPosX; // Stores random numebr for X position
-let randPosY; // Stores random number for Y position
-// Limiting papers display to the background area
-let borderLeft;
-let borderTop;
-let borderBottom;
-let seconds = 10; // Timer value
-let intervalTime = 1000; // Interval time
-let $playButton; //
 
+// Limiting papers display to the background area
+let borderLeft; // Left border of specified area for the papers display
+let borderTop; // Top border of specified area for the papers display
+let seconds = 15; // Timer value
+let intervalTime = 1000; // Interval time
+let $playButton; // Play and replay button
+let displayableAreaWidth;
+let displayableAreaHeight;
 // Paper crush sound
-let paperCrushSFX = new Audio ("../assets/sounds/paper-crush.mp3");
+let paperCrushSFX = new Audio("../assets/sounds/paper-crush.mp3");
 // Throwing paper away sound
-let throwingAwaySFX = new Audio ("../assets/sounds/throwing-paper-away.mp3");
+let throwingAwaySFX = new Audio("../assets/sounds/throwing-paper-away.mp3");
 let timer;
 
 // setup()
@@ -87,6 +86,7 @@ function startGame() {
   $('#gameDescription').hide();
 
   // Shows papers
+
   for (let i = 0; i < numPapers; i++) {
     $allPapers[i].show();
   }
@@ -95,7 +95,7 @@ function startGame() {
   // shows timer
   $('#timer').show();
   // Decreases time by 1 per second
-  timer  = setInterval(updateTime, intervalTime);
+  timer = setInterval(updateTime, intervalTime);
 }
 
 // makePapers
@@ -117,27 +117,38 @@ function makePapers() {
 //
 // Assigns all papers to an array + Gives random position to + ....
 function assignPapersProperties() {
-  borderLeft = 730;
-  borderBottom = 560;
-  borderTop = 100;
+  // Store window width and height
+  let bodyWidth = $(window).width();
+  let bodyHeight = $(window).height();
 
+  // Defines a rectangular area of display for the papers
+  // So that they will only be positioned inside the specified area
+  displayableAreaWidth = 700;
+  displayableAreaHeight = 460;
+  borderTop = 105;
+  // If window width was less or more than a certain number of pixels
+  // differs the left border value so that in either way the paper sits inside the specified area
+  if (bodyWidth < 1400) {
+    borderLeft = 415;
+  } else {
+    borderLeft = 740;
+  }
+
+  // Assigns papers properties
   for (let i = 0; i < numPapers; i++) {
     // Generates random numbers
-    let bodyWidth = $(window).width();
-    let bodyHeight = $(window).height();
-    randPosX = Math.floor((Math.random() * (bodyWidth - 65)));
-    randPosY = Math.floor((Math.random() * (bodyHeight)));
+    let randPosX = borderLeft + Math.floor((Math.random() * (displayableAreaWidth)));
+    let randPosY = borderTop + Math.floor((Math.random() * (displayableAreaHeight)));
 
     // Assigns new paper to the array
     $allPapers[i] = $(`.paper${i}`);
 
-    // Checks if the paper is inside mainContainer div
-    if (randPosX > borderLeft && randPosY < borderBottom && randPosY > borderTop) {
-      $allPapers[i].offset({
-        "top": randPosY,
-        "left": randPosX
-      });
-    }
+    // Sets paper position
+    $allPapers[i].offset({
+      "top": randPosY,
+      "left": randPosX
+    });
+
 
     // Sets paper properties
     let imageUrl = "../assets/images/wastepaper.png";
@@ -148,7 +159,8 @@ function assignPapersProperties() {
       "position": "absolute",
       "background-position": "center center",
       "background-repeat": "round",
-      "background-size": "cover"
+      "background-size": "cover",
+      "z-index": "2"
     });
 
     // Hides them all
@@ -157,13 +169,13 @@ function assignPapersProperties() {
     // Makes them all draggable
     $allPapers[i].draggable({
       containment: "parent",
-      start: function () {
-          paperCrushSFX.loop = true;
-          paperCrushSFX.play();
-        },
-      stop: function () {
-          paperCrushSFX.pause();
-        }
+      start: function() {
+        paperCrushSFX.loop = true;
+        paperCrushSFX.play();
+      },
+      stop: function() {
+        paperCrushSFX.pause();
+      }
     });
   }
 }
@@ -190,8 +202,8 @@ function updateTime() {
   } else {
     // If time became 0, hides everything and show help again button
     $trashBin.hide();
-   $('#timer').hide();
-    seconds = 10;
+    $('#timer').hide();
+    seconds = 15;
     clearInterval(timer);
     // Replay button
     $playButton.text('Help Again!');

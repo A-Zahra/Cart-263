@@ -2,36 +2,6 @@ body {
   background-color: #00AAB3;
 }
 
-/*GameDescription properties*/
-#gameDescription {
-  font-family: 'Arial', sans-serif;
-  font-size: 1.5vw;
-  background-color: #00AAB3;
-  line-height: 30px;
-  color: white;
-  width: 52.5%;
-  padding: 10px;
-  position: absolute;
-  text-align: center;
-  margin-top: 11vw;
-  margin-left: -10px;
-}
-
-/*PlayButton properties*/
-#playButton {
-  font-family: 'Arial', sans-serif;
-  font-size: 2vw;
-  background-color: #00AAB3;
-  color: white;
-  width: 10%;
-  padding: 10px;
-  position: absolute;
-  text-align: center;
-  border-radius: 10px;
-  margin-top: 20vw;
-  margin-left: 305px;
-}
-
 /*MainContainer properties*/
 #mainContainer {
   background-image: url("../assets/images/background2.jpg");
@@ -43,6 +13,42 @@ body {
   border-radius: 15px;
 }
 
+/*Properties of the div containing the elements like gameDescription and play button*/
+.gameStart {
+  position: absolute;
+  width: inherit;
+}
+
+/*GameDescription properties*/
+#gameDescription {
+  font-family: 'Arial', sans-serif;
+  font-size: 1.5vw;
+  background-color: #00AAB3;
+  line-height: 30px;
+  color: white;
+  width: 100%;
+  padding: 10px;
+  position: relative;
+  text-align: center;
+  top: 12vw;
+  margin: auto;
+}
+
+/*PlayButton properties*/
+#playButton {
+  font-family: 'Arial', sans-serif;
+  font-size: 2vw;
+  background-color: #00AAB3;
+  color: white;
+  width: 15%;
+  padding: 10px;
+  position: relative;
+  text-align: center;
+  border-radius: 10px;
+  top: 15vw;
+  margin: auto;
+}
+
 /*TrashBin properties*/
 #trashBin {
   width: 200px;
@@ -50,7 +56,8 @@ body {
   margin-top: 500px;
   margin-left: 20px;
   float: left;
-  z-index: 2;
+  position: relative;
+  z-index: 1;
 }
 
 /*Timer properties*/
