@@ -43,9 +43,9 @@ let $playButton; // Play and replay button
 let displayableAreaWidth;
 let displayableAreaHeight;
 // Paper crush sound
-let paperCrushSFX = new Audio("../assets/sounds/paper-crush.mp3");
+let paperCrushSFX = new Audio("assets/sounds/paper-crush.mp3");
 // Throwing paper away sound
-let throwingAwaySFX = new Audio("../assets/sounds/throwing-paper-away.mp3");
+let throwingAwaySFX = new Audio("assets/sounds/throwing-paper-away.mp3");
 let timer;
 
 // setup()
