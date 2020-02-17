@@ -14,7 +14,8 @@ $(document).ready(setup);
 let buttons; // Stores five random animal names
 const NUM_OPTIONS = 5; // Number of random animals being displayed on screen
 let $correctButton; // Button which was just said
-let numCorrectAnswer=0;
+let counterValue = 0;
+let wrongAnswer;
 // All animals names
 let animals = [
   "aardvark",
@@ -170,7 +171,6 @@ function setup() {
 
     // Start listening. You can call this here, or attach this call to an event, button, etc.
     annyang.start();
-    
     // Activates debug mode for detailed logging in the console
     // annyang.debug();
   }
@@ -178,7 +178,7 @@ function setup() {
 
 // Creates buttons, assigns css properties to
 function addButton(label) {
-  let $button = $('<div></div>').addClass("guess").text(label);
+  let $button = $('<div></div>').addClass("guess").attr('id', label).text(label);
   $button.button();
   $button.css({
     "position": "relative",
@@ -202,6 +202,7 @@ function newRound() {
   let mainContainer = $('<div></div>').attr('id', 'mainContainer');
   mainContainer.appendTo('body');
   
+  
   correctAnswerCounter();
   
   buttons = [];
@@ -221,8 +222,11 @@ function newRound() {
 
 // Displays and Counts number of correct answers
 function correctAnswerCounter () {
+  let numCorrectAnswer = counterValue;
   let correctAnswer = $('#correctAnswer');
-  correctAnswer.text(`Number of correct answers:${numCorrectAnswer}`);
+  correctAnswer.css({"display": "inline-flex"});
+  console.log( "numCorrectAnswer"+ numCorrectAnswer);
+  correctAnswer.text(`NUMBER OF CORRECT ANSWERS:${numCorrectAnswer}`);
 }
 
 // On click, if the value of button clicked was same as the value of correctbutton..
@@ -231,15 +235,17 @@ function handleGuess() {
     // Removes all the divs named "guess"
     $(".guess").remove();
     // Makes a new round of buttons
+    counterValue++;
     setTimeout(newRound, 100);
-    numCorrectAnswer++;
-
   } else {
     // Otherwise, applies shake effect to the button
     $(this).effect('shake');
+    wrongAnswer = $(this);
     // Repeats the word backward
     sayBackwards($correctButton.text());
-    numCorrectAnswer = 0;
+    counterValue = 0;
+    correctAnswerCounter();
+    setTimeout(function (){ wrongAnswer.remove();}, 1000);
   }
 }
 
@@ -262,6 +268,10 @@ function giveUp() {
     "background-color": "green",
     "color": "white"
   });
+  
+  // Makes a new round of buttons
+  setTimeout(newRound, 1000);
+  
 }
 
 // If repeatReversedWord got called say the word again
@@ -277,13 +287,19 @@ function oralAnswer(myString) {
       "background-color": "green",
       "color": "white"
     });
+    counterValue++;
+    // Makes a new round of buttons
+    setTimeout(newRound, 1000);
   }
   else {
-      // Otherwise, applies shake effect to the button
-      $(this).effect('shake');
-      // Repeats the word backward
-      sayBackwards($correctButton.text());
-      numCorrectAnswer = 0;
     
+    $(`#${myString}`).effect('shake');
+    // Repeats the word backward
+    sayBackwards($correctButton.text());
+      
+    counterValue = 0;
+    correctAnswerCounter();
+    wrongAnswer = $(`#${myString}`);
+    setTimeout(function (){ wrongAnswer.remove();}, 1000);
   }
 }
