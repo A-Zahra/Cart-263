@@ -1,3 +1,33 @@
 body {
 
 }
+#mainContainer{
+  width: 50%;
+  height: 10%;
+  background-color: yellow;
+  display: inline-flex;
+  position: absolute;
+  margin: auto;
+  margin-top: 20vw;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 3vw;
+}
+
+#correctAnswer {
+  width: 50%;
+  height: 10%;
+  font-family: sans-serif;
+  font-size: 2vw;
+  color: black;
+  display: inline-flex;
+  position: absolute;
+  margin: auto;
+  margin-top: 10vw;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
