@@ -1,6 +1,7 @@
 body {
 
 }
+/* mainContainer properties */
 #mainContainer{
   width: 50%;
   height: 10%;
@@ -15,7 +16,7 @@ body {
   left: 0;
   padding: 3vw;
 }
-
+/* correctAnswer properties */
 #correctAnswer {
   background-color: orange;
   width: 54%;
