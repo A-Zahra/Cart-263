@@ -5,11 +5,18 @@
 Slamina Special
 Zahra Ahmadi
 
-There are five buttons at the middle of screen with labels of animal names . In each round, one of the five animal names is said reversely. 
-The user should recognize which of the five is the correct answer and show his/her true recognition by clicking on the button or
-saying that orally. The word is checked through the written functions. If the answer is correct it becomes green, 
-1 is added to the counter value and it goes to next round. Otherwise, the word is said again, the wrong button shakes 
+This is a guessing game based on voice synthesis. There are five buttons at the middle of screen with labels of animal names . 
+In each round, one of the five animal names is said reversely. The user should recognize which of the five is the correct answer 
+and show his/her true recognition by clicking on the button or saying that orally. The word is checked through the written functions. 
+If the answer is correct it becomes green, 1 is added to the counter value and it goes to next round. Otherwise, the word is said again, the wrong button shakes 
 and after a second is removed from the screen. The counter is set to zero as well. The user can give up or asks the word is said again.
+
+ResponsiveVoice
+https://responsivevoice.org/
+
+Animal names from:
+https://github.com/dariusk/corpora/blob/master/data/animals/common.json
+
 
 *********************************************************************/
 
