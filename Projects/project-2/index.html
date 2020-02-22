@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0>
@@ -8,16 +9,10 @@
   <link rel="stylesheet" type="text/css" href="css/style.css" />
 
   <!-- Libraries -->
-  <script
-    src="https://code.jquery.com/jquery-3.4.1.min.js"
-    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-    crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 
   <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
-  <script
-  src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
-  integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
-  crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
 
   <script src="//cdnjs.cloudflare.com/ajax/libs/annyang/2.6.0/annyang.min.js"></script>
   <script src="https://code.responsivevoice.org/responsivevoice.js"></script>
@@ -26,15 +21,17 @@
 </head>
 
 <body>
+  <!-- Main div -->
   <div id="row">
-    <div class="column"></div>
+    <!-- timer div -->
+    <div class="column" id="timerContainer"></div>
+    <!-- cards div -->
     <div class="column1">
-      <img >
       <div class="innerCollection">
-      <p  id="selfDefinition"></p>
+        <p id="selfDefinition"></p>
+      </div>
     </div>
-
-    </div>
+    <!-- score counter -->
     <div class="column" id="pointCounter"></div>
   </div>
 </body>
