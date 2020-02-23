@@ -43,6 +43,37 @@ body {
   margin-top: 1vw;
   border-radius: 15px;
 }
+#gameTitle, #gameDescription, #button {
+  font-family: sans-serif;
+  font-size: 3vw;
+  color: black;
+  display: table;
+  position: relative;
+  text-align: center;
+  margin: auto;
+  top: -5vw;
+  bottom: 0;
+  right: 0;
+  left: 0;
+
+}
+
+#button {
+  background-color: yellow;
+  font-family: sans-serif;
+  font-size: 1.5vw;
+  color: black;
+  margin-top: 2vw;
+}
+
+#gameDescription {
+  font-family: sans-serif;
+  font-size: 1.5vw;
+  color: black;
+  margin-top: 2vw;
+  text-align: justify;
+  text-indent: 3vw;
+}
 /* Properties of div holding cards descriptions */
 .innerCollection {
   width: 70%;

@@ -123,6 +123,11 @@ let timerBars = []; // Stores time bars
 let maxOpacity = 255; // Maximum opacity
 let myTime = 0; // Stores timer
 let questionWasReplied = false; // Checks if the question was replied
+let timeLeft = 60;
+let gameTitle;
+let gameDescription;
+let $button;
+let endGame = false;
 
 // Get setup!
 $(document).ready(setup);
@@ -131,8 +136,8 @@ $(document).ready(setup);
 //
 // Sets up everything
 function setup() {
+  startScreen();
   // On click, prompts start game function
-  $(".column1").one('click', startGame);
 
   // Speech recognition code which gives user the opportunity to orally interact with the website
   if (annyang) {
@@ -155,18 +160,47 @@ function setup() {
 
 // startGame()
 //
-// Runs timer + prompts cardInfo function
+// Runs timer + prompts question function
 function startGame() {
+
   timer();
   myTime = setInterval(runTime, 2000);
-  cardInfo();
+  question();
+  gameTitle.hide();
+  gameDescription.hide();
+  $button.hide();
 }
 
+function startScreen() {
+  gameTitle = $('<h2></h2>').attr('id', 'gameTitle').text("WHO AM I?");
+  // Adds question to html file and puts it before description paragraph
+  gameTitle.appendTo(".innerCollection").after($("#whoAmI"));
+
+  gameDescription = $('<p></p>').attr('id', 'gameDescription');
+  let gameDescriptionText = "Is a guessing card game inwhich the player should" +
+      " guess what is the animal's name by reading the animal's self description." +
+      'To gives his/her answer he/she should say "I am (animal name)" and to go to the next card' +
+      ' he/she should say "next". To win the game the player should answer at least 5 questions.';
+  gameDescription.text(gameDescriptionText);
+  gameDescription.appendTo(".innerCollection");
+  startButton();
+}
+
+function startButton () {
+ $button = $('<div></div>').attr('id', 'button').text("Play!");
+ $button.button();
+
+ // On click, prompts handleGuess function
+ // $(".column1").one('click', );
+ $button.appendTo(".innerCollection");
+  $button.on('click', startGame);
+}
 // getRandomElement()
 //
-//
+// Gets random elements from animals array and return its index number
 function getRandomElement(animal) {
   let cardNumber;
+  // Random element
   let element = animal[Math.floor(Math.random() * animal.length)];
   console.log("element " + element);
   for (let i = 0; i < animal.length; i++) {
@@ -178,30 +212,34 @@ function getRandomElement(animal) {
   return cardNumber;
 }
 
-// cardInfo()
+// question()
 //
-//
-function cardInfo() {
+// Makes and display game main question
+function question() {
   whoAmI = $('<p></p>').attr('id', 'whoAmI').text("WHO AM I?");
+  // Adds question to html file and puts it before description paragraph
   whoAmI.appendTo(".innerCollection");
   whoAmI.fadeIn(500);
   whoAmI.css({
     "display": "table"
   }).after($("#selfDefinition"));
+  // Displays description sentence
   descriptions();
+  // Displays score counter
   pointCounter();
 }
 
 // descriptions()
 //
-//
+// Creates and displays random animals self description
 function descriptions() {
+  // Gets random description
   if (animals.length !== 0) {
     cardNum = getRandomElement(animals);
   } else if (animals.length < 0) {
     cardNum = undefined;
   }
-
+  // Adds description to html file
   selfDefinition = $("#selfDefinition");
   let definition = descriptionList[cardNum];
   selfDefinition.text(definition);
@@ -214,12 +252,14 @@ function descriptions() {
 
 // showMe()
 //
-//
+// If player said purposed sentence,
 function showMe(myString) {
+  // Checks if it is the right animal name
   if (myString === animals[cardNum]) {
+    // Creates and adds the image to html file
     cardImg = $('<img>').addClass(animals[cardNum]).attr('src', 'assets/images/' + animals[cardNum] + ".png");
     console.log("animal name: " + animals[cardNum] + " card num: " + cardNum);
-
+    // Gives css properties to
     cardImg.css({
       "display": "none",
       "width": "100%",
@@ -234,6 +274,7 @@ function showMe(myString) {
       "border-radius": "10px"
     });
 
+    // If it is the lion image makes it background black
     if (myString === "lion") {
       cardImg.css({
         "background-color": "black"
@@ -243,89 +284,132 @@ function showMe(myString) {
         "background-color": "white"
       });
     }
-
+    // Adds it to html file, adds fade effect to
+    // and puts it before description paragraph
     cardImg.fadeIn(500);
     cardImg.appendTo('.column1');
     cardImg.after($(".innerCollection"));
+    // Hides the question and the description
     selfDefinition.css({
       "display": "none"
     });
     whoAmI.css({
       "display": "none"
     });
-
+    // Removes both the description and animal name after 5 miliseconds
     setTimeout(function() {
       descriptionList = jQuery.grep(descriptionList, function(value) {
         return value != descriptionList[cardNum];
       });
-      console.log(descriptionList);
+
       animals = jQuery.grep(animals, function(value) {
         return value != animals[cardNum];
       });
     }, 500);
-
+    // If answer is correct, adds one to score bar
     numPointBars++;
+    // And positions the new bar far from the previous onended(callback)
+    // by 1% of the width of the viewport*
     pointBarTopMargin += 1;
   }
+  // Confirms the answer was true
   questionWasReplied = true;
-  console.log(animals);
 }
 
 // nextCard()
 //
-//
+// If the question was answered and player said "next",
 function nextCard() {
   if (questionWasReplied) {
-    cardInfo();
+    // Shows next question
+    question();
+    // Removes previous card image
     cardImg.remove();
+    // Sets questionWasReplied value to false
     questionWasReplied = false;
   }
 }
 
 // pointCounter()
 //
-//
+// Counts the player points
 function pointCounter() {
+  // Creates score bar divs and gives them a name
   let counter = $('<div></div>').attr('id', 'counter');
-
   let pointBars = [];
+  // Accumulates all the score bars in an array
   for (let i = 0; i < numPointBars; i++) {
+    // Sets their position and opacity proportional to each other
     counter.css({
       "margin-top": `${pointBarTopMargin}vw`,
       "opacity": `${numPointBars/10}`
     });
+    // Adds new score bar to the array
     pointBars.push(counter);
+    // Adds them to html file one by one
     pointBars[i].appendTo("#pointCounter");
   }
 }
 
 // timer()
 //
-//
+// Creates and displays timer
 function timer() {
 
   let timerBarTopMargin;
   for (let i = 0; i < numTimerBars; i++) {
+    // Creates time bar div and gives a name to
     let timerBar = $('<div></div>').attr('id', 'timerBar');
     timerBarTopMargin = (numTimerBars / 6) * (i / 5);
+    // Sets their position and opacity proportional to each other
     timerBar.css({
       "margin-top": `${timerBarTopMargin}vw`,
       "opacity": `${maxOpacity}`
     });
+    // Adds new time bar to the array
     timerBars.push(timerBar);
+    // Adds them to html file one by one
     timerBars[i].appendTo("#timerContainer");
+    // Reduces opacity of time bar in each round
     maxOpacity /= 1.3;
   }
 }
 
 // runTime()
 //
-//
+// Runs time
 function runTime() {
+  // If number of removed time bars is not less than total number of time bars,
   if (removeTimeBar < 30) {
+    // Removes current time bar
     timerBars[removeTimeBar].remove();
+    // Adds one to the number of removed time bars
     removeTimeBar++;
-  } else if (removeTimeBar >= numTimerBars) {
+    let options = {
+      rate: 0.8
+    };
+
+    if (removeTimeBar === 25) {
+      timeLeft = 10;
+      responsiveVoice.speak(`You have ${timeLeft} seconds left`, "UK English Male", options);
+    }
+  }
+  // Otherwise removes the timer
+  else if (removeTimeBar >= numTimerBars) {
+    let options = {
+      rate: 0.8
+    };
+    endGame = true;
+    gameOver(endGame);
+    responsiveVoice.speak(`Your time is over and you missed the game!`, "UK English Male", options);
     clearInterval(myTime);
   }
+}
+
+function gameOver(endGame){
+  if (endGame){
+    $("#whoAmI").remove();
+    $("#selfDefinition").hide();
+  }
+
 }
