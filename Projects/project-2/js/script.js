@@ -5,6 +5,17 @@
 Guess who I am - card game
 Zahra Ahmadi
 
+Is a guessing card game inwhich the player should guess what is the animal's name by
+reading the animal's self description. To gives his/her answer, he/she should say
+"I am a (animal name)" and to go to the next card, he/she should say "next".
+To win the game the player should answer at least 5 questions.
+However, there is no winning and even if the player answers more than 5 question he/she
+won't win. I did this intentionally for the issue of "something is wrong on the internet".
+Some of the essential features of this game are:
+1. The timer
+2. Score counter
+3. Randomly picked cards which are displayed every time the page is reloaded
+
 ---------------
 ***Reference***
 ---------------
@@ -76,44 +87,12 @@ https://github.com/dariusk/corpora/blob/master/data/animals/common.json
 
 // An array of animal names
 // Be used for several purposes like
-let animals = [
-  "dog",
-  "deer",
-  "gorilla",
-  "frog",
-  "sloth",
-  "bear",
-  "jaguar",
-  "parrot",
-  "wolf",
-  "rabbit",
-  "snake",
-  "lion",
-  "donkey",
-  "zebra",
-  "tiger"
-];
+let animals = 0;
 // List of self descriptions
-let descriptionList = [
-  "I am playful and do not share my lovely bone with anyone!",
-  "I have big antlers and a fluffy tail! I live both in north and south America!",
-  "I love banana! I am black and have large jaw muscles plus strong teeth!",
-  "I live on wetLands and rivers. Flies are my favorite food!",
-  "I am sooo Slow and love hanging trees!",
-  "I love honey and fish! I have rounded ears and big claws!",
-  "I am a wild cat that his fur is marked with rosettes!",
-  "I like to repeat people words and I have colorful wings!",
-  "I hunt sheeps and dogs are my main enemy! ",
-  "I am smart and fast! carrot is my favorite food!",
-  "I don't have limbs but I'm fast and crawl on the ground!",
-  "I have mane around my neck and live in a group!",
-  "I am stubborn! I always wanted to be like a horse but I am not!",
-  "My skin is striped! I am an herbivore and moslty live in Africa!",
-  "I am a large cat! I love to swim and my orange skin has vertical black stripes!"
-];
+let descriptionList = 0;
 let selfDefinition; // Holds self definition sentence
 let whoAmI; // Holds the question
-let cardImg; // Holds animal image
+let cardImg = 0; // Holds animal image
 let cardNum = 0; // Holds index number of picked card
 let numPointBars = 0; // Number of score bars is accumulated in
 let pointBarTopMargin = 0; // score bars position
@@ -129,7 +108,8 @@ let gameDescription; // Holds game description
 let $button; // Play button
 let endGame = false; // Checks if game ended
 let pointBars; // An array to store point bars
-
+let gaveUp = false; // Checks if the player gave up
+let gameStarted = false; // Checks if game started
 // Get setup!
 $(document).ready(setup);
 
@@ -145,7 +125,15 @@ function setup() {
     // Let's define our first command. First the text we expect, and then the function it should call
     let commands = {
       'I am a *text': showMe, // If user said "I am a (animal name)", prompts show me function
-      'next': nextCard // If he said next, prompts nextCard function
+      'next': nextCard, // If he said "next", prompts nextCard function
+      // If he said "I give up", displays the animal name and go next
+      'I give up': function() {
+        if (!gaveUp) {
+          gaveUp = true;
+          showMe(animals[cardNum]);
+          setTimeout(nextCard, 1000);
+        }
+      }
     };
 
     // Add our commands to annyang
@@ -155,31 +143,91 @@ function setup() {
     annyang.start();
 
     // Activates debug mode for detailed logging in the console
-    // annyang.debug();
+    annyang.debug();
   }
 }
 
-// startGame()
+// resetGame()
 //
-// Runs timer + prompts question function
-function startGame() {
-  timer();
-  myTime = setInterval(runTime, 3000);
-  question();
-  gameTitle.hide();
-  gameDescription.hide();
-  $button.hide();
+// Resets game's elements
+function resetGame() {
+  startScreen();
 }
 
 // startScreen()
 //
 // Displays game start screen
 function startScreen() {
+  // An array of animal names
+  // Be used for several purposes like
+  animals = [
+    "dog",
+    "deer",
+    "gorilla",
+    "frog",
+    "sloth",
+    "bear",
+    "leopard",
+    "parrot",
+    "wolf",
+    "rabbit",
+    "snake",
+    "lion",
+    "donkey",
+    "zebra",
+    "tiger"
+  ];
+  // List of self descriptions
+  descriptionList = [
+    "I am playful and do not share my lovely bone with anyone!",
+    "I have big antlers and a fluffy tail! I live both in north and south America!",
+    "I love banana! I am black and have large jaw muscles plus strong teeth!",
+    "I live on wetLands and rivers. Flies are my favorite food!",
+    "I am sooo Slow and love hanging trees!",
+    "I love honey and fish! I have rounded ears and big claws!",
+    "I am a wild cat that his fur is marked with rosettes!",
+    "I like to repeat people words and I have colorful wings!",
+    "I hunt sheeps and dogs are my main enemy! ",
+    "I am smart and fast! carrot is my favorite food!",
+    "I don't have limbs but I'm fast and crawl on the ground!",
+    "I have mane around my neck and live in a group!",
+    "I am stubborn! I always wanted to be like a horse but I am not!",
+    "My skin is striped! I am an herbivore and moslty live in Africa!",
+    "I am a large cat! I love to swim and my orange skin has vertical black stripes!"
+  ];
+
+  endGame = false;
+  cardImg = 0;
+  cardNum = 0;
+  numPointBars = 0;
+  pointBarTopMargin = 0;
+  numTimerBars = 30;
+  removeTimeBar = 0;
+  timerBars = [];
+  maxOpacity = 255;
+  myTime = 0;
+  questionWasReplied = false;
+  timeLeft = 0;
+  gaveUp = false;
+  gameStarted = false;
+
+  // Sets background color to white
+  $('.column1').css({
+    "background-color": "white"
+  });
+  // Empties innerCollection div
+  $('.innerCollection').empty();
+  // reDefines self definition once the game restarts
+  let selfDef = $('<p></p>').attr('id', 'selfDefinition');
+  selfDef.appendTo('.innerCollection');
+
+  // Adds game title
   gameTitle = $('<h2></h2>').attr('id', 'gameTitle').text("Who am I?");
   // Adds question to html file and puts it before description paragraph
   gameTitle.appendTo(".innerCollection").after($("#gameDescription"));
   // Inserts game description element
-  gameDescription = $('#gameDescription');
+  gameDescription = $('<p></p>').attr('id', 'gameDescription').html("Is a guessing card game inwhich the player should guess what is the animals name by reading the animals self description. To gives his/her answer, he/she should say 'I am a (animal name)' and to go to the next card,  he/she should say 'next'. To win the game the player should answer <span>at least 5 questions</span>.");
+  gameDescription.appendTo('.innerCollection');
   // Prompts start button
   startButton();
 }
@@ -194,6 +242,19 @@ function startButton() {
   $button.appendTo(".innerCollection");
   // On click, prompts startGame function
   $button.on('click', startGame);
+}
+
+// startGame()
+//
+// Runs timer + prompts question function
+function startGame() {
+  gameStarted = true;
+  gameTitle.remove();
+  gameDescription.remove();
+  $button.remove();
+  timer();
+  myTime = setInterval(runTime, 2500);
+  question();
 }
 
 // getRandomElement()
@@ -228,8 +289,6 @@ function question() {
     }).after($("#selfDefinition"));
     // Displays description sentence
     descriptions();
-    // Displays score counter
-    pointCounter();
   }
 }
 
@@ -253,16 +312,16 @@ function descriptions() {
     selfDefinition.css({
       "display": "table"
     });
-    // selfDefinition.bind('click', showMe);
   }
 }
 
 // showMe()
 //
-// If player said purposed sentence,
+// If player said purposed word,
 function showMe(myString) {
-  // Checks if it is the right animal name
-  if (myString === animals[cardNum] && !endGame) {
+  // If it is the right animal name and game hasn't end,
+  if (myString === animals[cardNum] && !endGame && gameStarted) {
+    console.log("SHOW IMAGE");
     // Creates and adds the image to html file
     cardImg = $('<img>').addClass(animals[cardNum]).attr('src', 'assets/images/' + animals[cardNum] + ".png");
     console.log("animal name: " + animals[cardNum] + " card num: " + cardNum);
@@ -293,7 +352,7 @@ function showMe(myString) {
     }
     // Adds it to html file, adds fade effect to
     // and puts it before description paragraph
-    cardImg.fadeIn(500);
+    cardImg.fadeIn(400);
     cardImg.appendTo('.column1');
     cardImg.after($(".innerCollection"));
     // Hides the question and the description
@@ -303,17 +362,29 @@ function showMe(myString) {
     whoAmI.css({
       "display": "none"
     });
-    // Removes both the description and animal name after 5 miliseconds
-    setTimeout(removePreviousCard, 500);
 
-    // If answer is correct, adds one to score bar
-    numPointBars++;
-    // And positions the new bar far from the previous onended(callback)
-    // by 1% of the width of the viewport*
-    pointBarTopMargin += 1;
+    // If the player gave up don't add to his score, otherwise do it
+    if (!gaveUp) {
+      // If answer is correct, adds one to score bar
+      numPointBars++;
+      // And positions the new bar far from the previous onended(callback)
+      // by 1% of the width of the viewport*
+      pointBarTopMargin += 1;
+
+      // Displays score counter
+      pointCounter();
+      gaveUp = true;
+    }
+    // Confirms the answer was true
+    questionWasReplied = true;
   }
-  // Confirms the answer was true
-  questionWasReplied = true;
+  // Otherwise asks the player answers again
+  else if (myString !== animals[cardNum] && gameStarted && !endGame) {
+    let option = {
+      rate: 0.8
+    };
+    responsiveVoice.speak("Wrong answer!", "UK English Male", option);
+  }
 }
 
 // removePreviousCard()
@@ -323,11 +394,11 @@ function removePreviousCard() {
   descriptionList = jQuery.grep(descriptionList, function(value) {
     return value != descriptionList[cardNum];
   });
-  // console.log(descriptionList);
+  console.log(descriptionList);
   animals = jQuery.grep(animals, function(value) {
     return value != animals[cardNum];
   });
-  // console.log(animals);
+  console.log(animals);
 }
 
 // nextCard()
@@ -337,10 +408,12 @@ function nextCard() {
   if (questionWasReplied && !endGame) {
     // Removes previous question
     $('#whoAmI').remove();
-    // Shows next question
-    question();
     // Removes previous card image
     cardImg.remove();
+    // Shows next question
+    removePreviousCard();
+    question();
+    gaveUp = false;
     // Sets questionWasReplied value to false
     questionWasReplied = false;
   }
@@ -364,7 +437,7 @@ function pointCounter() {
       // Adds new score bar to the array
       pointBars.push(counter);
       // Adds them to html file one by one
-      pointBars[i].appendTo("#pointCounter");
+      pointBars[i].appendTo("#counterContainer");
     }
   }
 }
@@ -405,14 +478,14 @@ function runTime() {
     let options = {
       rate: 0.8
     };
-    // Warns the player that only 15 seconds is left
-    if (removeTimeBar === 25) {
+    // Warns the player that only 10 seconds is left
+    if (removeTimeBar === 24) {
       timeLeft = 15;
       responsiveVoice.speak(`You have ${timeLeft} seconds left`, "UK English Male", options);
     }
   }
   // Otherwise removes the timer + announces game end + Displays gameOver screen
-  else if (removeTimeBar >= numTimerBars) {
+  else if (removeTimeBar === numTimerBars) {
     let options = {
       rate: 0.8
     };
@@ -431,7 +504,10 @@ function gameOver(endGame) {
   if (endGame) {
     $("#whoAmI").hide();
     $("#selfDefinition").hide();
-    cardImg.hide();
+    if (cardImg !== 0) {
+      cardImg.remove();
+    }
+    $('#counterContainer').empty();
   }
   gameOverScreen();
 }
@@ -448,8 +524,17 @@ function gameOverScreen() {
   let numAnsweredQuestion = $('<div></div>').attr('id', 'numAnsweredQuestion');
   numAnsweredQuestion.text(`Number of questions answered in total is: ${numPointBars}`);
   numAnsweredQuestion.appendTo(".innerCollection");
+
   // Changes background color to red
   $('.column1').css({
     "background-color": "red"
   });
+
+  let playAgain = $('<div></div>').attr('id', 'playAgain').text("Play again!");
+  playAgain.button();
+  // Adds the button to html file
+  playAgain.appendTo(".innerCollection");
+  // On click, prompts startGame function
+  playAgain.on('click', resetGame);
+
 }

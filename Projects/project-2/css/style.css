@@ -47,7 +47,7 @@ body {}
 }
 
 /* Properties of following html elements */
-#gameTitle, #gameDescription, #button, #gameOverTitle, #numAnsweredQuestion {
+#gameTitle, #gameDescription, #button, #gameOverTitle, #numAnsweredQuestion, #playAgain {
   font-family: "courgette", sans-serif;
   font-size: 3vw;
   color: black;
@@ -69,6 +69,15 @@ body {}
   font-size: 1.5vw;
   color: black;
   margin-top: 2vw;
+}
+
+/* Specific properties of button */
+#playAgain {
+  background-color: yellow;
+  font-family: sans-serif;
+  font-size: 1.5vw;
+  color: black;
+  margin-top: 10vw;
 }
 
 /* Specific properties of gameDescription */
