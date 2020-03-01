@@ -2,7 +2,7 @@
 #### Date: 02/04/2020
 #### Professor: Pippin Barr
 #### Project 1 - Sisyphus - Artist Statement
-\
+
 
 According to my understanding of Sisyphus Myth, Sisyphus has been a cruel Greek king who was punished to
 roll immense boulders up a hill and then, watching them down forever. In first sight, this action absolute absurdity 
