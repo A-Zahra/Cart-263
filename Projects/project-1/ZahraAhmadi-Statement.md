@@ -1,11 +1,10 @@
-Name: Zahra Ahmadi
-Date: 02/04/2020
-Professor: Pippin Barr
-	
-      Project 1 - Sisyphus - Artist Statement
+#### Name: Zahra Ahmadi
+#### Date: 02/04/2020
+#### Professor: Pippin Barr
+#### Project 1 - Sisyphus - Artist Statement
 
-      According to my understanding of Sisyphus Myth, Sisyphus has been a cruel Greek king who was punished to
- roll immense boulders up a hill and then, watching them down forever. In first sight, this action absolute absurdity 
+According to my understanding of Sisyphus Myth, Sisyphus has been a cruel Greek king who was punished to
+roll immense boulders up a hill and then, watching them down forever. In first sight, this action absolute absurdity 
 might be the only thing that can be perceived of this scenario. For sure, nothing could improve or worsen Sisyphus 
 situation, if he rolled more or less boulders up the hill or if he did this action faster or slower. But what would lead him 
 to go through whole this process every day? 
@@ -40,10 +39,10 @@ supposed to restart the game.
 For this game visual aspect, I got all of my images from internet, as I spent more time on the coding side.
 I also got my sound effects from free sound website which its link is available in my JavaScript file.
 
-Reference
-Background image: https://photodune.net/item/rustic-wooden-board-texture-table-top-view/18736293
-Wastepaper image: https://pixabay.com/vectors/wastepaper-discard-trash-paper-97619/
-Trash bin: https://pnghunter.com/png/recycle-bin-15/
+###### Reference
+Background image: (https://photodune.net/item/rustic-wooden-board-texture-table-top-view/18736293)
+Wastepaper image: (https://pixabay.com/vectors/wastepaper-discard-trash-paper-97619/)
+Trash bin: (https://pnghunter.com/png/recycle-bin-15/)
 Sound effects: https://freesound.org/people/DeantheDinosauce/sounds/177853/
 
 
