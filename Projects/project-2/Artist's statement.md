@@ -19,15 +19,11 @@ Two of the other components of “who am I?” game are the timer and score coun
 
 One of main challenges to program this game was making the cards pile. To prevent repeating codes like, having several arrays or variables for animals’ images or self-descriptions, I should come up with an appropriate method. I decided to define one array of animal’s names and use that in various parts of my code. One of the main parts that I used this array is where I needed to insert animals’ images. Thanks to this array, I could define only one variable for all of my images rather than defining several single variables, assigning images to and then using them one by one in my code.
 
-The other challenge I faced with was that I wanted the game displays random images, every time the player reloads or restarts the game. To solve this problem, I found a function called “Jquery.grep()” which removes exactly the element that you want from the array.
+The other challenge I faced with was that I wanted the game displays random images, every time the player reloads or restarts the game. To solve this problem, I found a function called “Jquery.grep()” which removes exactly the element that you want from the array. I put this function inside an another one which every time the "next" function is prompted it is called and removes the animal's name that was just displayed, from the animals array. Thus, the animal will no longer exist to be picked by the computer.
 
 Annyang and Responsive voice are two of the libraries that I used alongside the jQuery library. I used Annyang so the player can answer questions orally. I think the game impression on the kid would be more if they actually repeat the “I am a (animal name)” sentence every time. And I used Responsive voice for the warnings, so the player won’t lose her/his time for reading the warnings.
 
 Finally, I have a “Play again” button in my game over screen which let the player play again if they liked.
-
-
-
-
 
 
 
