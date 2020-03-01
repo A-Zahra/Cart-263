@@ -11,12 +11,12 @@ reading the animal's self description. To gives his/her answer, he/she should sa
 is not correct, the player is warnned that their answer is wrong. If the player couldn't guess
 the correct answer, they can give up to see the image by saying "I give up".
 To win the game the player should answer at least 5 questions. However, there is no winning
-and even if the player answers more than 5 question he/she won't win.
+and even if the player answers more than 5 questions he/she won't win.
 I did this intentionally for the idea of "something is wrong on the internet".
 Some of the main features of this game are:
 1. The timer
 2. Score counter
-3. Randomly picked cards which are displayed every time the page is reloaded
+3. Randomly picked cards which are displayed every time the page is reloaded or restarted
 
 ---------------
 ***Reference***
@@ -426,6 +426,7 @@ function showMe(myString) {
     }
     // Confirms the answer was true
     questionWasReplied = true;
+    // Makes the gameStarted false, so if the player mistakenly repeated his answer, it won't add a new image to the screen
     gameStarted = false;
   }
   // Otherwise asks the player answers again
