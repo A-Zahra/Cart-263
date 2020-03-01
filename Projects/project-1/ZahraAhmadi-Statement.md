@@ -2,6 +2,7 @@
 #### Date: 02/04/2020
 #### Professor: Pippin Barr
 #### Project 1 - Sisyphus - Artist Statement
+\
 
 According to my understanding of Sisyphus Myth, Sisyphus has been a cruel Greek king who was punished to
 roll immense boulders up a hill and then, watching them down forever. In first sight, this action absolute absurdity 
@@ -39,10 +40,13 @@ supposed to restart the game.
 For this game visual aspect, I got all of my images from internet, as I spent more time on the coding side.
 I also got my sound effects from free sound website which its link is available in my JavaScript file.
 
-###### Reference
+##### Reference
 Background image: (https://photodune.net/item/rustic-wooden-board-texture-table-top-view/18736293)
+
 Wastepaper image: (https://pixabay.com/vectors/wastepaper-discard-trash-paper-97619/)
+
 Trash bin: (https://pnghunter.com/png/recycle-bin-15/)
+
 Sound effects: https://freesound.org/people/DeantheDinosauce/sounds/177853/
 
 
