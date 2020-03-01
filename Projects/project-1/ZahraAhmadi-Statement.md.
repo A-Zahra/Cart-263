@@ -18,10 +18,10 @@ This false hope is mainly what I am trying to make the user feels, when he/she i
 about someone whose guests arrive in 20 seconds and he needs to drop all the paper trashes into the trash bin. 
 To motivate the player to go through the process of dragging and dropping, I kept the number of trashes limited. 
 This way, although the given time is too short and the player sees that, he/she keeps dragging and dropping trashes 
-inside the trash bin because he/she feels that ìOh, itís just a bunch of trashes, for sure I can finish it before time ends!î. 
+inside the trash bin because he/she feels that ‚ÄúOh, it‚Äôs just a bunch of trashes, for sure I can finish it before time ends!‚Äù. 
 
 To program this game, I used HTML, JavaScript and CSS. When I started coding, the first problem I faced with was that  
-I didnít know how to create div elements in my JavaScript file and then append them to the main div I had in HTML file. 
+I didn‚Äôt know how to create div elements in my JavaScript file and then append them to the main div I had in HTML file. 
 But then, with the help of Dana I found that I need to use a for loop and createElement method to create divs one by one. 
 Thereafter, I faced with my second problem when I was trying to use remove function for the paper divs in my onDrop
 function. Since I was appending divs with same attribute names to my main div, every time that I dragged and drop one 
