@@ -103,8 +103,13 @@ https://www.goodfon.com/wallpaper/chiornyi-fon-sova-dozhd-vzgliad.html
 mouse
 https://www.pngfuel.com/free-png/abnwy
 -----------------------------------------------------------------------------------------
-**Animal names**
+**Animals' names**
 https://github.com/dariusk/corpora/blob/master/data/animals/common.json
+-----------------------------------------------------------------------------------------
+** Animals' sounds**
+https://www.freesoundeffects.com/
+https://www.findsounds.com/
+https://www.videvo.net/sound-effect/lion-growl-angry-gene-pe931903/249943/
 
 *****************************************************************************************/
 
@@ -133,7 +138,16 @@ let endGame = false; // Checks if game ended
 let pointBars; // An array to store point bars
 let gaveUp = false; // Checks if the player gave up
 let gameStarted = false; // Checks if game started
-
+// Sounds variables
+let tiger = 0;
+let leopard = 0;
+let owl = 0;
+let lion = 0;
+let gorilla = 0;
+let bat = 0;
+let wolf = 0;
+let snake = 0;
+let bear = 0;
 // Get setup!
 $(document).ready(setup);
 
@@ -141,7 +155,7 @@ $(document).ready(setup);
 //
 // Sets up everything
 function setup() {
-  let timeoutDuration = 1000;
+  let timeoutDuration = 1500;
 
   startScreen();
   // On click, prompts start game function
@@ -216,8 +230,8 @@ function startScreen() {
   // List of self descriptions
   descriptionList = [
     "I am playful and do not share my lovely bone with anyone!",
-    "I have big antlers and a fluffy tail! I live both in north and south America!",
-    "I love banana! I am black and have large jaw muscles plus strong teeth!",
+    "I have big and beautiful antlers! I live both in north and south America!",
+    "I love banana! I am black and have strong teeth!",
     "I live on wetLands and rivers. Flies are my favorite food!",
     "I am sooo Slow and love hanging trees!",
     "I love honey and fish! I have rounded ears and big claws!",
@@ -231,11 +245,11 @@ function startScreen() {
     "My skin is striped! I am an herbivore and moslty live in Africa!",
     "I am a large cat! I love to swim and my orange skin has vertical black stripes!",
     "I live in caves. I hate light and I hunt in the dark!",
-    "I am too slow and carry my home on my back! I can live for several centuries!",
+    "I am too slow and carry my home on my back!",
     "I'm the only bird that doesn't fly and I live in the Arctic!",
     "I have extremely long neck and legs!",
     "I make honey!",
-    "I have a flat face with big eyes! my neck rotates 270 degrees!",
+    "I have a flat face with large eyes! my neck rotates 270 degrees!",
     "I love cheese and of course hate cats!"
   ];
 
@@ -308,7 +322,6 @@ function getRandomElement(animal) {
   let cardNumber;
   // Random element
   let element = animal[Math.floor(Math.random() * animal.length)];
-  console.log("element " + element);
   for (let i = 0; i < animal.length; i++) {
     if (element === animal[i]) {
       cardNumber = i;
@@ -366,13 +379,52 @@ function descriptions() {
 //
 // If player said purposed word,
 function showMe(myString) {
-  console.log(gameStarted);
   // If it is the right animal name and game hasn't end,
   if (myString === animals[cardNum] && !endGame && gameStarted) {
     // console.log("SHOW IMAGE");
     // Creates and adds the image to html file
     cardImg = $('<img>').addClass(animals[cardNum]).attr('src', 'assets/images/' + animals[cardNum] + ".png");
-    console.log("animal name: " + animals[cardNum] + " card num: " + cardNum);
+    // Adds wild animal sounds
+    switch (myString) {
+      case "tiger":
+        tiger = new Audio("assets/sounds/tiger.wav");
+        tiger.play();
+        break;
+      case "wolf":
+        wolf = new Audio("assets/sounds/wolf.wav");
+        wolf.play();
+        break;
+      case "lion":
+        lion = new Audio("assets/sounds/lion.mp3");
+        lion.play();
+        break;
+      case "leopard":
+        leopard = new Audio("assets/sounds/leopard.wav");
+        leopard.play();
+        break;
+      case "snake":
+        snake = new Audio("assets/sounds/snake.wav");
+        snake.play();
+        break;
+      case "bear":
+        bear = new Audio("assets/sounds/bear.wav");
+        bear.play();
+        break;
+      case "bat":
+        bat = new Audio("assets/sounds/bat.wav");
+        bat.play();
+        break;
+      case "owl":
+        owl = new Audio("assets/sounds/owl.mp3");
+        owl.play();
+        break;
+      case "gorilla":
+        gorilla = new Audio("assets/sounds/gorilla.mp3");
+        gorilla.play();
+        break;
+      default:
+        console.log("not a wild");
+    }
     // Gives css properties to
     cardImg.css({
       "display": "none",
@@ -461,6 +513,42 @@ function nextCard() {
     $('#whoAmI').remove();
     // Removes previous card image
     cardImg.remove();
+
+    // If gaveUp is true, pauses animal sound
+    if (gaveUp) {
+      switch (animals[cardNum]) {
+        case "tiger":
+          tiger.pause();
+          break;
+        case "wolf":
+          wolf.pause();
+          break;
+        case "leopard":
+          leopard.pause();
+          break;
+        case "snake":
+          snake.pause();
+          break;
+        case "bear":
+          bear.pause();
+          break;
+        case "bat":
+          bat.pause();
+          break;
+        case "owl":
+          owl.pause();
+          break;
+        case "gorilla":
+          gorilla.pause();
+          break;
+        case "lion":
+          lion.pause();
+          break;
+        default:
+          console.log("not a wild");
+      }
+    }
+
     // Shows next question
     removePreviousCard();
     question();
@@ -484,7 +572,7 @@ function pointCounter() {
       // Sets their position and opacity proportional to each other
       counter.css({
         "margin-top": `${pointBarTopMargin}vw`,
-        "opacity": `${numPointBars/10}`
+        "opacity": `${numPointBars/6}`
       });
       // Adds new score bar to the array
       pointBars.push(counter);
@@ -590,5 +678,4 @@ function gameOverScreen() {
   playAgain.appendTo(".innerCollection");
   // On click, prompts startGame function
   playAgain.on('click', resetGame);
-
 }
