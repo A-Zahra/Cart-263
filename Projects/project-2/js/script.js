@@ -113,11 +113,9 @@ https://www.videvo.net/sound-effect/lion-growl-angry-gene-pe931903/249943/
 
 *****************************************************************************************/
 
-// An array of animal names
+// An array of animals' names and descriptions
 // Be used for several purposes like
-let animals = 0;
-// List of self descriptions
-let descriptionList = 0;
+let animalPackage = 0;
 let selfDefinition; // Holds self definition sentence
 let whoAmI; // Holds the question
 let cardImg = 0; // Holds animal image
@@ -173,7 +171,7 @@ function setup() {
 
           gaveUp = true;
           gameStarted = true;
-          showMe(animals[cardNum]);
+          showMe(animalPackage[cardNum].name);
           setTimeout(nextCard, timeoutDuration);
         }
       }
@@ -203,56 +201,95 @@ function resetGame() {
 function startScreen() {
   // An array of animal names
   // Be used for several purposes like
-  animals = [
-    "dog",
-    "deer",
-    "gorilla",
-    "frog",
-    "sloth",
-    "bear",
-    "leopard",
-    "parrot",
-    "wolf",
-    "rabbit",
-    "snake",
-    "lion",
-    "donkey",
-    "zebra",
-    "tiger",
-    "bat",
-    "turtle",
-    "penguin",
-    "giraffe",
-    "bees",
-    "owl",
-    "mouse"
+  animalPackage = [{
+      name: "dog",
+      clue: "I am playful and do not share my lovely bone with anyone!"
+    },
+    {
+      name: "deer",
+      clue: "I have big and beautiful antlers! I live both in north and south America!"
+    },
+    {
+      name: "gorilla",
+      clue: "I love banana! I am black and have strong teeth!"
+    },
+    {
+      name: "frog",
+      clue: "I live on wetLands and rivers. Flies are my favorite food!"
+    },
+    {
+      name: "sloth",
+      clue: "I am sooo Slow and love hanging trees!"
+    },
+    {
+      name: "bear",
+      clue: "I love honey and fish! I have rounded ears and big claws!"
+    },
+    {
+      name: "leopard",
+      clue: "I am a wild cat that his fur is marked with rosettes!"
+    },
+    {
+      name: "parrot",
+      clue: "I like to repeat people words and I have colorful wings!"
+    },
+    {
+      name: "wolf",
+      clue: "I hunt sheeps and dogs are my main enemy!"
+    },
+    {
+      name: "rabbit",
+      clue: "I am smart and fast! carrot is my favorite food!"
+    },
+    {
+      name: "snake",
+      clue: "I don't have limbs but I'm fast and crawl on the ground!"
+    },
+    {
+      name: "lion",
+      clue: "I have mane around my neck and live in a group!"
+    },
+    {
+      name: "donkey",
+      clue: "I am stubborn! I always wanted to be like a horse but I am not!"
+    },
+    {
+      name: "zibra",
+      clue: "My skin is striped! I am an herbivore and moslty live in Africa!"
+    },
+    {
+      name: "tiger",
+      clue: "I am a large cat! my orange skin has vertical black stripes!"
+    },
+    {
+      name: "bat",
+      clue: "I live in caves. I hate light and I hunt in the dark!"
+    },
+    {
+      name: "turtle",
+      clue: "I am too slow and carry my home on my back!"
+    },
+    {
+      name: "penguin",
+      clue: "I'm the only bird that doesn't fly and I live in the Arctic!"
+    },
+    {
+      name: "giraffe",
+      clue: "I have extremely long neck and legs!"
+    },
+    {
+      name: "bee",
+      clue: "I make honey!"
+    },
+    {
+      name: "owl",
+      clue: "I have a flat face with large eyes! my neck rotates 270 degrees!"
+    },
+    {
+      name: "mouse",
+      clue: "I love cheese and of course hate cats!"
+    }
   ];
-  // List of self descriptions
-  descriptionList = [
-    "I am playful and do not share my lovely bone with anyone!",
-    "I have big and beautiful antlers! I live both in north and south America!",
-    "I love banana! I am black and have strong teeth!",
-    "I live on wetLands and rivers. Flies are my favorite food!",
-    "I am sooo Slow and love hanging trees!",
-    "I love honey and fish! I have rounded ears and big claws!",
-    "I am a wild cat that his fur is marked with rosettes!",
-    "I like to repeat people words and I have colorful wings!",
-    "I hunt sheeps and dogs are my main enemy! ",
-    "I am smart and fast! carrot is my favorite food!",
-    "I don't have limbs but I'm fast and crawl on the ground!",
-    "I have mane around my neck and live in a group!",
-    "I am stubborn! I always wanted to be like a horse but I am not!",
-    "My skin is striped! I am an herbivore and moslty live in Africa!",
-    "I am a large cat! I love to swim and my orange skin has vertical black stripes!",
-    "I live in caves. I hate light and I hunt in the dark!",
-    "I am too slow and carry my home on my back!",
-    "I'm the only bird that doesn't fly and I live in the Arctic!",
-    "I have extremely long neck and legs!",
-    "I make honey!",
-    "I have a flat face with large eyes! my neck rotates 270 degrees!",
-    "I love cheese and of course hate cats!"
-  ];
-
   endGame = false;
   cardImg = 0;
   cardNum = 0;
@@ -359,14 +396,14 @@ function descriptions() {
   // If game hasn't end,
   if (!endGame) {
     // Gets random description
-    if (animals.length !== animalsNotEmpty) {
-      cardNum = getRandomElement(animals);
-    } else if (animals.length < animalsNotEmpty) {
+    if (animalPackage.length !== animalsNotEmpty) {
+      cardNum = getRandomElement(animalPackage);
+    } else if (animalPackage.length < animalsNotEmpty) {
       cardNum = undefined;
     }
     // Adds description to html file
     selfDefinition = $("#selfDefinition");
-    let definition = descriptionList[cardNum];
+    let definition = animalPackage[cardNum].clue;
     selfDefinition.text(definition);
     selfDefinition.fadeIn(fadeDuration);
     selfDefinition.css({
@@ -380,10 +417,11 @@ function descriptions() {
 // If player said purposed word,
 function showMe(myString) {
   // If it is the right animal name and game hasn't end,
-  if (myString === animals[cardNum] && !endGame && gameStarted) {
+  if (myString === animalPackage[cardNum].name && !endGame && gameStarted) {
     // console.log("SHOW IMAGE");
     // Creates and adds the image to html file
-    cardImg = $('<img>').addClass(animals[cardNum]).attr('src', 'assets/images/' + animals[cardNum] + ".png");
+    let animalName = animalPackage[cardNum];
+    cardImg = $('<img>').addClass(animalName).attr('src', 'assets/images/' + animalPackage[cardNum].name + ".png");
     // Adds wild animal sounds
     switch (myString) {
       case "tiger":
@@ -482,7 +520,7 @@ function showMe(myString) {
     gameStarted = false;
   }
   // Otherwise asks the player answers again
-  else if (myString !== animals[cardNum] && gameStarted && !endGame) {
+  else if (myString !== animalPackage[cardNum].name && gameStarted && !endGame) {
     let option = {
       rate: 0.8
     };
@@ -494,12 +532,12 @@ function showMe(myString) {
 //
 // Removes elements of previous card
 function removePreviousCard() {
-  descriptionList = jQuery.grep(descriptionList, function(value) {
-    return value != descriptionList[cardNum];
-  });
+  // descriptionList = jQuery.grep(descriptionList, function(value) {
+  //   return value != descriptionList[cardNum];
+  // });
   // console.log(descriptionList);
-  animals = jQuery.grep(animals, function(value) {
-    return value != animals[cardNum];
+  animalPackage = jQuery.grep(animalPackage, function(value) {
+    return value != animalPackage[cardNum];
   });
   // console.log(animals);
 }
@@ -516,7 +554,7 @@ function nextCard() {
 
     // If gaveUp is true, pauses animal sound
     if (gaveUp) {
-      switch (animals[cardNum]) {
+      switch (animalPackage[cardNum].name) {
         case "tiger":
           tiger.pause();
           break;
