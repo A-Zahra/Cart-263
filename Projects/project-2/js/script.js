@@ -199,7 +199,7 @@ function resetGame() {
 //
 // Displays game start screen
 function startScreen() {
-  // An array of animal names
+  // An array of animal names and clues
   // Be used for several purposes like
   animalPackage = [{
       name: "dog",
@@ -254,7 +254,7 @@ function startScreen() {
       clue: "I am stubborn! I always wanted to be like a horse but I am not!"
     },
     {
-      name: "zibra",
+      name: "zebra",
       clue: "My skin is striped! I am an herbivore and moslty live in Africa!"
     },
     {
