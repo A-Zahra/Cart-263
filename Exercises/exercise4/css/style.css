@@ -1,0 +1,28 @@
+body {
+  background-color: yellow;
+  width: 500px;
+  height: 500px;
+}
+
+#container {
+  position: absolute;
+  margin: auto;
+  /* margin-top: 5vw; */
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+#condimentSimile {
+  font-family: "century gothic", sans-serif;
+  font-size: 2vw;
+  width: 50vw;
+  position: relative;
+  margin: auto;
+  margin-top: 5vw;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
