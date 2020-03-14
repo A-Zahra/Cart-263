@@ -10,20 +10,37 @@ to match your project! Write JavaScript to do amazing things below!
 
 *********************************************************************/
 let condimentSimileSentence;
-let gameStarted= false;
+let gameStarted = false;
+let $button;
 $(document).ready(setup);
 
 // setup()
 //
 // Prompts all the required functons to run the code
 function setup() {
-  let introduction = $('<h2></h2>').text("Let's see what monsters eat as their daily meal!").attr('id', 'introduction').appendTo('body');
-  let monsterImg = $('<img>').addClass("monsterImg").attr('src', 'assets/images/lovelyMonster.png').appendTo('body');
+  startScreen();
   if (gameStarted) {
     $.getJSON("data/data.json")
       .done(dataLoaded) // If there is no error, runs dataLoaded function
       .fail(dataError); // otherwise, runs the dataError function
   }
+}
+
+function startScreen() {
+  let introduction = $('#introduction').text("Let's see what monsters have as their daily meal!!!");
+  let monsterImg = $('#monsterImg').attr('src', 'assets/images/lovelyMonster.png').after($('#button'));
+  startButton();
+  
+}
+
+function startButton() {
+  $button = $('#button').text("Play!");
+  $button.button();
+  // On click, prompts startGame function
+  $button.on('click', function () {
+    gameStarted = true;
+    $('#startScreen').hide();
+  });
 }
 
 // dataLoaded()

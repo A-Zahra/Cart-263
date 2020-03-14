@@ -4,11 +4,20 @@ body {
   height: 500px;
 }
 
-#introduction {
-  font-family: "century gothic", sans-serif;
-  font-size: 2vw;
-  width: 50vw;
+#startScreen {
   position: absolute;
+  margin: auto;
+  margin-top: 5vw;
+  width: auto;
+  height: auto;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+.innerContainer {
+  display: inline-table;
   margin: auto;
   margin-top: 15vw;
   left: 0;
@@ -17,17 +26,46 @@ body {
   bottom: 0;
 }
 
-.monsterImg {
+#introduction {
+  font-family: "century gothic", sans-serif;
+  font-size: 2vw;
+  width: 50vw;
   position: absolute;
   margin: auto;
-  width: 25vw;
-  margin-top: 20vw;
+  /* margin-top: 10vw; */
   left: 0;
   right: 0;
   top: 0;
   bottom: 0;
-
 }
+
+#monsterImg {
+  position: absolute;
+  margin: auto;
+  width: 25vw;
+  margin-top: 5vw;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+#button {
+  background-color: rgba(255, 120, 140, 20);
+  border:solid; /* no info for size nor color yet */
+  box-shadow: 2px 2px 2px 2px ;
+  border-radius:5px; /* prefix not needed anymore */
+  position: absolute;
+  margin: auto;
+  width: fit-content;
+  height: fit-content;
+  margin-top: 35vw;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
 #container {
   position: absolute;
   margin: auto;
