@@ -22,8 +22,11 @@ let randomRoom; // Stores random room names
 let randomObject; // Stores random objects
 let catArticle; // Stores the correct Article that should be used for cat name
 let roomArticle; // Stores the correct Article that should be used for room name
+let objectArticle; // Stores the correct Article that should be used for object name
+let firstChar = 0; // Be used in charAt() method
 let roomFirstCharacter; // Stores room's name first character
 let catFirstCharacter; // Stores cat's name first character
+let objectFirstCharacter; // Stores object's name first character
 let vowels; // Stores vowels
 let verb; // Stores the appropriate verb
 let gameStarted = true; 
@@ -89,6 +92,10 @@ function getData(data) {
   randomCats = getRandomElement(data.cats);
   // Gets random room's name from JSON file
   randomRoom = getRandomElement(data.rooms);
+  //Gets random object's name from JSON file
+  randomObject = getRandomElement(data.objects);
+  // Gets random appliance's name from JSON file
+  randomAppliances = getRandomElement(data.appliances);
   
   // Makes an array of vowels
   vowels = ["A", "E", "O", "U", "I"];
@@ -96,10 +103,13 @@ function getData(data) {
   catArticle = "a";
   // If the room's name first character is consonant...
   roomArticle = "a";
+  // If the room's name first character is consonant...
+  objectArticle = "a";
   
   // If it is vowel...
-  catFirstCharacter = randomCats.charAt(0).toUpperCase();
-  roomFirstCharacter = randomRoom.charAt(0).toUpperCase();
+  catFirstCharacter = randomCats.charAt(firstChar).toUpperCase();
+  roomFirstCharacter = randomRoom.charAt(firstChar).toUpperCase();
+  objectFirstCharacter = randomObject.charAt(firstChar).toUpperCase();
   for (let i = 0; i < vowels.length; i++) {
     if (catFirstCharacter === vowels[i]) {
       catArticle = "an";
@@ -107,13 +117,10 @@ function getData(data) {
     if (roomFirstCharacter === vowels[i]) {
       roomArticle = "an";
     }
+    if (objectFirstCharacter === vowels[i]) {
+      objectArticle = "an";
+    }
   }
-
-  //Gets random object's name from JSON file
-  randomObject = getRandomElement(data.objects);
-  // Gets random appliance's name from JSON file
-  randomAppliances = getRandomElement(data.appliances);
-
 }
 
 // dataLoaded()
@@ -127,7 +134,7 @@ function dataLoaded(data) {
   let container = $('<div></div>').attr('id', 'container');
   container.appendTo('body');
   // Asigns Condiment Simile to a variable
-  condimentSimile = ` I think ${randomCondiment} ${verb} like ${catArticle} ${randomCats} that when you add it to your ${randomAppliances} in ${roomArticle} ${randomRoom}, it tastes like a ${randomObject}`;
+  condimentSimile = ` I think ${randomCondiment} ${verb} like ${catArticle} ${randomCats} that when you add it to your ${randomAppliances} in ${roomArticle} ${randomRoom}, it tastes like ${objectArticle} ${randomObject}`;
   condimentSimileSentence = $('<p></p>').text(`${condimentSimile}`).attr('id', 'description');
   // Append it to the container div
   condimentSimileSentence.appendTo('#container');
