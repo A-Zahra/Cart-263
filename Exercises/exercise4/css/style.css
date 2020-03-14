@@ -4,6 +4,30 @@ body {
   height: 500px;
 }
 
+#introduction {
+  font-family: "century gothic", sans-serif;
+  font-size: 2vw;
+  width: 50vw;
+  position: absolute;
+  margin: auto;
+  margin-top: 15vw;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+.monsterImg {
+  position: absolute;
+  margin: auto;
+  width: 25vw;
+  margin-top: 20vw;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+
+}
 #container {
   position: absolute;
   margin: auto;
@@ -20,7 +44,7 @@ body {
   width: 50vw;
   position: relative;
   margin: auto;
-  margin-top: 5vw;
+  margin-top: 20vw;
   left: 0;
   right: 0;
   top: 0;
