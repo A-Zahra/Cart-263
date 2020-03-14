@@ -141,7 +141,7 @@ function dataLoaded(data) {
   // On click, prompts replaceSentence
   let andButton = $('<div></div>').text("and...").attr('id', 'andButton').appendTo('#container');
   andButton.button();
-  andButton.on("click", onClick);
+  andButton.on("click", replaceIt);
 }
 
 // dataError
@@ -163,7 +163,7 @@ function getRandomElement(array) {
 // replaceSentence
 //
 // Remove previous sentence and runs the setup function again
-function onClick() {
+function replaceIt() {
   $('#container').remove();
   gameScreen();
 }
