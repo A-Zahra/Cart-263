@@ -4,6 +4,7 @@ body {
   height: 500px;
 }
 
+/* Properties of startScreen */
 #startScreen {
   position: absolute;
   margin: auto;
@@ -16,6 +17,7 @@ body {
   bottom: 0;
 }
 
+/* Properties of innerContainer */
 .innerContainer {
   display: inline-table;
   margin: auto;
@@ -26,57 +28,74 @@ body {
   bottom: 0;
 }
 
+/* Properties of introduction */
 #introduction {
   font-family: "century gothic", sans-serif;
-  font-size: 2vw;
+  font-size: 1.5vw;
   width: 50vw;
   position: absolute;
   margin: auto;
-  /* margin-top: 10vw; */
   left: 0;
   right: 0;
   top: 0;
   bottom: 0;
 }
 
+/* Properties of monsterImg */
 #monsterImg {
   position: absolute;
   margin: auto;
   width: 25vw;
-  margin-top: 5vw;
+  margin-top: 8vw;
   left: 0;
   right: 0;
   top: 0;
   bottom: 0;
 }
 
+/* Properties of start button */
 #button {
   background-color: rgba(255, 120, 140, 20);
-  border:solid; /* no info for size nor color yet */
-  box-shadow: 2px 2px 2px 2px ;
-  border-radius:5px; /* prefix not needed anymore */
+  border: solid;
+  box-shadow: 2px 2px 2px 2px;
+  border-radius: 5px;
   position: absolute;
   margin: auto;
   width: fit-content;
   height: fit-content;
-  margin-top: 35vw;
+  margin-top: 36vw;
   left: 0;
   right: 0;
   top: 0;
   bottom: 0;
 }
 
+/* Properties of andButton */
+#andButton {
+  background-color: rgba(255, 120, 140, 20);
+  border: solid;
+  box-shadow: 2px 2px 2px 2px;
+  border-radius: 5px;
+  position: absolute;
+  margin: auto;
+  width: fit-content;
+  height: fit-content;
+  margin-top: 4vw;
+  margin-left: 26vw;
+}
+
+/* Properties of container */
 #container {
   position: absolute;
   margin: auto;
-  /* margin-top: 5vw; */
   left: 0;
   right: 0;
   top: 0;
   bottom: 0;
 }
 
-#condimentSimile {
+/* Properties of description */
+#description {
   font-family: "century gothic", sans-serif;
   font-size: 2vw;
   width: 50vw;

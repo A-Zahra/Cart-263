@@ -5,13 +5,30 @@
 Condiments Cacophony
 Zahra Ahmadi
 
-This is a template. Fill in the title, author, and this description
-to match your project! Write JavaScript to do amazing things below!
+I have an introduction page to tell the user what they should expect to see, and a main page
+which shows random description made out of random words. If the player clicks on the page a 
+new description is generated and is replaced by the previous one
 
+Reference
+Monster image:
+https://www.pngarts.com/explore/136165
 *********************************************************************/
-let condimentSimileSentence;
-let gameStarted = false;
-let $button;
+let condimentSimile; // holds description
+let condimentSimileSentence; // holds description variable
+let randomCondiment; // Stores random condiments
+let randomAppliances; // Stores random Appliances
+let randomCats; // Stores random cat names
+let randomRoom; // Stores random room names
+let randomObject; // Stores random objects
+let catArticle; // Stores the correct Article that should be used for cat name
+let roomArticle; // Stores the correct Article that should be used for room name
+let roomFirstCharacter; // Stores room's name first character
+let catFirstCharacter; // Stores cat's name first character
+let vowels; // Stores vowels
+let verb; // Stores the appropriate verb
+let gameStarted = true; 
+let $button; // Stores button value
+
 $(document).ready(setup);
 
 // setup()
@@ -19,28 +36,84 @@ $(document).ready(setup);
 // Prompts all the required functons to run the code
 function setup() {
   startScreen();
-  if (gameStarted) {
-    $.getJSON("data/data.json")
-      .done(dataLoaded) // If there is no error, runs dataLoaded function
-      .fail(dataError); // otherwise, runs the dataError function
+}
+
+// startScreen()
+//
+// Displays introduction
+function startScreen() {
+  $('#startScreen').show();
+  let introduction = $('#introduction').text("Yesterday I met a monster. We had a discussion about condiments. He told me he has tried all kinds of condiments that humans add to their food. When I asked him how he felt about them he told me...");
+  let monsterImg = $('#monsterImg').attr('src', 'assets/images/lovelyMonster.png').after($('#button'));
+  startButton();
+}
+
+// startButton()
+//
+// The button which prompts the gameScreen function
+function startButton() {
+  $button = $('#button').text("See!");
+  $button.button();
+  if (gameStarted){
+    // On click, prompts startGame function
+    $button.one('click', gameScreen);
   }
 }
 
-function startScreen() {
-  let introduction = $('#introduction').text("Let's see what monsters have as their daily meal!!!");
-  let monsterImg = $('#monsterImg').attr('src', 'assets/images/lovelyMonster.png').after($('#button'));
-  startButton();
-  
+// gameScreen()
+//
+// The main screen which displays the description
+function gameScreen() {
+  gameStarted = false;
+  $('#startScreen').hide();
+  $.getJSON("data/data.json")
+    .done(dataLoaded) // If there is no error, runs dataLoaded function
+    .fail(dataError); // otherwise, runs the dataError function
 }
 
-function startButton() {
-  $button = $('#button').text("Play!");
-  $button.button();
-  // On click, prompts startGame function
-  $button.on('click', function () {
-    gameStarted = true;
-    $('#startScreen').hide();
-  });
+// getData
+//
+// Gets data from JSON file
+function getData(data) {
+  // Gets random condiment from JSON file
+  randomCondiment = getRandomElement(data.condiments);
+
+  // If subject is singular, Default verb would be "is"
+  verb = "is";
+  // If the subject is plural, verb would be "are"
+  if (randomCondiment.charAt(randomCondiment.length - 1) === "s") {
+    verb = "are";
+  }
+
+  // Gets random cat name from JSON file
+  randomCats = getRandomElement(data.cats);
+  // Gets random room's name from JSON file
+  randomRoom = getRandomElement(data.rooms);
+  
+  // Makes an array of vowels
+  vowels = ["A", "E", "O", "U", "I"];
+  // If the cat name first character is consonant..
+  catArticle = "a";
+  // If the room's name first character is consonant...
+  roomArticle = "a";
+  
+  // If it is vowel...
+  catFirstCharacter = randomCats.charAt(0).toUpperCase();
+  roomFirstCharacter = randomRoom.charAt(0).toUpperCase();
+  for (let i = 0; i < vowels.length; i++) {
+    if (catFirstCharacter === vowels[i]) {
+      catArticle = "an";
+    }
+    if (roomFirstCharacter === vowels[i]) {
+      roomArticle = "an";
+    }
+  }
+
+  //Gets random object's name from JSON file
+  randomObject = getRandomElement(data.objects);
+  // Gets random appliance's name from JSON file
+  randomAppliances = getRandomElement(data.appliances);
+
 }
 
 // dataLoaded()
@@ -48,63 +121,20 @@ function startButton() {
 // Loads written code respectively
 function dataLoaded(data) {
   console.log(data);
-
-  // Gets random condiment from JSON file
-  let randomCondiment = getRandomElement(data.condiments);
-  // console.error(randomCondiment);
-
-  // If subject is singular, Default verb would be "is"
-  let verb = "is";
-  // If the subject is plural, verb would be "are"
-  if (randomCondiment.charAt(randomCondiment.length - 1) === "s") {
-    verb = "are";
-  }
-
-  // Gets random cat name from JSON file
-  let randomCats = getRandomElement(data.cats);
-  // console.error(randomCats);
-
-  // Makes an array of vowels
-  let vowels = ["A", "E", "O", "U", "I"];
-  // If the cat name first character is consonant..
-  let catArticle = "a";
-  // If it is vowel...
-  let catFirstCharacter = randomCats.charAt(0).toUpperCase();
-  for (let i = 0; i < vowels.length; i++) {
-    if (catFirstCharacter === vowels[i]) {
-      catArticle = "an";
-    }
-  }
-
-  // Gets random room's name from JSON file
-  let randomRoom = getRandomElement(data.rooms);
-  // console.error(randomRoom);
-
-  // If the room's name first character is consonant...
-  let roomArticle = "a";
-  // else...
-  for (let i = 0; i < vowels.length; i++) {
-    let roomFirstCharacter = randomRoom.charAt(0).toUpperCase();
-    if (roomFirstCharacter === vowels[i]) {
-      roomArticle = "an";
-    }
-  }
-
-  //Gets random object's name from JSON file
-  let randomObject = getRandomElement(data.objects);
-  // Gets random appliance's name from JSON file
-  let randomAppliances = getRandomElement(data.appliances);
+  getData(data);
   
   // Creates a container div
   let container = $('<div></div>').attr('id', 'container');
   container.appendTo('body');
   // Asigns Condiment Simile to a variable
-  let condimentSimile = `${randomCondiment} ${verb} like ${catArticle} ${randomCats} in ${roomArticle} ${randomRoom} that when you add it to your ${randomAppliances} it tastes like a ${randomObject}`;
-  condimentSimileSentence = $('<p></p>').text(`${condimentSimile}`).attr('id', 'condimentSimile');
+  condimentSimile = ` I think ${randomCondiment} ${verb} like ${catArticle} ${randomCats} that when you add it to your ${randomAppliances} in ${roomArticle} ${randomRoom}, it tastes like a ${randomObject}`;
+  condimentSimileSentence = $('<p></p>').text(`${condimentSimile}`).attr('id', 'description');
   // Append it to the container div
   condimentSimileSentence.appendTo('#container');
   // On click, prompts replaceSentence
-  $('#container').on("click", onClick);
+  let andButton = $('<div></div>').text("and...").attr('id', 'andButton').appendTo('#container');
+  andButton.button();
+  andButton.on("click", onClick);
 }
 
 // dataError
@@ -127,6 +157,6 @@ function getRandomElement(array) {
 //
 // Remove previous sentence and runs the setup function again
 function onClick() {
-  $(this).remove();
-  setup();
+  $('#container').remove();
+  gameScreen();
 }
