@@ -70,8 +70,8 @@ function pieces(data) {
     li = $('<li></li>').addClass(`slide${i}`).addClass("slideC").appendTo('.content-slider');
     let imgAddress = data.puzzles.firstPuzzle.puzzlePieces[i];
     puzzlePiece = $('<img>').addClass(`piece${i}Img`).css({
-      "width": "8vw",
-      "padding": "8px"
+      "width": "6vw",
+      "padding": "14px"
     }).attr('src', `${imgAddress}`).appendTo(`.slide${i}`);
 
     // Makes the piece draggable
@@ -112,7 +112,7 @@ function spotsToPositionPieces(data) {
         src: `${image}`
       }).css({
         "width": "100%",
-        "opacity": "0.1"
+        "opacity": "0"
       }).appendTo(`#spotToPosition${i}`);
 
       // Makes the spot droppable
@@ -132,9 +132,6 @@ function spotsToPositionPieces(data) {
 function onDrop(event, ui) {
   // If the spot has not been already filled...
   if (!($(this).hasClass("dropped"))) {
-    // Gets the spot id
-    let itemId = $(this).attr("id");
-    console.log(itemId);
 
     // Adds "dropped" class so that this spot can't be filled again
     $(this).addClass("dropped");
@@ -148,23 +145,22 @@ function onDrop(event, ui) {
       piecesInSlide.splice(indexToRemove, 1);
       // SABINE EDIT END.
 
-      // If the spot id is single digit, takes only the last charater of the id
-      // Else, takes the last two character
-      let spotId;
-      if (itemId.length < 16) {
-        spotId = itemId.charAt(itemId.length - 1);
-      } else if (itemId.length > 15) {
-        spotId = itemId.substring(itemId.length - 2, itemId.length);
-      }
+
+      // Gets the spot id, Gets the piece first class
+      // Finds the digit embeded in the spot and the piece + assigns them to variables
+      let itemId = $(this).attr("id");
+      let setSpotId = findSpotId(itemId);
+      let droppedPieceFirstClass = $(ui.draggable[0]).attr("class").split(' ')[0];
+      let setPieceId = findPieceId(droppedPieceFirstClass);
 
       // SABINE EDITS START:
       // Makes a copy ..
       // Removes the other ...
-      let droppedOne = $('<img>').addClass(`droppedPiece${spotId}`).css({
-        "width": "100%"
-      }).attr('src', ui.draggable[0].src).appendTo($(this));
-      console.log((ui.draggable[0]).src);
-      $(`.hidingLayer${spotId}`).remove();
+      let droppedOne = $('<img>').addClass(`droppedPiece${setSpotId}`).css({
+        "width": "100%",
+        "opacity": "0"
+      }).attr({id:`piece${setPieceId}Img`, src:`${ui.draggable[0].src}`}).appendTo($(this));
+      $(`.hidingLayer${setSpotId}`).remove();
 
       // Removes everyone up ...
       $(ui.draggable[0]).parent().remove();
@@ -175,6 +171,11 @@ function onDrop(event, ui) {
       // SHOWS THE FIRST FOUR ..
       for (let j = 0; j <= 3; j++) {
         $(slides[j]).show();
+      }
+
+      // Once all the pieces were dropped to the empty spots prompts the function
+      if (piecesInSlide.length === 24) {
+        makePuzzleFullSize();
       }
     }
   } else {
@@ -223,6 +224,56 @@ function goPrev() {
   $(slides[0]).html(piecesInSlide[0]);
 }
 
+// makePuzzleFullSize()
+//
+// Removes the slider column, reveal the pieces dropped to the puzzle board
+// checks the piece arrangment. If true display victory screen, else displays game over screen
+function makePuzzleFullSize() {
+  let numPiecesFadeIn = 0;
+  let totalNumPiecesFadeIn = 5;
+  let fadeTime = 100;
+
+  // Removes light slider column
+    $('.columnToRemove').remove();
+    $('.column').css({
+      "width": "100%",
+      "float": "none"
+    });
+    // Makes the rows of pieces fade in with delay
+    for (var i = 1; i < 2; i++) {
+      $(`.row${i}`).css({
+        "margin-left": "7.5vw"
+      });
+      for (var j = numPiecesFadeIn; j <= totalNumPiecesFadeIn; j++) {
+        $(`.droppedPiece${j}`).fadeTo( fadeTime , 1 );
+      }
+      numPiecesFadeIn += 6;
+      totalNumPiecesFadeIn += 6;
+      fadeTime += 700;
+    }
+    // Prompts checkPuzzleArrangement function
+    checkPuzzleArrangement();
+}
+
+// checkPuzzleArrangement()
+//
+// Checks whether the pieces are placed in the right position or not
+function checkPuzzleArrangement() {
+  for (var p = 0; p < 6; p++) {
+    let getSpotId = `spotToPosition${p}`;
+    let checkSpotId = findSpotId(getSpotId);
+    let getPieceId = $(`.droppedPiece${p}`).attr("id");
+    let checkPieceId = findPieceId(getPieceId);
+
+    // Compare the spot and the piece ids.
+    // If all of them are the same, displayes victory screen, else gameOver screen
+    if (checkSpotId === checkPieceId) {
+      // gameOver();
+      console.log("in correct spot " + checkPieceId);
+    }
+  }
+}
+
 // dataError()
 //
 // If there is an error...
@@ -242,4 +293,30 @@ function findArrayIndex(obj, list) {
     }
   }
   return -1;
+}
+
+// findSpotId()
+//
+// Finds the digit placed in the spot id name in order to be used as the spot id
+function findSpotId(itemId) {
+  let spotId;
+  if (itemId.length < 16) {
+    spotId = itemId.charAt(itemId.length - 1);
+  } else if (itemId.length > 15) {
+    spotId = itemId.substring(itemId.length - 2, itemId.length);
+  }
+  return spotId;
+}
+
+// findSpotId()
+//
+// Finds the digit placed in the piece class name in order to be used as the piece id
+function findPieceId(pieceId) {
+  let droppedPieceId;
+  if (pieceId.length < 16) {
+    droppedPieceId = pieceId.charAt(5);
+  } else if (pieceId.length > 15) {
+    droppedPieceId = pieceId.substring(5, pieceId.length-3);
+  }
+  return droppedPieceId;
 }

@@ -30,12 +30,10 @@ body {
   z-index: 0;
 }
 
-.row2, .row4, .row5{
+.row2, .row3, .row4, .row5{
   margin-top: -4.8vw;
 }
-.row3 {
-  margin-top: -4.7vw;
-}
+ 
 .rowProperties {
     width:10vw;
     float:left;
@@ -101,7 +99,7 @@ body {
 
 .item {
   display: table;
-  margin-top: -0.6vw;
+  margin-top: 1.5vw;
   left: 0;
   right: 0;
   bottom: 0;
