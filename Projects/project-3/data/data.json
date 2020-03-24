@@ -33,6 +33,38 @@
         "assets/images/Blossom/28.png",
         "assets/images/Blossom/29.png",
         "assets/images/Blossom/30.png"
+      ],
+      "puzzlePiecesSpots": [
+        "assets/images/BlossomHidingLayer/1.png",
+        "assets/images/BlossomHidingLayer/2.png",
+        "assets/images/BlossomHidingLayer/3.png",
+        "assets/images/BlossomHidingLayer/4.png",
+        "assets/images/BlossomHidingLayer/5.png",
+        "assets/images/BlossomHidingLayer/6.png",
+        "assets/images/BlossomHidingLayer/7.png",
+        "assets/images/BlossomHidingLayer/8.png",
+        "assets/images/BlossomHidingLayer/9.png",
+        "assets/images/BlossomHidingLayer/10.png",
+        "assets/images/BlossomHidingLayer/11.png",
+        "assets/images/BlossomHidingLayer/12.png",
+        "assets/images/BlossomHidingLayer/13.png",
+        "assets/images/BlossomHidingLayer/14.png",
+        "assets/images/BlossomHidingLayer/15.png",
+        "assets/images/BlossomHidingLayer/16.png",
+        "assets/images/BlossomHidingLayer/17.png",
+        "assets/images/BlossomHidingLayer/18.png",
+        "assets/images/BlossomHidingLayer/19.png",
+        "assets/images/BlossomHidingLayer/20.png",
+        "assets/images/BlossomHidingLayer/21.png",
+        "assets/images/BlossomHidingLayer/22.png",
+        "assets/images/BlossomHidingLayer/23.png",
+        "assets/images/BlossomHidingLayer/24.png",
+        "assets/images/BlossomHidingLayer/25.png",
+        "assets/images/BlossomHidingLayer/26.png",
+        "assets/images/BlossomHidingLayer/27.png",
+        "assets/images/BlossomHidingLayer/28.png",
+        "assets/images/BlossomHidingLayer/29.png",
+        "assets/images/BlossomHidingLayer/30.png"
       ]
     }
   }
