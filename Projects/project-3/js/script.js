@@ -19,6 +19,9 @@ https://www.irandiamondtour.com/ArticleDetails/6/Shiraz-City
 GeeksforGeeks:
 https://www.geeksforgeeks.org/jquery-first-with-examples/
 
+removeFromArray
+http://www.jquerybyexample.net/2012/02/remove-item-from-array-using-jquery.html
+
 draggable and droppable
 https://stackoverflow.com/questions/42898090/jquery-ui-append-div-on-drop-and-make-appended-div-droppablenested
 https://stackoverflow.com/questions/20025169/when-using-jquery-ui-droppable-how-can-you-remove-an-item-from-the-droppable-ar
@@ -43,24 +46,54 @@ let puzzleScreen;
 let puzzle1pieces;
 let numSlides;
 let piecesInSlide = [];
-let movablePiece = 1;
 let li;
 let arrowTop;
 let arrowBottom;
 let puzzlePiece;
-let droppedPiece = 0;
+let droppedPiece;
 let pieceImage = [];
 let imagesIds = [];
+let gameStarted = false;
+let puzzleImage;
+
 $(document).ready(setup);
 
 // setup()
 //
 // Sets up everything
 function setup() {
+  droppedPiece = 0;
+  // Introduction page
+  introScreen();
+
   // Calls required data from JSON file
   $.getJSON("data/data.json")
     .done(dataLoaded) // If there is no error, runs dataLoaded function
     .fail(dataError); // otherwise, runs the dataError function
+
+}
+
+function introScreen() {
+  let introduction = $('<h1></h1>').addClass("gameTitle").text("Jigsaw Puzzle Game").appendTo('.introduction').after($('.gameLevels'));
+  $('.model1Title').on("click", puzzleModel1);
+}
+
+
+function puzzleModel1() {
+  console.log("worked");
+  $('.gameLevels').css({
+    "display": "none"
+  });
+  $('.level1Options').css({
+    "display": "table"
+  });
+  $('.windowExitButton').on('click', function () {
+    $('.level1Options').hide();
+    $('.gameLevels').show();
+  });
+  $('#shiraz').click(function() {
+    window.location.href = "http://stackoverflow.com";
+  })
 }
 
 // dataLoaded()
@@ -70,10 +103,16 @@ function dataLoaded(data) {
   firstPuzzle(data);
 }
 
+
 // firstPuzzle()
 //
 // Creates first puzzle and prompts pieces() funtion
 function firstPuzzle(data) {
+  // $('body').css({
+  //   "background-image": "url('../assets/images/background.png')",
+  //   "background-size": "100vw 60vw",
+  //   "background-repeat": "no-repeat"
+  // });
   puzzleScreen = $('<img>').addClass('puzzleScreen').attr('src', `${data.puzzles.firstPuzzle.puzzleScreen}`).appendTo('#template-container');
   let ul = $('<ul></ul>').addClass('content-slider').appendTo('.item');
   // Creates puzzle pieces and add them to the lightslider
@@ -222,6 +261,7 @@ function onDrop(event, ui) {
           piecesInSlide.splice(indexToRemove, 1);
           // SABINE EDIT END.
 
+
         // SABINE EDITS START:
         // Makes a copy ..
         // Removes the other ...
@@ -237,6 +277,7 @@ function onDrop(event, ui) {
         $(ui.draggable[0]).parent().remove();
       }
 
+      console.log("script works for both");
 
       //SABINE: also needs to ensure that the correct ones are showing
       let slides = $(".slideC");
@@ -376,7 +417,7 @@ function gameOver() {
 // Displays victory screen
 function victoryScreen() {
   let imageUrl = "https://cdn.streamelements.com/uploads/24548f52-afb9-4338-b823-d2a5d1b5c793.gif";
-  $('.gifAttached').css({
+  $('.victoryReward').css({
     "display": "block",
     "background-image": 'url(' + imageUrl + ')'
   });

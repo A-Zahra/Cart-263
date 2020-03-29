@@ -3,6 +3,7 @@
     "firstPuzzle": {
       "puzzleScreen": "assets/images/Blossom/BlossomTemplate.png",
       "blossom": [
+        "assets/images/Blossom/0.png",
         "assets/images/Blossom/1.png",
         "assets/images/Blossom/2.png",
         "assets/images/Blossom/3.png",
@@ -31,8 +32,7 @@
         "assets/images/Blossom/26.png",
         "assets/images/Blossom/27.png",
         "assets/images/Blossom/28.png",
-        "assets/images/Blossom/29.png",
-        "assets/images/Blossom/30.png"
+        "assets/images/Blossom/29.png"
       ],
       "NasirOlMolkMosque": [
         "assets/images/NasirOlMolkMosque/0.png",
