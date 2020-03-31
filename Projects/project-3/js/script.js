@@ -45,17 +45,18 @@ https://cdn.streamelements.com/uploads/24548f52-afb9-4338-b823-d2a5d1b5c793.gif
 let puzzleScreen;
 let puzzle1pieces;
 let numSlides;
-let piecesInSlide = [];
+let piecesInSlide;
 let li;
 let arrowTop;
 let arrowBottom;
 let puzzlePiece;
 let droppedPiece;
-let pieceImage = [];
-let imagesIds = [];
-let gameStarted = false;
-let puzzleImage;
-
+let pieceImage;
+let imagesIds;
+//SABINE variable to hold the puzzle id chosen (retrieved from local storage)
+let puzzleId;
+let puzzles;
+let $backbutton;
 $(document).ready(setup);
 
 // setup()
@@ -63,43 +64,57 @@ $(document).ready(setup);
 // Sets up everything
 function setup() {
   droppedPiece = 0;
-  // Introduction page
-  introScreen();
+  piecesInSlide = [];
+  imagesIds = [];
+  pieceImage = [];
 
   // Calls required data from JSON file
   $.getJSON("data/data.json")
     .done(dataLoaded) // If there is no error, runs dataLoaded function
     .fail(dataError); // otherwise, runs the dataError function
-
+    backButton()
 }
 
-function introScreen() {
-  let introduction = $('<h1></h1>').addClass("gameTitle").text("Jigsaw Puzzle Game").appendTo('.introduction').after($('.gameLevels'));
-  $('.model1Title').on("click", puzzleModel1);
+// backButton()
+//
+// Creates an start button
+function backButton() {
+  $backbutton = $('<div></div>').attr('id', 'backbutton').text("back");
+  $backbutton.button();
+  // Adds the button to html file
+  $backbutton.css({
+    "position": "absolute",
+    "margin-top": "42vw",
+    "margin-left": "3vw",
+    "font-size": "1.5vw"
+  }).appendTo(".FirstPuzzleModels");
+  // On click, prompts startGame function
+  $backbutton.on('click', homePage);
 }
 
-
-function puzzleModel1() {
-  console.log("worked");
-  $('.gameLevels').css({
-    "display": "none"
-  });
-  $('.level1Options').css({
-    "display": "table"
-  });
-  $('.windowExitButton').on('click', function () {
-    $('.level1Options').hide();
-    $('.gameLevels').show();
-  });
-  $('#shiraz').click(function() {
-    window.location.href = "http://stackoverflow.com";
-  })
+function homePage() {
+    setup();
+    window.location.href = "index.html";
 }
 
 // dataLoaded()
 //
 // Creates and runs dataLoaded funtion
 function dataLoaded(data) {
+  // Gets data from Json file
+  puzzles = [{
+      id: "shiraz",
+      length: data.puzzles.firstPuzzle.shiraz.length,
+      pieces: data.puzzles.firstPuzzle.shiraz
+    },
+    {
+      id: "spring",
+      length: data.puzzles.firstPuzzle.blossom.length,
+      pieces: data.puzzles.firstPuzzle.blossom
+    }
+  ];
+  // Gets the puzzle id from the other script file using local storage
+  puzzleId = localStorage.getItem("testId");
   firstPuzzle(data);
 }
 
@@ -108,11 +123,6 @@ function dataLoaded(data) {
 //
 // Creates first puzzle and prompts pieces() funtion
 function firstPuzzle(data) {
-  // $('body').css({
-  //   "background-image": "url('../assets/images/background.png')",
-  //   "background-size": "100vw 60vw",
-  //   "background-repeat": "no-repeat"
-  // });
   puzzleScreen = $('<img>').addClass('puzzleScreen').attr('src', `${data.puzzles.firstPuzzle.puzzleScreen}`).appendTo('#template-container');
   let ul = $('<ul></ul>').addClass('content-slider').appendTo('.item');
   // Creates puzzle pieces and add them to the lightslider
@@ -126,15 +136,24 @@ function firstPuzzle(data) {
 function pieces(data) {
   // Creates the top arrow
   arrowTop = $('<img>').addClass('arrowTop').attr('src', 'assets/images/arrowTop.png').appendTo(`.content-slider`);
-  // Gets data from JSON file
-  // Stores  slide's length in a variable
-  numSlides = data.puzzles.firstPuzzle.NasirOlMolkMosque.length;
-  // Stores all images in an array
-  for (var i = 0; i < numSlides; i++) {
-    let imgAddress = data.puzzles.firstPuzzle.NasirOlMolkMosque[i];
-    pieceImage.push(imgAddress);
+
+  let getPuzzleId;
+  // Based on the id of the puzzle, gets data from Json file
+  for (let i = 0; i < 2; i++) {
+    if (puzzleId === puzzles[i].id) {
+      getPuzzleId = i;
+      // Gets data from JSON file
+      // Stores  slide's length in a variable
+      numSlides = puzzles[i].length;
+      // Stores all images in an array
+      for (var h = 0; h < numSlides; h++) {
+        let imgAddress = puzzles[i].pieces[h];
+        pieceImage.push(imgAddress);
+      }
+    }
   }
 
+  let firstPieceLength = puzzles[getPuzzleId].pieces[0].length;
   // Creates pieces and adds them to their relative slide
   for (let i = 0; i < numSlides; i++) {
     // Gets random image from the array
@@ -142,10 +161,10 @@ function pieces(data) {
 
     // Gets the image Id
     let imageId;
-    if (randomPieceImg.length === 37) {
-      imageId = randomPieceImg.charAt(32);
-    } else if (randomPieceImg.length === 38) {
-      imageId = randomPieceImg.substring(32, randomPieceImg.length - 4);
+    if (randomPieceImg.length === firstPieceLength) {
+      imageId = randomPieceImg.charAt(randomPieceImg.length-5);
+    } else if (randomPieceImg.length === (firstPieceLength+1)) {
+      imageId = randomPieceImg.substring(randomPieceImg.length - 6, randomPieceImg.length - 4);
     }
 
     // Creates slide
@@ -186,7 +205,7 @@ function pieces(data) {
 // getRandomElement()
 //
 // Gets random element from the images array to assign them to the slides
-function getRandomElement (array) {
+function getRandomElement(array) {
   let element = array[Math.floor(Math.random() * array.length)];
   return element;
 }
@@ -195,7 +214,7 @@ function getRandomElement (array) {
 //
 // Removes the last used image from array to not be chosen again
 function removeImageAfterAssignment(image) {
-  pieceImage.splice($.inArray(image, pieceImage),1);
+  pieceImage.splice($.inArray(image, pieceImage), 1);
 }
 
 // spotsToPositionPieces()
@@ -240,26 +259,26 @@ function onDrop(event, ui) {
   // If the spot has not been already filled...
   if (!($(this).hasClass("dropped"))) {
 
-      // Gets the spot id, Gets the piece first class
-      // Finds the digit embeded in the spot and the piece + assigns them to variables
-      let itemId = $(this).attr("id");
-      let setSpotId = findSpotId(itemId);
-      let droppedPieceFirstClass = $(ui.draggable[0]).attr("class").split(' ')[0];
-      let setPieceId = findPieceId(droppedPieceFirstClass);
+    // Gets the spot id, Gets the piece first class
+    // Finds the digit embeded in the spot and the piece + assigns them to variables
+    let itemId = $(this).attr("id");
+    let setSpotId = findSpotId(itemId);
+    let droppedPieceFirstClass = $(ui.draggable[0]).attr("class").split(' ')[0];
+    let setPieceId = findPieceId(droppedPieceFirstClass);
 
-      if($(`.hidingLayer${setSpotId}`).hasClass("clicked")) {
-        // Adds "dropped" class so that this spot can't be filled again
-        $(this).addClass("dropped");
+    if ($(`.hidingLayer${setSpotId}`).hasClass("clicked")) {
+      // Adds "dropped" class so that this spot can't be filled again
+      $(this).addClass("dropped");
 
 
-        // SABINE EDIT START:
-        //The one we dropped AND CHECK THAT IT IS NOT ONE ALREADY DROPPED ...
-        let classNameOfParent = $(ui.draggable[0]).parent().attr('class');
-        if (classNameOfParent.includes("slideC")) {
-          //CUSTOM FUNCTION TO REMOVE FROM THE ARRAY (BASED ON THE SRC OF THE IMAGE)
-          let indexToRemove = findArrayIndex(ui.draggable, piecesInSlide);
-          piecesInSlide.splice(indexToRemove, 1);
-          // SABINE EDIT END.
+      // SABINE EDIT START:
+      //The one we dropped AND CHECK THAT IT IS NOT ONE ALREADY DROPPED ...
+      let classNameOfParent = $(ui.draggable[0]).parent().attr('class');
+      if (classNameOfParent.includes("slideC")) {
+        //CUSTOM FUNCTION TO REMOVE FROM THE ARRAY (BASED ON THE SRC OF THE IMAGE)
+        let indexToRemove = findArrayIndex(ui.draggable, piecesInSlide);
+        piecesInSlide.splice(indexToRemove, 1);
+        // SABINE EDIT END.
 
 
         // SABINE EDITS START:
@@ -276,8 +295,6 @@ function onDrop(event, ui) {
         // Removes everyone up ...
         $(ui.draggable[0]).parent().remove();
       }
-
-      console.log("script works for both");
 
       //SABINE: also needs to ensure that the correct ones are showing
       let slides = $(".slideC");
@@ -464,6 +481,7 @@ function findPieceId(pieceId) {
   }
   return droppedPieceId;
 }
+
 
 // dataError()
 //

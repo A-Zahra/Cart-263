@@ -1,7 +1,5 @@
 <!-- ************************************************************************
-
-Condiments
-Pippin Barr
+Zahra Ahmadi
 
 A webpage that randomly generates descriptions of condiments.
 
@@ -12,8 +10,6 @@ A webpage that randomly generates descriptions of condiments.
 <html lang="en">
 
 <head>
-
-
   <meta name="viewport" https-equiv="content-type" content="text/html" charset="utf-8">
 
   <title>Puzzle</title>
@@ -21,114 +17,54 @@ A webpage that randomly generates descriptions of condiments.
   <link rel="stylesheet" type="text/css" href="css/style.css" />
 
   <!-- Including jQuery -->
-  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> -->
   <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
   <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
 
   <!-- We include our own script file(s) -->
-  <script src="js/script.js" content="text/javascript"></script>
+  <!-- SABINE -- HERE WE CALL INDEX.JS -->
+  <script src="js/index.js" content="text/javascript"></script>
 </head>
 
 <body>
-<div class="introduction">
-  <div class="gameLevels">
-    <div class="level1">
-      <img class="levels" id="model1" src="assets/images/model1.png" alt="model1">
-      <h2 class="model1Title" style="margin-left: -22.5vw;"><a href="#" style="text-decoration: none; color: white;">Model1</a></h2>
+  <div class="introduction">
+    <div class="gameLevels">
+      <div class="level1">
+        <img class="levels" id="model1" src="assets/images/model1.png" alt="model1">
+        <h2 class="model1Title" style="margin-left: -22.5vw;"><a href="#" style="text-decoration: none; color: white;">Model1</a></h2>
+      </div>
+      <div class="level2">
+        <img class="levels" id="model2" src="assets/images/model2.png" alt="model2">
+        <h2 class="model2Title" style="margin-left: -22.5vw; transform: rotate(90deg);"><a href="#" style="text-decoration: none; color: white;">Model2</a></h2>
+      </div>
     </div>
-    <div class="level2">
-      <img class="levels" id="model2" src="assets/images/model2.png" alt="model2">
-      <h2 class="model2Title" style="margin-left: -22.5vw; transform: rotate(90deg);"><a href="#" style="text-decoration: none; color: white;">Model2</a></h2>
-    </div>
-  </div>
-  <div class="level1Options">
-    <a href="#" style="text-decoration: none; color: white;"><img class="windowExitButton" src="assets/images/exit.png" alt="exit"></a>
-    <h1 class="level1Title">Puzzle Level 1 [EAZY]</h1>
-    <h3 class="instruction">INSTRUCTION</h3>
-    <ol type="I">
-      <li class="rules">To activate puzzle screen mouse over the white space</li>
-      <li class="rules">To place puzzle pieces:
-        <ol type="a">
-          <li class="rules">Click on the empty spot you want to drop a piece to</li>
-          <li class="rules">Drag the piece from the slider and drop it to the place</li>
-        </ol>
-      </li>
-      <li class="rules">DON'T click on more than one empty spot at a time as it may drop the piece to the both!</li>
-      <li class="rules">If the piece you have taken isn't the correct one,you can put it back to it's slide and take another piece</li>
-      <li class="rules">NOTICE that once you drop a piece to it's SPOT, it won't be draggable any more!</li>
-    </ol>
-    <div class="rowOfOptions">
-      <div class="option"><img id="colorful" onclick="window.location.href='modelOne.html'" src="assets/images/colorful.jpg" alt="colorful"></div>
-      <div class="option"><img id="shiraz" src="assets/images/shiraz.jpg" alt=""></div>
-      <div class="option"><img id="spring" src="assets/images/Spring.jpg" alt=""></div>
-      <div class="option"><img id="food" src="assets/images/food.jpg" alt=""></div>
-    </div>
-  </div>
-</div>
-
-<div class="FirstPuzzleModels"></div>
-<!--
-  <div class="row" style="margin-top: 3vw;">
-
-    <div class="column" style="width: 80%;">
-
-      <div id="template-container"></div>
-      <div class="row">
-        <div class="column" style="width: 80%;"> -->
-
-        <!-- <div class="row1">
-          <div class="rowProperties spot5" id="spotToPosition5" style="margin-left: 5.6vw; margin-top: 2.9vw; width: 10.5vw;"></div>
-          <div class="rowProperties spot4" id="spotToPosition4" style="margin-left: -3.4vw; margin-top: 2.85vw; width: 10vw;"></div>
-          <div class="rowProperties spot3" id="spotToPosition3" style="margin-left: -3.35vw; margin-top: 1.85vw; width: 13vw;"></div>
-          <div class="rowProperties spot2" id="spotToPosition2" style="margin-left: -2.9vw; margin-top: 2.9vw; width: 9.2vw;"></div>
-          <div class="rowProperties spot1" id="spotToPosition1" style="margin-left: -2.8vw; margin-top: 2.6vw; width: 13.5vw;"></div>
-          <div class="rowProperties spot0" id="spotToPosition0" style="margin-left: -3.4vw; margin-top: 3vw; width: 9vw;"></div>
-        </div>
-        <div class="row2">
-          <div class="rowProperties spot6" id="spotToPosition6" style="margin-left: 4.73vw; margin-top: -0.83vw; width: 9.7vw;"></div>
-          <div class="rowProperties spot7" id="spotToPosition7" style="margin-left: -3.65vw; margin-top: 0.65vw; width: 13.95vw;"></div>
-          <div class="rowProperties spot8" id="spotToPosition8" style="margin-left: -4.1vw; margin-top: -0.6vw; width: 10.8vw;"></div>
-          <div class="rowProperties spot9" id="spotToPosition9" style="margin-left: -4.2vw; margin-top: -0.1vw; width: 13.6vw;"></div>
-          <div class="rowProperties spot10" id="spotToPosition10" style="margin-left: -4.2vw; margin-top: -1.2vw; width: 11.6vw;"></div>
-          <div class="rowProperties spot11" id="spotToPosition11" style="margin-left: -4vw; margin-top: -0.3vw; width: 10.3vw;"></div>
-        </div>
-        <div class="row3">
-          <div class="rowProperties spot17" id="spotToPosition17" style="margin-left: 5.1vw; margin-top: 1.3vw; width: 11vw;"></div>
-          <div class="rowProperties spot16" id="spotToPosition16" style="margin-left: -4.7vw; margin-top: -0.85vw; width: 12.6vw;"></div>
-          <div class="rowProperties spot15" id="spotToPosition15" style="margin-left: -3.9vw; margin-top: 1.2vw; width: 12.2vw;"></div>
-          <div class="rowProperties spot14" id="spotToPosition14" style="margin-left: -4vw; margin-top: -0.5vw; width: 11.8vw;"></div>
-          <div class="rowProperties spot13" id="spotToPosition13" style="margin-left: -3.9vw; margin-top: 0.95vw; width: 12.2vw;"></div>
-          <div class="rowProperties spot12" id="spotToPosition12" style="margin-left: -3.9vw; margin-top: -0.05vw; width: 11.6vw;"></div>
-        </div>
-
-        <div class="row4">
-          <div class="rowProperties spot18" id="spotToPosition18" style="margin-left: 3.65vw; margin-top: -0.65vw; width: 11.5vw;"></div>
-          <div class="rowProperties spot19" id="spotToPosition19" style="margin-left: -4.55vw; margin-top: -0.3vw; width: 14.9vw;"></div>
-          <div class="rowProperties spot20" id="spotToPosition20" style="margin-left: -4.7vw; margin-top: -0.65vw; width: 11vw;"></div>
-          <div class="rowProperties spot21" id="spotToPosition21" style="margin-left: -4.25vw; margin-top: -0.05vw; width: 13.5vw;"></div>
-          <div class="rowProperties spot22" id="spotToPosition22" style="margin-left: -4.45vw; margin-top: -0.87vw; width: 11.55vw;"></div>
-          <div class="rowProperties spot23" id="spotToPosition23" style="margin-left: -4.8vw; margin-top: 0.45vw; width: 11.3vw;"></div>
-        </div>
-
-        <div class="row5">
-          <div class="rowProperties spot29" id="spotToPosition29" style="margin-left: 5.2vw; margin-top: -0.45vw; width: 11.1vw;"></div>
-          <div class="rowProperties spot28" id="spotToPosition28" style="margin-left: -3.95vw; margin-top: -2.45vw; width: 11vw;"></div>
-          <div class="rowProperties spot27" id="spotToPosition27" style="margin-left: -3.55vw; margin-top: -0.65vw; width: 12.8vw;"></div>
-          <div class="rowProperties spot26" id="spotToPosition26" style="margin-left: -3.15vw; margin-top: -1.9vw; width: 10.1vw;"></div>
-          <div class="rowProperties spot25" id="spotToPosition25" style="margin-left: -3.25vw; margin-top: -0.28vw; width: 12.2vw;"></div>
-          <div class="rowProperties spot24" id="spotToPosition24" style="margin-left: -2.9vw; margin-top: -0.45vw; width: 9.1vw;"></div>
-        </div> -->
-        <!-- </div> -->
-        <!-- <div class="column columnToRemove" style="width: 20%;">
-          <div class="item">
-        </div>
-      </div> -->
-      <!-- </div>
+    <div class="level1Options">
+      <a href="#" style="text-decoration: none; color: white;"><img class="windowExitButton" src="assets/images/exit.png" alt="exit"></a>
+      <h1 class="level1Title">Puzzle Level 1 [EAZY]</h1>
+      <h3 class="instruction">INSTRUCTION</h3>
+      <ol type="I">
+        <li class="rules">To activate puzzle screen mouse over the white space</li>
+        <li class="rules">To place puzzle pieces:
+          <ol type="a">
+            <li class="rules">Click on the empty spot you want to drop a piece to</li>
+            <li class="rules">Drag the piece from the slider and drop it to the place</li>
+          </ol>
+        </li>
+        <li class="rules">DON'T click on more than one empty spot at a time as it may drop the piece to the both!</li>
+        <li class="rules">If the piece you have taken isn't the correct one,you can put it back to it's slide and take another piece</li>
+        <li class="rules">NOTICE that once you drop a piece to it's SPOT, it won't be draggable any more!</li>
+      </ol>
+      <div class="rowOfOptions">
+        <div class="option"><img id="colorful" onclick="window.location.href='modelOne.html'" src="assets/images/colorful.jpg" alt="colorful"></div>
+        <div class="option"><img id="shiraz" src="assets/images/shiraz.jpg" alt=""></div>
+        <div class="option"><img id="spring" src="assets/images/Spring.jpg" alt=""></div>
+        <div class="option"><img id="food" src="assets/images/food.jpg" alt=""></div>
+      </div>
     </div>
   </div>
-  <div class="victoryReward"></div>
-</div> -->
+
+  <div class="FirstPuzzleModels"></div>
+
 </body>
 
 </html>
