@@ -1,5 +1,11 @@
 "use strict";
 
+/********************************************************************
+Project3 - Jigsaw puzzles
+Zahra Ahmadi
+
+Reference
+********************************************************************/
 $(document).ready(setup);
 
 // Sets up everything
@@ -8,7 +14,6 @@ function setup() {
 
   // Introduction page
   introScreen();
-
 
   /* Displays the intro screen */
   function introScreen() {

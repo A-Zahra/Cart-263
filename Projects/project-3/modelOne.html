@@ -1,19 +1,15 @@
 <!-- ************************************************************************
 ZahraAhmadi
 
-A webpage that ....
-
+A webpage that contains the puzzle screen and the slider containing the puzzle pieces
 ************************************************************************ -->
-
 <!DOCTYPE html>
 
 <html lang="en">
 
 <head>
   <meta name="viewport" https-equiv="content-type" content="text/html" charset="utf-8">
-
-  <title>Puzzle</title>
-
+  <title>LevelOne</title>
   <link rel="stylesheet" type="text/css" href="css/style.css" />
 
   <!-- Including jQuery -->
@@ -21,15 +17,8 @@ A webpage that ....
   <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
 
-  <!-- Including rita -->
-  <script src="js/libraries/rita.min.js" content="text/javascript"></script>
-
-  <!-- Annyang and ResponsiveVoice libraries -->
-  <script src="//cdnjs.cloudflare.com/ajax/libs/annyang/2.6.0/annyang.min.js"></script>
-  <script src="https://code.responsivevoice.org/responsivevoice.js"></script>
-
   <!-- We include our own script file(s) -->
-  <script src="js/script.js" content="text/javascript"></script>
+  <script src="js/modelOne.js" content="text/javascript"></script>
 </head>
 
 <body>
@@ -37,6 +26,7 @@ A webpage that ....
     <div class="row" style="margin-top: 3vw;">
       <div class="column" style="width: 80%;">
         <div id="template-container"></div>
+        <!-- Rows of puzzle pieces -->
         <div class="row">
           <div class="column" style="width: 80%;">
             <div class="row1">
@@ -44,7 +34,7 @@ A webpage that ....
               <div class="rowProperties spot4" id="spotToPosition4" style="margin-left: -3.4vw; margin-top: 2.85vw; width: 10vw;"></div>
               <div class="rowProperties spot3" id="spotToPosition3" style="margin-left: -3.35vw; margin-top: 1.85vw; width: 13vw;"></div>
               <div class="rowProperties spot2" id="spotToPosition2" style="margin-left: -2.9vw; margin-top: 2.9vw; width: 9.2vw;"></div>
-              <div class="rowProperties spot1" id="spotToPosition1" style="margin-left: -2.8vw; margin-top: 2.6vw; width: 13.5vw;"></div>
+              <div class="rowProperties spot1" id="spotToPosition1" style="margin-left: -2.85vw; margin-top: 2.6vw; width: 13.5vw;"></div>
               <div class="rowProperties spot0" id="spotToPosition0" style="margin-left: -3.4vw; margin-top: 3vw; width: 9vw;"></div>
             </div>
             <div class="row2">
@@ -80,6 +70,7 @@ A webpage that ....
               <div class="rowProperties spot24" id="spotToPosition24" style="margin-left: -2.9vw; margin-top: -0.45vw; width: 9.1vw;"></div>
             </div>
           </div>
+          <!-- Slider column -->
           <div class="column columnToRemove" style="width: 20%;">
             <div class="item">
             </div>
@@ -87,6 +78,7 @@ A webpage that ....
         </div>
       </div>
     </div>
+    <!-- Victory screen -->
     <div class="victoryReward"></div>
   </div>
 </body>
