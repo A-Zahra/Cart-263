@@ -82,18 +82,23 @@ function dataLoaded(data) {
       id: "colorful",
       length: data.puzzles.firstPuzzle.colorMix.length,
       pieces: data.puzzles.firstPuzzle.colorMix
+    },
+    {
+      id: "food",
+      length: data.puzzles.firstPuzzle.food.length,
+      pieces: data.puzzles.firstPuzzle.food
     }
   ];
   // Gets the puzzle id from the other script file using local storage
   puzzleId = localStorage.getItem("testId");
-  firstPuzzle(data);
+  makePuzzle(data);
 }
 
 
-// firstPuzzle()
+// makePuzzle()
 //
 // Creates first puzzle and prompts pieces() funtion
-function firstPuzzle(data) {
+function makePuzzle(data) {
   puzzleScreen = $('<img>').addClass('puzzleScreen').attr('src', `${data.puzzles.firstPuzzle.puzzleScreen}`).appendTo('#template-container');
   let ul = $('<ul></ul>').addClass('content-slider').appendTo('.item');
   // Creates puzzle pieces and add them to the lightslider
@@ -110,7 +115,7 @@ function pieces(data) {
 
   let getPuzzleId;
   // Based on the id of the puzzle, gets data from Json file
-  for (let i = 0; i < 3; i++) {
+  for (let i = 0; i < 4; i++) {
     if (puzzleId === puzzles[i].id) {
       getPuzzleId = i;
       // Gets data from JSON file

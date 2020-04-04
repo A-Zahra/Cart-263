@@ -83,7 +83,6 @@ body {
   font-family: "corbel", sans-serif;
   font-size: 2vw;
   margin-left: 2vw;
-  /* text-align: left; */
 }
 
 .rules {
@@ -127,7 +126,7 @@ body {
 }
 /* Start screen elements properties ends here */
 /* Level one elements properties starts here */
-.row1, .row2, .row3, .row4, .row5{
+.row1, .row2, .row3, .row4, .row5, .row6{
   display: inline-table;
   position: relative;
   margin: auto;
@@ -138,7 +137,7 @@ body {
   z-index: 0;
 }
 
-.row2, .row3, .row4, .row5{
+.row2, .row3, .row4, .row5, .row6{
   margin-top: -4.77vw;
 }
 
@@ -328,5 +327,29 @@ li {
   font-size: 1.5vw;
   color: white;
   background-color: gold;
+}
+/* Level one elements properties ends here */
 
+.allSpots {
+    float:left;
+    display: table;
+    left: 0;
+    right:0;
+    top:0;
+    bottom:0;
+    margin: auto;
+    margin-top: 4vw;
+    z-index: 2;
+}
+
+.innerRow1, .innerRow2, .innerRow3, .innerRow4, .innerRow5, .innerRow6{
+  display: table;
+  margin: auto;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin:auto;
+  margin-top: -4.2vw;
+  z-index: 0;
 }
