@@ -330,6 +330,34 @@ li {
 }
 /* Level one elements properties ends here */
 
+.secondPuzzleModels {
+  margin: auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: table;
+}
+
+.columns {
+  float:left;
+  left: 0;
+  right:0;
+  top:0;
+  bottom:0;
+  margin: auto;
+  z-index: 2;
+
+}
+
+#leftSidePieces, #rightSidePieces {
+  padding: 2vw;
+}
+
+#puzzleBoard {
+    margin-top: 2vw;
+}
+
 .allSpots {
     float:left;
     display: table;
@@ -340,6 +368,16 @@ li {
     margin: auto;
     margin-top: 4vw;
     z-index: 2;
+}
+
+.innerRow0 {
+  height: 40vw;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  margin-top: 3vw;
 }
 
 .innerRow1, .innerRow2, .innerRow3, .innerRow4, .innerRow5, .innerRow6{
