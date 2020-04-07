@@ -217,5 +217,57 @@
       ],
       "emptySpot": "assets/images/Level2/emptySpot.png"
     }
-  }
+  },
+  "questionsPackage": [
+    {
+      "question": "Multiplying the number 72 X 98 two equals:",
+      "answer": "576",
+      "clue": "Do not say in single digits!"
+    },
+    {
+      "question": "Who is inventor of Alcohol?",
+      "answer": "razi",
+      "clue": "Say only one word!"
+    },
+    {
+      "question": "Which animal has it's heart on its head?",
+      "answer": "shrimp",
+      "clue": "Say only one word!"
+    },
+    {
+      "question": "How long does an African elephant pregnancy take?",
+      "answer": "22 months",
+      "clue": "**** months"
+    },
+    {
+      "question": "Where is the oldest tree of the world?",
+      "answer": "California's White Mountain",
+      "clue": "Say three words!"
+    },
+    {
+      "question": "How many days a human survive without food?",
+      "answer": "21 days",
+      "clue": "**** days"
+    },
+    {
+      "question": "What is the fastest sea animal in the world?",
+      "answer": "Sailfish",
+      "clue": "Say only one word!"
+    },
+    {
+      "question": "what is the oldest sport in the world?",
+      "answer": "wrestling",
+      "clue": "Say only one word!"
+    },
+    {
+      "question": "what is the most sensitive organ in our body?",
+      "answer": "skin",
+      "clue": "Say only one word!"
+    },
+    {
+      "question": "What was the first planet in space?",
+      "answer": "Jupiter",
+      "clue": "Say only one word!"
+    }
+  ]
 }

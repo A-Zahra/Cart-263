@@ -264,26 +264,35 @@ li {
   height: 47vw;
 }
 
-.popUpWindow {
+.popUpWindow, .popUpQuestion {
   display: table;
   margin: auto;
   left: 0;
   right: 0;
   top: 0;
   bottom: 0;
-  background-color: rgb(95, 229, 180);
+  background-color: rgb(34, 248, 218);
   width: 40vw;
   position: absolute;
   margin-top: 16vw;
   padding: 1vw;
 }
 
-.victoryMessage {
+.popUpQuestion {
+  width: 45vw;
+  padding: 2vw;
+  background-color: #FFB826;
+}
+
+.victoryMessage, .question, .clue{
   text-align: center;
   font-family: "Berlin Sans FB" ;
   font-weight: 400;
   margin-bottom: 1vw;
   font-size: 2.5vw;
+}
+.clue {
+  font-size: 2vw;
 }
 
 .rowOfButtons {
@@ -371,13 +380,14 @@ li {
 }
 
 .innerRow0 {
+  display: table;
   height: 40vw;
   left: 0;
   right: 0;
   top: 0;
   bottom: 0;
   margin: auto;
-  margin-top: 3vw;
+  margin-top: 2vw;
 }
 
 .innerRow1, .innerRow2, .innerRow3, .innerRow4, .innerRow5, .innerRow6{
@@ -390,4 +400,15 @@ li {
   margin:auto;
   margin-top: -4.2vw;
   z-index: 0;
+}
+
+.questionsChart {
+  display: flex;
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin-top: -1vw;
+  margin-left: 1vw;
 }

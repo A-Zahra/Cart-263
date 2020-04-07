@@ -16,10 +16,22 @@ let puzzlePieces;
 let allPiecesImgAddress;
 let numLeftColumnDroppedPieces;
 let numRightColumnDroppedPieces;
-
+let questionsPackage;
 let $backbutton;
 let $homebutton;
 let $playAgain;
+let totalNumQuestions;
+let displayQuestion;
+let displayTimeIntervals = 15000;
+let pieceDisplacement = false;
+let numQuestionsShown = 0;
+let questionsChart;
+let rightAnswer = 0;
+let wrongAnswer = false;
+let popUpQuestion;
+let timeToAnswer;
+let seconds ;
+let earlyVictory = false;
 $(document).ready(setup);
 
 
@@ -35,7 +47,27 @@ function setup() {
   numRightColumnDroppedPieces = 0;
   puzzlePieces = [];
   allPiecesImgAddress = [];
+  questionsPackage = [];
+  totalNumQuestions = 10;
+  questionsChart = [];
   startGame();
+
+    // Speech recognition code which gives user the opportunity to orally interact with the website
+    if (annyang) {
+    // Let's define our first command. First the text we expect, and then the function it should call
+    let commands = {
+      '*text': checkAnswer // If user said "I am a (animal name)", prompts show me function
+    };
+
+    // Add our commands to annyang
+    annyang.addCommands(commands);
+
+    // Start listening. You can call this here, or attach this call to an event, button, etc.
+    annyang.start();
+
+    // Activates debug mode for detailed logging in the console
+    annyang.debug();
+    }
 }
 
 // startGame()
@@ -78,8 +110,121 @@ function dataLoaded(data) {
     //   pieces: data.puzzles.firstPuzzle.blossom
     // }
   ];
+  for (let i = 0; i < 10; i++) {
+    questionsPackage.push(data.questionsPackage[i]);
+  }
+  // totalNumQuestions = $('<p></p>').attr('id', 'totalNumQuestions').appendTo('#puzzleBoard');
+
+  displayQuestion = setInterval(makeQuestions, displayTimeIntervals);
+  // makeQuestions();
+  displayNumQuestions();
   makePuzzlePieces();
   makeEmptySpot(data);
+}
+
+// makeQuestions()
+//
+// Creates question popUp window
+function makeQuestions() {
+  console.log(questionsPackage.length);
+  if (questionsPackage.length >= 1) {
+    $('#rightSidePieces').hide();
+    $('#leftSidePieces').hide();
+    let randomQuestionSet = getRandomElement(questionsPackage);
+    // Creates a pop up window
+    popUpQuestion = $('<div></div>').addClass("popUpQuestion").appendTo('.secondPuzzleModels');
+    let question = $('<h2></h2>').addClass("question").text(`${randomQuestionSet.question}`).appendTo('.popUpQuestion');
+    let clue = $('<h3></h3>').addClass("clue").text(`CLUE: ${randomQuestionSet.clue}`).appendTo('.popUpQuestion');
+    rightAnswer = randomQuestionSet.answer.toUpperCase();
+    seconds = 12;
+    let questionTimer = $('<p></p>').addClass("questionTimer").appendTo('.popUpQuestion');
+
+    timeToAnswer = setInterval(function() {
+      questionTimer.text(`${seconds}`);
+      seconds--;
+      if (seconds < 0) {
+          $('#rightSidePieces').show();
+          $('#leftSidePieces').show();
+          popUpQuestion.remove();
+          removeRandomQuestion(randomQuestionSet);
+          clearInterval(timeToAnswer);
+
+      }
+    }, 1000);
+
+    // displayTimeIntervals = 15000;
+    totalNumQuestions--;
+    updateQuestionsChart(totalNumQuestions);
+  }
+  else {
+    checkPuzzleCompletion();
+  }
+
+}
+
+function displayNumQuestions () {
+  for (let i = 0; i < totalNumQuestions; i++) {
+    let questionBar = $('<div></div>').attr('id', 'questionBar').appendTo('.questionsChart');
+    questionBar.css({
+      "width": "1vw",
+      "height": "2vw",
+      "background-color": "red",
+      "display": "table",
+      "float": "left",
+      "margin": "0.2vw"
+    });
+    questionsChart.push(questionBar);
+  }
+}
+
+function updateQuestionsChart (totalNumQuestions) {
+  questionsChart[totalNumQuestions].remove();
+}
+
+// removeRandomQuestion()
+//
+// Removes the last used question from array to not be chosen again
+function removeRandomQuestion(question) {
+  questionsPackage.splice($.inArray(question, questionsPackage), 1);
+}
+
+function checkAnswer(answer) {
+  let playerAnswer = answer.toUpperCase();
+  if(playerAnswer === rightAnswer) {
+    seconds = 1;
+    clearInterval(displayQuestion);
+    displayTimeIntervals = 18000;
+    displayQuestion = setInterval(makeQuestions, displayTimeIntervals);
+  }
+  else {
+    if (seconds < 0 && questionsPackage.length >= 1) {
+      clearInterval(displayQuestion);
+      // makeQuestions();
+    }
+
+  }
+}
+
+function checkPuzzleCompletion() {
+  // If all of the pieces were dropped to puzzle board, removes the pieces container
+  if ( $('#leftSidePieces').children().length !== 0 || $('#rightSidePieces').children().length !== 0 ) {
+    // console.log($('#leftSidePieces').children().length + " and " + $('#rightSidePieces').children().length );
+    $('#leftSidePieces').remove();
+    $('#rightSidePieces').remove();
+    $('.questionsChart').remove();
+    $backbutton.remove();
+    clearInterval(displayQuestion);
+    setTimeout(gameOver, 3000);
+  }
+  else if ( $('#leftSidePieces').children().length === 0 && $('#rightSidePieces').children().length === 0 ) {
+    // console.log($('#leftSidePieces').children().length + " and " + $('#rightSidePieces').children().length );
+    $('#leftSidePieces').remove();
+    $('#rightSidePieces').remove();
+    $('.questionsChart').remove();
+    $backbutton.remove();
+    clearInterval(displayQuestion);
+    setTimeout(victoryScreen, 3000);
+  }
 }
 
 // makePuzzlePieces()
@@ -224,14 +369,17 @@ function onDrop (event, ui) {
     });
   }
 
-  // If all of the pieces were dropped to puzzle board, removes the pieces container
-  if ( $('#leftSidePieces').children().length === 0 ) {
-    console.log($('#leftSidePieces').children().length);
-    $('#leftSidePieces').remove();
-  }
-  if ( $('#rightSidePieces').children().length === 0 ) {
-    console.log($('#rightSidePieces').children().length);
-    $('#rightSidePieces').remove();
+  // // If all of the pieces were dropped to puzzle board, removes the pieces container
+  // if ( $('#leftSidePieces').children().length === 0 ) {
+  //   console.log($('#leftSidePieces').children().length);
+  //   $('#leftSidePieces').remove();
+  // }
+  // if ( $('#rightSidePieces').children().length === 0 ) {
+  //   console.log($('#rightSidePieces').children().length);
+  //   $('#rightSidePieces').remove();
+  // }
+  if ($('#leftSidePieces').children().length === 0 && $('#rightSidePieces').children().length === 0) {
+    earlyVictory = true;
   }
 }
 
@@ -276,6 +424,74 @@ function findSpotId (spot) {
   return spotId;
 }
 
+// gameOver()
+//
+// Displays gameOver screen
+function gameOver() {
+  // Changes the background color
+  $('body').css({
+    "background-color": "red",
+    "display": "block"
+  }).fadeTo(500, 1);
+  // Shakes the puzzle
+  $('.innerRow0').effect("shake", {
+    direction: "left",
+    times: 5,
+    distance: 10
+  }, 700);
+
+  $backbutton.hide();
+  // After 6 seconds, runs the following code
+  setTimeout(function() {
+    // Creates a pop up window
+    let popUpWindow = $('<div></div>').addClass("popUpWindow").appendTo('.secondPuzzleModels');
+    let victoryMessage = $('<h3></h3>').addClass("victoryMessage").text("Game Over!!!").appendTo('.popUpWindow');
+    let rowOfButtons = $('<div></div>').addClass("rowOfButtons").appendTo('.popUpWindow');
+    // Home button container
+    let leftButton = $('<div></div>').addClass("buttonPosition").attr('id', 'leftColumn').appendTo('.rowOfButtons');
+    // Play again button container
+    let rightButton = $('<div></div>').addClass("buttonPosition").attr('id', 'rightColumn').appendTo('.rowOfButtons');
+
+    // Calls home and play again buttons functions
+    homeButton();
+    playAgainButton();
+  }, 4000);
+}
+
+
+// victoryScreen()
+//
+// Displays victory screen
+function victoryScreen() {
+  // Displays paper explosion gif
+  let imageUrl = "https://i.gifer.com/VZvx.gif";
+  $('.victoryReward').css({
+    "display": "block",
+    "background-image": 'url(' + imageUrl + ')',
+    "background-size": "cover",
+    "background-repeat": "no-repeat",
+    "background-position-y": "-10vw",
+    "height": "auto"
+  });
+
+  // Hides back button
+  $backbutton.hide();
+  // After 6 seconds, runs the following code
+  setTimeout(function() {
+    // Creates a pop up window
+    let popUpWindow = $('<div></div>').addClass("popUpWindow").appendTo('.secondPuzzleModels');
+    let victoryMessage = $('<h3></h3>').addClass("victoryMessage").text("Good Job Buddy!!!").appendTo('.popUpWindow');
+    let rowOfButtons = $('<div></div>').addClass("rowOfButtons").appendTo('.popUpWindow');
+    // Home button container
+    let leftButton = $('<div></div>').addClass("buttonPosition").attr('id', 'leftColumn').appendTo('.rowOfButtons');
+    // Play again button container
+    let rightButton = $('<div></div>').addClass("buttonPosition").attr('id', 'rightColumn').appendTo('.rowOfButtons');
+
+    // Calls home and play again buttons functions
+    homeButton();
+    playAgainButton();
+  }, 6000);
+}
 
 // backButton()
 //
@@ -283,7 +499,7 @@ function findSpotId (spot) {
 function backButton() {
   $backbutton = $('<div></div>').attr('id', 'backbutton').text("back");
   $backbutton.css({
-    "margin-top": "2vw",
+    "margin-top": "-1vw",
     "margin-left": "22vw",
     "font-size": "1.5vw",
     "color": "white",
@@ -298,33 +514,33 @@ function backButton() {
   });
 }
 
-// // homeButton()
-// //
-// // Creates home button
-// function homeButton() {
-//   // Creates html element and assigns button function to
-//   $homebutton = $('<div></div>').attr('id', 'homeButton').text("Home").appendTo("#leftColumn");
-//   $homebutton.button();
+// homeButton()
 //
-//   // On click, goes back to main page
-//   $homebutton.on('click', function() {
-//     window.location.href = "index.html"
-//   });
-// }
+// Creates home button
+function homeButton() {
+  // Creates html element and assigns button function to
+  $homebutton = $('<div></div>').attr('id', 'homeButton').text("Home").appendTo("#leftColumn");
+  $homebutton.button();
+
+  // On click, goes back to main page
+  $homebutton.on('click', function() {
+    window.location.href = "index.html"
+  });
+}
+
+// playAgainButton()
 //
-// // playAgainButton()
-// //
-// // Creates play again button
-// function playAgainButton() {
-//   // Creates html element and assigns button function to
-//   $playAgain = $('<div></div>').attr('id', 'playAgainButton').text("Play again").appendTo("#rightColumn");
-//   $playAgain.button();
-//
-//   // On click, reloads the page
-//   $playAgain.on('click', function() {
-//     window.location.href = "modelOne.html"
-//   });
-// }
+// Creates play again button
+function playAgainButton() {
+  // Creates html element and assigns button function to
+  $playAgain = $('<div></div>').attr('id', 'playAgainButton').text("Play again").appendTo("#rightColumn");
+  $playAgain.button();
+
+  // On click, reloads the page
+  $playAgain.on('click', function() {
+    window.location.href = "modelTwo.html"
+  });
+}
 
 // dataError()
 //
