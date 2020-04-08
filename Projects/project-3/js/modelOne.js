@@ -90,7 +90,7 @@ function dataLoaded(data) {
     }
   ];
   // Gets the puzzle id from the other script file using local storage
-  puzzleId = localStorage.getItem("testId");
+  puzzleId = localStorage.getItem("puzzle1Id");
   makePuzzle(data);
 }
 
@@ -410,7 +410,7 @@ function gameOver() {
   setTimeout(function() {
     // Creates a pop up window
     let popUpWindow = $('<div></div>').addClass("popUpWindow").appendTo('.FirstPuzzleModels');
-    let victoryMessage = $('<h3></h3>').addClass("victoryMessage").text("Awwww, It's okay Buddy!!!").appendTo('.popUpWindow');
+    let message = $('<h3></h3>').addClass("message").text("Awwww, It's okay Buddy!!!").appendTo('.popUpWindow');
     let rowOfButtons = $('<div></div>').addClass("rowOfButtons").appendTo('.popUpWindow');
     // Home button container
     let leftButton = $('<div></div>').addClass("buttonPosition").attr('id', 'leftColumn').appendTo('.rowOfButtons');
@@ -443,7 +443,7 @@ function victoryScreen() {
   setTimeout(function() {
     // Creates a pop up window
     let popUpWindow = $('<div></div>').addClass("popUpWindow").appendTo('.FirstPuzzleModels');
-    let victoryMessage = $('<h3></h3>').addClass("victoryMessage").text("Good Job Buddy!!!").appendTo('.popUpWindow');
+    let message = $('<h3></h3>').addClass("message").text("Good Job Buddy!!!").appendTo('.popUpWindow');
     let rowOfButtons = $('<div></div>').addClass("rowOfButtons").appendTo('.popUpWindow');
     // Home button container
     let leftButton = $('<div></div>').addClass("buttonPosition").attr('id', 'leftColumn').appendTo('.rowOfButtons');

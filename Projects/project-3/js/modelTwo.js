@@ -23,15 +23,14 @@ let $playAgain;
 let totalNumQuestions;
 let displayQuestion;
 let displayTimeIntervals = 15000;
-let pieceDisplacement = false;
 let numQuestionsShown = 0;
 let questionsChart;
 let rightAnswer = 0;
-let wrongAnswer = false;
 let popUpQuestion;
 let timeToAnswer;
 let seconds ;
-let earlyVictory = false;
+let isGameOver = false;
+let puzzleId = 0;
 $(document).ready(setup);
 
 
@@ -48,7 +47,6 @@ function setup() {
   puzzlePieces = [];
   allPiecesImgAddress = [];
   questionsPackage = [];
-  totalNumQuestions = 10;
   questionsChart = [];
   startGame();
 
@@ -56,7 +54,7 @@ function setup() {
     if (annyang) {
     // Let's define our first command. First the text we expect, and then the function it should call
     let commands = {
-      '*text': checkAnswer // If user said "I am a (animal name)", prompts show me function
+      '*text': checkAnswer // Once player replied, sends their response to this function
     };
 
     // Add our commands to annyang
@@ -64,7 +62,6 @@ function setup() {
 
     // Start listening. You can call this here, or attach this call to an event, button, etc.
     annyang.start();
-
     // Activates debug mode for detailed logging in the console
     annyang.debug();
     }
@@ -74,8 +71,10 @@ function setup() {
 //
 // Displays the puzzle complete image and then starts the game
 function startGame() {
+  puzzleId = localStorage.getItem("puzzle2Id");
+
   // Creates and adds the puzzle image to DOM element
-  let puzzleImage = $('<img>').attr({src: "assets/images/Level2/desert.jpg"}).css({
+  let puzzleImage = $('<img>').attr({src: `assets/images/Level2/${puzzleId}.jpg`}).css({
     "width": "50vw",
     "position": "absolute",
     "margin-top": "3vw"
@@ -103,18 +102,20 @@ function dataLoaded(data) {
       id: "desert",
       length: data.puzzles.secondPuzzle.desert.length,
       pieces: data.puzzles.secondPuzzle.desert
+    },
+    {
+      id: "strawberry",
+      length: data.puzzles.secondPuzzle.strawberry.length,
+      pieces: data.puzzles.secondPuzzle.strawberry
     }
-    // {
-    //   id: "spring",
-    //   length: data.puzzles.firstPuzzle.blossom.length,
-    //   pieces: data.puzzles.firstPuzzle.blossom
-    // }
   ];
-  for (let i = 0; i < 10; i++) {
+
+  for (let i = 0; i < data.questionsPackage.length ; i++) {
     questionsPackage.push(data.questionsPackage[i]);
   }
-  // totalNumQuestions = $('<p></p>').attr('id', 'totalNumQuestions').appendTo('#puzzleBoard');
 
+  totalNumQuestions = data.questionsPackage.length / 2;
+  console.log("totalNumQuestions" + (2*4+6/2-5));
   displayQuestion = setInterval(makeQuestions, displayTimeIntervals);
   // makeQuestions();
   displayNumQuestions();
@@ -126,8 +127,8 @@ function dataLoaded(data) {
 //
 // Creates question popUp window
 function makeQuestions() {
-  console.log(questionsPackage.length);
-  if (questionsPackage.length >= 1) {
+  console.log(totalNumQuestions);
+  if (totalNumQuestions >= 1) {
     $('#rightSidePieces').hide();
     $('#leftSidePieces').hide();
     let randomQuestionSet = getRandomElement(questionsPackage);
@@ -166,7 +167,7 @@ function displayNumQuestions () {
   for (let i = 0; i < totalNumQuestions; i++) {
     let questionBar = $('<div></div>').attr('id', 'questionBar').appendTo('.questionsChart');
     questionBar.css({
-      "width": "1vw",
+      "width": "2.8vw",
       "height": "2vw",
       "background-color": "red",
       "display": "table",
@@ -197,11 +198,7 @@ function checkAnswer(answer) {
     displayQuestion = setInterval(makeQuestions, displayTimeIntervals);
   }
   else {
-    if (seconds < 0 && questionsPackage.length >= 1) {
-      clearInterval(displayQuestion);
-      // makeQuestions();
-    }
-
+      $('.popUpQuestion').effect("shake");
   }
 }
 
@@ -214,16 +211,8 @@ function checkPuzzleCompletion() {
     $('.questionsChart').remove();
     $backbutton.remove();
     clearInterval(displayQuestion);
-    setTimeout(gameOver, 3000);
-  }
-  else if ( $('#leftSidePieces').children().length === 0 && $('#rightSidePieces').children().length === 0 ) {
-    // console.log($('#leftSidePieces').children().length + " and " + $('#rightSidePieces').children().length );
-    $('#leftSidePieces').remove();
-    $('#rightSidePieces').remove();
-    $('.questionsChart').remove();
-    $backbutton.remove();
-    clearInterval(displayQuestion);
-    setTimeout(victoryScreen, 3000);
+    isGameOver = true;
+    gameOver();
   }
 }
 
@@ -235,11 +224,16 @@ function makePuzzlePieces() {
   // let borderLeftValue = [30, 1170];
 
   let piecesContainer = ["leftSidePieces", "rightSidePieces"];
-  // Gets pieces images from Json file and assigns them to an array
-  for (let j = 0; j < numPieces; j++) {
-    let pieceImage = puzzles[0].pieces[j];
-    allPiecesImgAddress.push(pieceImage);
+  for (let p = 0; p < puzzles.length; p++) {
+    if (puzzleId === puzzles[p].id) {
+      // Gets pieces images from Json file and assigns them to an array
+      for (let j = 0; j < numPieces; j++) {
+        let pieceImage = puzzles[p].pieces[j];
+        allPiecesImgAddress.push(pieceImage);
+      }
+    }
   }
+
 
   // Makes two columns of puzzle pieces and displays them on the sides
   let numPiecesToShow = 0;
@@ -369,18 +363,17 @@ function onDrop (event, ui) {
     });
   }
 
-  // // If all of the pieces were dropped to puzzle board, removes the pieces container
-  // if ( $('#leftSidePieces').children().length === 0 ) {
-  //   console.log($('#leftSidePieces').children().length);
-  //   $('#leftSidePieces').remove();
-  // }
-  // if ( $('#rightSidePieces').children().length === 0 ) {
-  //   console.log($('#rightSidePieces').children().length);
-  //   $('#rightSidePieces').remove();
-  // }
-  if ($('#leftSidePieces').children().length === 0 && $('#rightSidePieces').children().length === 0) {
-    earlyVictory = true;
+  if ( $('#leftSidePieces').children().length === 0 && $('#rightSidePieces').children().length === 0 ) {
+    // console.log($('#leftSidePieces').children().length + " and " + $('#rightSidePieces').children().length );
+    $('#leftSidePieces').remove();
+    $('#rightSidePieces').remove();
+    $('.questionsChart').remove();
+    $backbutton.remove();
+    clearInterval(timeToAnswer);
+    clearInterval(displayQuestion);
+    victoryScreen();
   }
+
 }
 
 // findPieceId()
@@ -445,7 +438,9 @@ function gameOver() {
   setTimeout(function() {
     // Creates a pop up window
     let popUpWindow = $('<div></div>').addClass("popUpWindow").appendTo('.secondPuzzleModels');
-    let victoryMessage = $('<h3></h3>').addClass("victoryMessage").text("Game Over!!!").appendTo('.popUpWindow');
+    popUpWindow.css({"background-color": "black"});
+    let message = $('<h3></h3>').addClass("message").text("Game Over!!!").appendTo('.popUpWindow');
+    message.css({"color": "white"});
     let rowOfButtons = $('<div></div>').addClass("rowOfButtons").appendTo('.popUpWindow');
     // Home button container
     let leftButton = $('<div></div>').addClass("buttonPosition").attr('id', 'leftColumn').appendTo('.rowOfButtons');
@@ -464,7 +459,7 @@ function gameOver() {
 // Displays victory screen
 function victoryScreen() {
   // Displays paper explosion gif
-  let imageUrl = "https://i.gifer.com/VZvx.gif";
+  let imageUrl = "http://www.medwayyachtclub.com/wp-content/uploads/2019/10/1410010_e1288-2.gif";
   $('.victoryReward').css({
     "display": "block",
     "background-image": 'url(' + imageUrl + ')',
@@ -480,7 +475,7 @@ function victoryScreen() {
   setTimeout(function() {
     // Creates a pop up window
     let popUpWindow = $('<div></div>').addClass("popUpWindow").appendTo('.secondPuzzleModels');
-    let victoryMessage = $('<h3></h3>').addClass("victoryMessage").text("Good Job Buddy!!!").appendTo('.popUpWindow');
+    let message = $('<h3></h3>').addClass("message").text("Good Job Buddy!!!").appendTo('.popUpWindow');
     let rowOfButtons = $('<div></div>').addClass("rowOfButtons").appendTo('.popUpWindow');
     // Home button container
     let leftButton = $('<div></div>').addClass("buttonPosition").attr('id', 'leftColumn').appendTo('.rowOfButtons');
@@ -499,11 +494,11 @@ function victoryScreen() {
 function backButton() {
   $backbutton = $('<div></div>').attr('id', 'backbutton').text("back");
   $backbutton.css({
-    "margin-top": "-1vw",
+    "margin-top": "-2vw",
     "margin-left": "22vw",
     "font-size": "1.5vw",
     "color": "white",
-    "background-color": "gold"
+    "background-color": "blueviolet"
   });
   $backbutton.button();
   // Appends the button to FirstPuzzleModels div
@@ -535,7 +530,9 @@ function playAgainButton() {
   // Creates html element and assigns button function to
   $playAgain = $('<div></div>').attr('id', 'playAgainButton').text("Play again").appendTo("#rightColumn");
   $playAgain.button();
-
+  if (isGameOver) {
+    $playAgain.css({"background-color": "#189910"});
+  }
   // On click, reloads the page
   $playAgain.on('click', function() {
     window.location.href = "modelTwo.html"

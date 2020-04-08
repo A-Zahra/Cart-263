@@ -215,6 +215,56 @@
         "assets/images/Level2/desert/46.png",
         "assets/images/Level2/desert/47.png"
       ],
+      "strawberry": [
+        "assets/images/Level2/strawberry/0.png",
+        "assets/images/Level2/strawberry/1.png",
+        "assets/images/Level2/strawberry/2.png",
+        "assets/images/Level2/strawberry/3.png",
+        "assets/images/Level2/strawberry/4.png",
+        "assets/images/Level2/strawberry/5.png",
+        "assets/images/Level2/strawberry/6.png",
+        "assets/images/Level2/strawberry/7.png",
+        "assets/images/Level2/strawberry/8.png",
+        "assets/images/Level2/strawberry/9.png",
+        "assets/images/Level2/strawberry/10.png",
+        "assets/images/Level2/strawberry/11.png",
+        "assets/images/Level2/strawberry/12.png",
+        "assets/images/Level2/strawberry/13.png",
+        "assets/images/Level2/strawberry/14.png",
+        "assets/images/Level2/strawberry/15.png",
+        "assets/images/Level2/strawberry/16.png",
+        "assets/images/Level2/strawberry/17.png",
+        "assets/images/Level2/strawberry/18.png",
+        "assets/images/Level2/strawberry/19.png",
+        "assets/images/Level2/strawberry/20.png",
+        "assets/images/Level2/strawberry/21.png",
+        "assets/images/Level2/strawberry/22.png",
+        "assets/images/Level2/strawberry/23.png",
+        "assets/images/Level2/strawberry/24.png",
+        "assets/images/Level2/strawberry/25.png",
+        "assets/images/Level2/strawberry/26.png",
+        "assets/images/Level2/strawberry/27.png",
+        "assets/images/Level2/strawberry/28.png",
+        "assets/images/Level2/strawberry/29.png",
+        "assets/images/Level2/strawberry/30.png",
+        "assets/images/Level2/strawberry/31.png",
+        "assets/images/Level2/strawberry/32.png",
+        "assets/images/Level2/strawberry/33.png",
+        "assets/images/Level2/strawberry/34.png",
+        "assets/images/Level2/strawberry/35.png",
+        "assets/images/Level2/strawberry/36.png",
+        "assets/images/Level2/strawberry/37.png",
+        "assets/images/Level2/strawberry/38.png",
+        "assets/images/Level2/strawberry/39.png",
+        "assets/images/Level2/strawberry/40.png",
+        "assets/images/Level2/strawberry/41.png",
+        "assets/images/Level2/strawberry/42.png",
+        "assets/images/Level2/strawberry/43.png",
+        "assets/images/Level2/strawberry/44.png",
+        "assets/images/Level2/strawberry/45.png",
+        "assets/images/Level2/strawberry/46.png",
+        "assets/images/Level2/strawberry/47.png"
+      ],
       "emptySpot": "assets/images/Level2/emptySpot.png"
     }
   },
@@ -222,7 +272,7 @@
     {
       "question": "Multiplying the number 72 X 98 two equals:",
       "answer": "576",
-      "clue": "Do not say in single digits!"
+      "clue": "You can also say in single digits!"
     },
     {
       "question": "Who is inventor of Alcohol?",
@@ -268,6 +318,106 @@
       "question": "What was the first planet in space?",
       "answer": "Jupiter",
       "clue": "Say only one word!"
+    },
+    {
+      "question": "How many minutes is a day?",
+      "answer": "1440",
+      "clue": "You can also say in single digits!"
+    },
+    {
+      "question": "Who is the inventor the world's first watch?",
+      "answer": "Peter Henlein",
+      "clue": "Say full name!"
+    },
+    {
+      "question": "The only country in the world with three capital cities?",
+      "answer": "south africa",
+      "clue": "No need to have a clue!"
+    },
+    {
+      "question":"Where is the smallest country in the world located?",
+      "answer": "vatican",
+      "clue": "Say only one word!"
+    },
+    {
+      "question":"Polo game originates from which country?",
+      "answer": "Persia",
+      "clue": "Say only one word!"
+    },
+    {
+      "question":"Who reached south pole first?",
+      "answer": "Roald Amundsen",
+      "clue": "Say full name!"
+    },
+    {
+      "question":"What is the hairiest animal in the world?",
+      "answer": "sea otter",
+      "clue": "Say full name!"
+    },
+    {
+      "question":"How many languages are spoken in the world?",
+      "answer": "6500",
+      "clue": "You can also say in single digits!"
+    },
+    {
+      "question":"who is the first woman physician in the world?",
+      "answer": "Elizabeth Blackwell",
+      "clue": "Say full name!"
+    },
+    {
+      "question":"Where was the first library of the world made?",
+      "answer": "Iraq",
+      "clue": "No need to have a clue!"
+    },
+    {
+      "question":"What is the result of this code: (2*4+6/2-5)?",
+      "answer": "6",
+      "clue": "No need to have a clue!"
+    },
+    {
+      "question":"What is the name of world's highest waterfall?",
+      "answer": "Angel falls",
+      "clue": "**** falls!"
+    },
+    {
+      "question":"What year was the eiffel tower made?",
+      "answer": "1887",
+      "clue": "Say only the year!"
+    },
+    {
+      "question":"How old is queen elizabeth 2?",
+      "answer": "93",
+      "clue": "Say only the age!"
+    },
+    {
+      "question":"When did the money system start?",
+      "answer": "5000 bc",
+      "clue": "**** BC"
+    },
+    {
+      "question":"Who was the first tailor in the world?",
+      "answer": "Adam",
+      "clue": "Answer is clear!"
+    },
+    {
+      "question":"How many species of birds can't fly?",
+      "answer": "60",
+      "clue": "Say only the number!"
+    },
+    {
+      "question":"How many species of birds can't fly?",
+      "answer": "60",
+      "clue": "Say only the number!"
+    },
+    {
+      "question":"Who is the author of 'War and Peace' novel?",
+      "answer": "Leo Tolstoy",
+      "clue": "Say full name!"
+    },
+    {
+      "question":"Who is the director of 'GodFather' movies?",
+      "answer": "Francis Ford Coppola",
+      "clue": "Say full name!"
     }
   ]
 }
