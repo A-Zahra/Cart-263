@@ -4,7 +4,7 @@
 Project3 - Jigsaw puzzles
 Zahra Ahmadi
 
-Here is the Javascript code which let the user clicks on the page elements,
+Here is the Javascript code which lets the user clicks on the page elements,
 open windows, see the game instructions and chooses their favorite puzzle to play
 
 Reference
@@ -15,6 +15,7 @@ https://www.freepik.com/free-vector/blue-puzzle-pieces-paint-splashes-background
 $(document).ready(setup);
 // Sets up everything
 function setup() {
+  console.log((6*3/2+10-5));
   // Stores the image id that was just clicked
   let puzzle1Id = "";
   let puzzle2Id = "";

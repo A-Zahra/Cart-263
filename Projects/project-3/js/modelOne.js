@@ -4,8 +4,17 @@
 Project3 - Jigsaw puzzles
 Zahra Ahmadi
 
-
-
+The game's level 1 most important elements are:
+1. The puzzle board. The puzzle board is made of 30 similar shapes of puzzle pieces. 
+All of these shapes are hidden and only once the player hover over them they become visible.
+If the player wants to drop a piece they should first click on the shape and then drop the piece.
+In this level it is totally possible that the player drops the wrong piece to a spot, as there is no
+barrier to do so.
+2. Light Slider. It contains the puzzle pieces. The arrows on top and bottom of the slider lets the player
+to look for a certain piece if they want to. If the player doesn't want to use the piece they just took,
+they can put it back to the slider and take an another one.
+3. The game ends once all of the pieces are dropped. If the pieces are in their right spot, the victory
+screen shows up otherwise the gameOver screen will be displayed.
 *************************************************************************************
 Reference
 
@@ -42,7 +51,15 @@ https://stackoverflow.com/questions/10741899/how-to-select-last-two-characters-o
 
 Splice()
 http://www.jquerybyexample.net/2012/02/remove-item-from-array-using-jquery.html
-*********************************************************************/
+********************************************************************************************
+Sound Effects:
+
+Fail sound
+https://www.zapsplat.com/?s=applause&post_type=music&sound-effect-category-id=
+
+Victory sound
+https://freesound.org/people/qubodup/sounds/182825/
+********************************************************************************************/
 let puzzleScreen; // Stores puzzle template image 
 let numSlides; // Stores the length of array which contains the puzzle pieces
 let numSlidesToShow = 3; // Number of slides to show in the slider
@@ -59,6 +76,9 @@ let $backbutton; // Stores $backButton element in
 let $homebutton; // Stores $homekButton element in
 let $playAgain; // Stores $playAgain button element in
 let isGameOver = false; // Checks if game is over
+let failSound = new Audio("assets/sounds/cartoon_fail_trumpet.mp3"); // Game over sound effect
+let victorySound = new Audio("assets/sounds/applause.mp3"); // Victory sound effect
+
 $(document).ready(setup);
 
 // setup()
@@ -409,6 +429,8 @@ function checkPuzzleArrangement() {
 //
 // Displays gameOver screen
 function gameOver() {
+  // Plays sound effect
+  failSound.play();
   // Changes the background color
   $('body').css({
     "background-color": "red",
@@ -432,7 +454,7 @@ function gameOver() {
     popUpWindow.css({
       "background-color": "black"
     });
-    let message = $('<h3></h3>').addClass("message").text("Awwww, It's okay Buddy!!!").appendTo('.popUpWindow');
+    let message = $('<h3></h3>').addClass("message").text("Game over!!!").appendTo('.popUpWindow');
     message.css({
       "color": "white"
     });
@@ -442,9 +464,10 @@ function gameOver() {
     // Play again button container
     let rightButton = $('<div></div>').addClass("buttonPosition").attr('id', 'rightColumn').appendTo('.rowOfButtons');
 
-    // Calls home and play again buttons functions
+    // Calls home and play again buttons functions and stops sound
     homeButton();
     playAgainButton();
+    failSound.pause();
   }, 4000);
 }
 
@@ -452,6 +475,8 @@ function gameOver() {
 //
 // Displays victory screen
 function victoryScreen() {
+  // Plays sound effect
+  victorySound.play();
   // Displays paper explosion gif
   let imageUrl = "https://cdn.streamelements.com/uploads/24548f52-afb9-4338-b823-d2a5d1b5c793.gif";
   $('.victoryReward').css({
@@ -475,10 +500,11 @@ function victoryScreen() {
     // Play again button container
     let rightButton = $('<div></div>').addClass("buttonPosition").attr('id', 'rightColumn').appendTo('.rowOfButtons');
 
-    // Calls home and play again buttons functions
+    // Calls home and play again buttons functions and stops sound
     homeButton();
     playAgainButton();
-  }, 6000);
+    victorySound.pause();
+  }, 7000);
 }
 
 // findArrayIndex()

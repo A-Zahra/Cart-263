@@ -1,12 +1,20 @@
 "use strict";
 
-/********************************************************************
+/*********************************************************************************************
 Project3 - Jigsaw puzzles
 Zahra Ahmadi
 
-
-
-********************************************************************
+The game's level 2 most important elements are:
+1. The puzzle board and the pieces. The puzzle board is made of 48 square frame images 
+which occupy the empty spots and once the player drops a puzzle piece onto they are replaced by 
+the puzzle piece. The pieces are divided into two groups and are selected randomly in order to 
+be displayed on both sides of the board. 
+2. Questions chart. It is designed to help the player knows how many questions are left.
+3. Questions loop. Acts as the timer of the game. The player has 15 seconds to answer a question. 
+If they give a wrong answer the window shakes and if they don't answer it goes for the next question.
+Once the questions are finished, if all of the pieces where dropped to the board the victory screen 
+is displayed. Otherwise the game over screen is displayed.
+*********************************************************************************************
 Reference
 
 Images:
@@ -22,7 +30,7 @@ https://unsplash.com/photos/SYx3UCHZJlo
 
 breakfast
 https://unsplash.com/
-********************************************************************
+*********************************************************************************************
 Borrowed codes
 
 Effect("explode")
@@ -42,7 +50,15 @@ https://stackoverflow.com/questions/10741899/how-to-select-last-two-characters-o
 
 Splice()
 http://www.jquerybyexample.net/2012/02/remove-item-from-array-using-jquery.html
-********************************************************************/
+*********************************************************************************************
+Sound Effects:
+
+Fail sound
+https://www.zapsplat.com/?s=applause&post_type=music&sound-effect-category-id=
+
+Victory sound
+https://freesound.org/people/qubodup/sounds/182825/
+*********************************************************************************************/
 let puzzles; // An array which four different puzzles are stored in
 let displayableAreaWidth; // Stores the width of an area that pieces can be displayed
 let displayableAreaHeight; // Stores the height of an area that pieces can be displayed
@@ -68,8 +84,10 @@ let $playAgain; // Stores $playAgain button element in
 let numQuestionsLimit = 1; // A variable that is used to check if all the questions were displayed
 let secondsLimit = 0; // A variable that is used to check if the timer ended
 let piecesContainersContentLimit = 0; // A variable that is used to check if the pieces containers are empty
-$(document).ready(setup);
+let failSound = new Audio("assets/sounds/cartoon_fail_trumpet.mp3"); // Game over sound effect
+let victorySound = new Audio("assets/sounds/applause.mp3"); // Victory sound effect
 
+$(document).ready(setup);
 
 // setup()
 //
@@ -85,7 +103,7 @@ function setup() {
   allPiecesImgAddress = [];
   questionsPackage = [];
   questionsChart = [];
-
+  
   // Calls startGame function
   startGame();
 
@@ -168,7 +186,8 @@ function dataLoaded(data) {
     questionsPackage.push(data.questionsPackage[i]);
   }
   // Sets total number of questions which should be shown
-  totalNumQuestions = data.questionsPackage.length / 3;
+  totalNumQuestions = data.questionsPackage.length / 5;
+  console.log(totalNumQuestions);
   // Every few seconds calls the makeQuestions function
   displayQuestion = setInterval(makeQuestions, displayTimeIntervals);
   // Then, calls the following functions
@@ -234,7 +253,7 @@ function displayNumQuestions() {
   for (let i = 0; i < totalNumQuestions; i++) {
     let questionBar = $('<div></div>').attr('id', 'questionBar').appendTo('.questionsChart');
     questionBar.css({
-      "width": "2.8vw",
+      "width": "3.6vw",
       "height": "2vw",
       "background-color": "red",
       "display": "table",
@@ -512,6 +531,8 @@ function findSpotId(spot) {
 //
 // Displays gameOver screen
 function gameOver() {
+  // Plays sound effect
+  failSound.play();
   // Changes the background color
   $('body').css({
     "background-color": "red",
@@ -544,9 +565,10 @@ function gameOver() {
     // Play again button container
     let rightButton = $('<div></div>').addClass("buttonPosition").attr('id', 'rightColumn').appendTo('.rowOfButtons');
 
-    // Calls home and play again buttons functions
+    // Calls home and play again buttons functions and stops sound
     homeButton();
     playAgainButton();
+    failSound.pause();
   }, 4000);
 }
 
@@ -555,6 +577,8 @@ function gameOver() {
 //
 // Displays victory screen
 function victoryScreen() {
+  // Plays sound effect
+  victorySound.play();
   // Displays paper explosion gif
   let imageUrl = "http://www.medwayyachtclub.com/wp-content/uploads/2019/10/1410010_e1288-2.gif";
   $('.victoryReward').css({
@@ -581,10 +605,11 @@ function victoryScreen() {
     // Play again button container
     let rightButton = $('<div></div>').addClass("buttonPosition").attr('id', 'rightColumn').appendTo('.rowOfButtons');
 
-    // Calls home and play again buttons functions
+    // Calls home and play again buttons functions and stops sound
     homeButton();
     playAgainButton();
-  }, 6000);
+    victorySound.pause();
+  }, 7000);
 }
 
 // backButton()
