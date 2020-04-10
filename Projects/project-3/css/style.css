@@ -13,25 +13,28 @@ body {
   bottom: 0;
 }
 
+/* Game title properties */
 .gameTitle {
   font-family: "Berlin Sans FB", sans-serif;
   font-weight: lighter;
-  font-size: 3.5vw;
+  font-size: 4.5vw;
   text-align: center;
+  margin-top: 1vw;
 }
 
+ /* Levels pop up winodows properties starts here */
 .gameLevels {
-  margin-top: -2vw;
+  margin-top: -1vw;
 }
 
 .levels {
   display: table;
   float: left;
-  width: 35vw;
+  width: 30vw;
 }
 
 .level1, .level2 {
-  width: 35vw;
+  width: 30vw;
   float: left;
   left: 0;
   right: 0;
@@ -42,7 +45,7 @@ body {
 }
 
 #model2{
-  margin-left: -15vw;
+  margin-left: -13vw;
 }
 
 .model1Title, .model2Title {
@@ -56,10 +59,11 @@ body {
   top: 0;
   bottom: 0;
   margin: auto;
-  margin-top: 15.5vw;
+  margin-top: 13vw;
 }
 
-#colorful, #shiraz, #spring, #food, #desert, #strawberry, #dog, #breakFast {
+
+#colorful, #shiraz, #spring, #food, #desert, #strawberry, #dog, #breakfast {
   width: 15vw;
   padding: 1vw;
   border-radius: 15px;
@@ -124,8 +128,20 @@ body {
   padding: 1vw;
   display: contents;
 }
-/* Start screen elements properties ends here */
+/* Start screen and levels pop up window elements properties ends here */
+
 /* Level one elements properties starts here */
+.rowProperties {
+    width:10vw;
+    float:left;
+    display: table;
+    left: 0;
+    right:0;
+    top:0;
+    bottom:0;
+    z-index: 2;
+}
+
 .row1, .row2, .row3, .row4, .row5, .row6{
   display: inline-table;
   position: relative;
@@ -139,17 +155,6 @@ body {
 
 .row2, .row3, .row4, .row5, .row6{
   margin-top: -4.77vw;
-}
-
-.rowProperties {
-    width:10vw;
-    float:left;
-    display: table;
-    left: 0;
-    right:0;
-    top:0;
-    bottom:0;
-    z-index: 2;
 }
 
 #template-container {
@@ -264,6 +269,7 @@ li {
   height: 47vw;
 }
 
+ /* Pop up windows and questions pop up window */
 .popUpWindow, .popUpQuestion {
   display: table;
   margin: auto;
@@ -337,8 +343,8 @@ li {
   color: white;
   background-color: gold;
 }
-/* Level one elements properties ends here */
 
+/* Level Two elements properties starts here */
 .secondPuzzleModels {
   margin: auto;
     top: 0;
@@ -412,3 +418,4 @@ li {
   margin-top: -1vw;
   margin-left: 1vw;
 }
+/* Level Two elements properties ends here */

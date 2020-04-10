@@ -265,11 +265,110 @@
         "assets/images/Level2/strawberry/46.png",
         "assets/images/Level2/strawberry/47.png"
       ],
+      "dog": [
+        "assets/images/Level2/dog/0.png",
+        "assets/images/Level2/dog/1.png",
+        "assets/images/Level2/dog/2.png",
+        "assets/images/Level2/dog/3.png",
+        "assets/images/Level2/dog/4.png",
+        "assets/images/Level2/dog/5.png",
+        "assets/images/Level2/dog/6.png",
+        "assets/images/Level2/dog/7.png",
+        "assets/images/Level2/dog/8.png",
+        "assets/images/Level2/dog/9.png",
+        "assets/images/Level2/dog/10.png",
+        "assets/images/Level2/dog/11.png",
+        "assets/images/Level2/dog/12.png",
+        "assets/images/Level2/dog/13.png",
+        "assets/images/Level2/dog/14.png",
+        "assets/images/Level2/dog/15.png",
+        "assets/images/Level2/dog/16.png",
+        "assets/images/Level2/dog/17.png",
+        "assets/images/Level2/dog/18.png",
+        "assets/images/Level2/dog/19.png",
+        "assets/images/Level2/dog/20.png",
+        "assets/images/Level2/dog/21.png",
+        "assets/images/Level2/dog/22.png",
+        "assets/images/Level2/dog/23.png",
+        "assets/images/Level2/dog/24.png",
+        "assets/images/Level2/dog/25.png",
+        "assets/images/Level2/dog/26.png",
+        "assets/images/Level2/dog/27.png",
+        "assets/images/Level2/dog/28.png",
+        "assets/images/Level2/dog/29.png",
+        "assets/images/Level2/dog/30.png",
+        "assets/images/Level2/dog/31.png",
+        "assets/images/Level2/dog/32.png",
+        "assets/images/Level2/dog/33.png",
+        "assets/images/Level2/dog/34.png",
+        "assets/images/Level2/dog/35.png",
+        "assets/images/Level2/dog/36.png",
+        "assets/images/Level2/dog/37.png",
+        "assets/images/Level2/dog/38.png",
+        "assets/images/Level2/dog/39.png",
+        "assets/images/Level2/dog/40.png",
+        "assets/images/Level2/dog/41.png",
+        "assets/images/Level2/dog/42.png",
+        "assets/images/Level2/dog/43.png",
+        "assets/images/Level2/dog/44.png",
+        "assets/images/Level2/dog/45.png",
+        "assets/images/Level2/dog/46.png",
+        "assets/images/Level2/dog/47.png"
+      ],
+      "breakfast": [
+        "assets/images/Level2/breakfast/0.png",
+        "assets/images/Level2/breakfast/1.png",
+        "assets/images/Level2/breakfast/2.png",
+        "assets/images/Level2/breakfast/3.png",
+        "assets/images/Level2/breakfast/4.png",
+        "assets/images/Level2/breakfast/5.png",
+        "assets/images/Level2/breakfast/6.png",
+        "assets/images/Level2/breakfast/7.png",
+        "assets/images/Level2/breakfast/8.png",
+        "assets/images/Level2/breakfast/9.png",
+        "assets/images/Level2/breakfast/10.png",
+        "assets/images/Level2/breakfast/11.png",
+        "assets/images/Level2/breakfast/12.png",
+        "assets/images/Level2/breakfast/13.png",
+        "assets/images/Level2/breakfast/14.png",
+        "assets/images/Level2/breakfast/15.png",
+        "assets/images/Level2/breakfast/16.png",
+        "assets/images/Level2/breakfast/17.png",
+        "assets/images/Level2/breakfast/18.png",
+        "assets/images/Level2/breakfast/19.png",
+        "assets/images/Level2/breakfast/20.png",
+        "assets/images/Level2/breakfast/21.png",
+        "assets/images/Level2/breakfast/22.png",
+        "assets/images/Level2/breakfast/23.png",
+        "assets/images/Level2/breakfast/24.png",
+        "assets/images/Level2/breakfast/25.png",
+        "assets/images/Level2/breakfast/26.png",
+        "assets/images/Level2/breakfast/27.png",
+        "assets/images/Level2/breakfast/28.png",
+        "assets/images/Level2/breakfast/29.png",
+        "assets/images/Level2/breakfast/30.png",
+        "assets/images/Level2/breakfast/31.png",
+        "assets/images/Level2/breakfast/32.png",
+        "assets/images/Level2/breakfast/33.png",
+        "assets/images/Level2/breakfast/34.png",
+        "assets/images/Level2/breakfast/35.png",
+        "assets/images/Level2/breakfast/36.png",
+        "assets/images/Level2/breakfast/37.png",
+        "assets/images/Level2/breakfast/38.png",
+        "assets/images/Level2/breakfast/39.png",
+        "assets/images/Level2/breakfast/40.png",
+        "assets/images/Level2/breakfast/41.png",
+        "assets/images/Level2/breakfast/42.png",
+        "assets/images/Level2/breakfast/43.png",
+        "assets/images/Level2/breakfast/44.png",
+        "assets/images/Level2/breakfast/45.png",
+        "assets/images/Level2/breakfast/46.png",
+        "assets/images/Level2/breakfast/47.png"
+      ],
       "emptySpot": "assets/images/Level2/emptySpot.png"
     }
   },
-  "questionsPackage": [
-    {
+  "questionsPackage": [{
       "question": "Multiplying the number 72 X 98 two equals:",
       "answer": "576",
       "clue": "You can also say in single digits!"
@@ -327,7 +426,7 @@
     {
       "question": "Who is the inventor the world's first watch?",
       "answer": "Peter Henlein",
-      "clue": "Say full name!"
+      "clue": "Say their full name!"
     },
     {
       "question": "The only country in the world with three capital cities?",
@@ -335,89 +434,164 @@
       "clue": "No need to have a clue!"
     },
     {
-      "question":"Where is the smallest country in the world located?",
+      "question": "Where is the smallest country in the world located?",
       "answer": "vatican",
       "clue": "Say only one word!"
     },
     {
-      "question":"Polo game originates from which country?",
+      "question": "Polo game originates from which country?",
       "answer": "Persia",
       "clue": "Say only one word!"
     },
     {
-      "question":"Who reached south pole first?",
+      "question": "Who reached south pole first?",
       "answer": "Roald Amundsen",
-      "clue": "Say full name!"
+      "clue": "Say their full name!"
     },
     {
-      "question":"What is the hairiest animal in the world?",
+      "question": "What is the hairiest animal in the world?",
       "answer": "sea otter",
-      "clue": "Say full name!"
+      "clue": "Say their full name!"
     },
     {
-      "question":"How many languages are spoken in the world?",
+      "question": "How many languages are spoken in the world?",
       "answer": "6500",
       "clue": "You can also say in single digits!"
     },
     {
-      "question":"who is the first woman physician in the world?",
+      "question": "who is the first woman physician in the world?",
       "answer": "Elizabeth Blackwell",
-      "clue": "Say full name!"
+      "clue": "Say their full name!"
     },
     {
-      "question":"Where was the first library of the world made?",
+      "question": "Where was the first library of the world made?",
       "answer": "Iraq",
       "clue": "No need to have a clue!"
     },
     {
-      "question":"What is the result of this code: (2*4+6/2-5)?",
+      "question": "What is the result of this code: (2*4+6/2-5)?",
       "answer": "6",
       "clue": "No need to have a clue!"
     },
     {
-      "question":"What is the name of world's highest waterfall?",
+      "question": "What is the name of world's highest waterfall?",
       "answer": "Angel falls",
       "clue": "**** falls!"
     },
     {
-      "question":"What year was the eiffel tower made?",
+      "question": "What year was the eiffel tower made?",
       "answer": "1887",
       "clue": "Say only the year!"
     },
     {
-      "question":"How old is queen elizabeth 2?",
+      "question": "How old is queen elizabeth 2?",
       "answer": "93",
       "clue": "Say only the age!"
     },
     {
-      "question":"When did the money system start?",
+      "question": "When did the money system start?",
       "answer": "5000 bc",
       "clue": "**** BC"
     },
     {
-      "question":"Who was the first tailor in the world?",
+      "question": "Who was the first tailor in the world?",
       "answer": "Adam",
       "clue": "Answer is clear!"
     },
     {
-      "question":"How many species of birds can't fly?",
+      "question": "How many species of birds can't fly?",
       "answer": "60",
       "clue": "Say only the number!"
     },
     {
-      "question":"How many species of birds can't fly?",
+      "question": "How many species of birds can't fly?",
       "answer": "60",
       "clue": "Say only the number!"
     },
     {
-      "question":"Who is the author of 'War and Peace' novel?",
+      "question": "Who is the author of 'War and Peace' novel?",
       "answer": "Leo Tolstoy",
-      "clue": "Say full name!"
+      "clue": "Say their full name!"
     },
     {
-      "question":"Who is the director of 'GodFather' movies?",
+      "question": "Who is the director of 'GodFather' movies?",
       "answer": "Francis Ford Coppola",
-      "clue": "Say full name!"
+      "clue": "Say their full name!"
+    },
+    {
+      "question": "What is the first word in english dictionary?",
+      "answer": "a",
+      "clue": "Say only one word!"
+    },
+    {
+      "question": "What is the most venomous snake in the world?",
+      "answer": "Inland taipan",
+      "clue": "It's more than one word!"
+    },
+    {
+      "question": "Who developed the world's first programming language?",
+      "answer": "Konrad Zuse",
+      "clue": "Say their full name!"
+    },
+    {
+      "question": "How long does a soccer game last?",
+      "answer": "90 minutes",
+      "clue": "**** minutes"
+    },
+    {
+      "question": "How old is the world's oldest bridge in the world?",
+      "answer": "3000 years old",
+      "clue": "**** years old"
+    },
+    {
+      "question": "How many novels did Jane Austen write?",
+      "answer": "At least 13",
+      "clue": "At least ****"
+    },
+    {
+      "question": "How many ghazals (lyrical, rhymed poems) did rumi write?",
+      "answer": "3000",
+      "clue": "Say only number of them!"
+    },
+    {
+      "question": "What was the world's first book written on paper?",
+      "answer": "Gutenberg Bible",
+      "clue": "It's more than one word!"
+    },
+    {
+      "question": "How fast can a cheetah run?",
+      "answer": "93 kilometers per hour",
+      "clue": "**** kilometers per hour"
+    },
+    {
+      "question": "what animal has the longest nose in the world?",
+      "answer": "Elephent",
+      "clue": "It's one word!"
+    },
+    {
+      "question": "How many tim hortons stores are there in the world?",
+      "answer": "4932",
+      "clue": "Say only the number!"
+    },
+    {
+      "question": "How many presidencies has america had so far?",
+      "answer": "45",
+      "clue": "Say only the number"
+    },
+    {
+      "question": "Who is the world's fastest chess player currently?",
+      "answer": "Magnus Carlsen",
+      "clue": "Say their full name!"
+    },
+    {
+      "question": "Where is lowest temperature in the world?",
+      "answer": "Antarctica",
+      "clue": "It's one word!"
+    },
+    {
+      "question": "Who has the most beautiful smile in the world?",
+      "answer": "Michael Jackson",
+      "clue": "Say their full name!"
     }
   ]
 }

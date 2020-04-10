@@ -4,16 +4,32 @@
 Project3 - Jigsaw puzzles
 Zahra Ahmadi
 
+
+
+*************************************************************************************
 Reference
 
-lightslider
-http://sachinchoolur.github.io/lightslider/settings.html
-
-background image
-https://www.freepik.com/free-vector/blue-puzzle-pieces-paint-splashes-background_714024.htm
+Images:
 
 Nasir-ol-molk mosque
 https://www.irandiamondtour.com/ArticleDetails/6/Shiraz-City
+
+Food
+https://unsplash.com/photos/1SPu0KT-Ejg
+
+Spring
+https://unsplash.com/
+
+Color Mix
+couldn't find the link
+
+Gifs:
+https://cdn.streamelements.com/uploads/24548f52-afb9-4338-b823-d2a5d1b5c793.gif
+****************************************************************************************
+Borrowed Codes:
+
+Local storage
+https://www.w3schools.com/jsref/prop_win_localstorage.asp
 
 effect("shake")
 https://makitweb.com/how-to-shake-an-element-with-jquery-ui/
@@ -24,36 +40,32 @@ https://stackoverflow.com/questions/5568292/get-the-first-class-from-an-element-
 substring()
 https://stackoverflow.com/questions/10741899/how-to-select-last-two-characters-of-a-string
 
-Gifs:
-https://cdn.streamelements.com/uploads/24548f52-afb9-4338-b823-d2a5d1b5c793.gif
+Splice()
+http://www.jquerybyexample.net/2012/02/remove-item-from-array-using-jquery.html
 *********************************************************************/
-let puzzleScreen;
-let puzzle1pieces;
-let numSlides;
-let piecesInSlide;
-let li;
-let arrowTop;
-let arrowBottom;
-let puzzlePiece;
-let droppedPiece;
-let pieceImage;
-let imagesIds;
-//SABINE variable to hold the puzzle id chosen (retrieved from local storage)
-let puzzleId;
-let puzzles;
-let $backbutton;
-let $homebutton;
-let $playAgain;
-
+let puzzleScreen; // Stores puzzle template image 
+let numSlides; // Stores the length of array which contains the puzzle pieces
+let numSlidesToShow = 3; // Number of slides to show in the slider
+let piecesInSlide; // An array which puzzle pieces elements with all of their properties are stored in
+let allSlidesWereDropped = 0; // A variable to check if all pieces were dropped
+let slide; // Stores new slide element
+let arrowTop; // Stores top arrow element
+let arrowBottom; // Stores bottom arrow element
+let puzzlePiece; // Stores new puzzle piece in
+let pieceImage; // An array stores pieces images address
+let puzzleId; //SABINE variable to hold the puzzle id chosen (retrieved from local storage)
+let puzzles; // An array which four different puzzles are stored in
+let $backbutton; // Stores $backButton element in
+let $homebutton; // Stores $homekButton element in
+let $playAgain; // Stores $playAgain button element in
+let isGameOver = false; // Checks if game is over
 $(document).ready(setup);
 
 // setup()
 //
 // Sets up everything
 function setup() {
-  droppedPiece = 0;
   piecesInSlide = [];
-  imagesIds = [];
   pieceImage = [];
 
   // Calls required data from JSON file
@@ -67,7 +79,7 @@ function setup() {
 //
 // Creates and runs dataLoaded funtion
 function dataLoaded(data) {
-  // Gets data from Json file
+  // Gets data from Json file and stores them in puzzles array
   puzzles = [{
       id: "shiraz",
       length: data.puzzles.firstPuzzle.shiraz.length,
@@ -91,13 +103,14 @@ function dataLoaded(data) {
   ];
   // Gets the puzzle id from the other script file using local storage
   puzzleId = localStorage.getItem("puzzle1Id");
+  // Calls makePuzzle function
   makePuzzle(data);
 }
 
 
 // makePuzzle()
 //
-// Creates first puzzle and prompts pieces() funtion
+// Creates puzzle and prompts pieces() funtion
 function makePuzzle(data) {
   puzzleScreen = $('<img>').addClass('puzzleScreen').attr('src', `${data.puzzles.firstPuzzle.puzzleScreen}`).appendTo('#template-container');
   let ul = $('<ul></ul>').addClass('content-slider').appendTo('.item');
@@ -113,17 +126,19 @@ function pieces(data) {
   // Creates the top arrow
   arrowTop = $('<img>').addClass('arrowTop').attr('src', 'assets/images/arrowTop.png').appendTo(`.content-slider`);
 
+  // Stores puzzle id 
   let getPuzzleId;
   // Based on the id of the puzzle, gets data from Json file
-  for (let i = 0; i < 4; i++) {
+  for (let i = 0; i < puzzles.length; i++) {
     if (puzzleId === puzzles[i].id) {
       getPuzzleId = i;
       // Gets data from JSON file
-      // Stores  slide's length in a variable
+      // Stores slide's length in a variable
       numSlides = puzzles[i].length;
       // Stores all images in an array
       for (var h = 0; h < numSlides; h++) {
         let imgAddress = puzzles[i].pieces[h];
+        // Stores all images address in an array
         pieceImage.push(imgAddress);
       }
     }
@@ -137,6 +152,7 @@ function pieces(data) {
     let randomPieceImg = getRandomElement(pieceImage);
     // Gets the image Id
     let imageId;
+    // As The number embeded in the images address is going to be used the address length matters
     if (randomPieceImg.length === firstPieceLength) {
       imageId = randomPieceImg.charAt(randomPieceImg.length - 5);
     } else if (randomPieceImg.length === (firstPieceLength + 1)) {
@@ -144,7 +160,7 @@ function pieces(data) {
     }
 
     // Creates slide
-    li = $('<li></li>').addClass(`slide${i}`).addClass("slideC").appendTo('.content-slider');
+    slide = $('<li></li>').addClass(`slide${i}`).addClass("slideC").appendTo('.content-slider');
     // Gets the piece's image address
     let imgAddress = randomPieceImg;
     // Creates the image element and assigns it to the slide
@@ -164,7 +180,7 @@ function pieces(data) {
     removeImageAfterAssignment(randomPieceImg);
 
     // Displays only the first four pieces
-    if (i > 3) {
+    if (i > numSlidesToShow) {
       $(`.slide${i}`).hide();
     }
   }
@@ -199,13 +215,14 @@ function removeImageAfterAssignment(image) {
 function spotsToPositionPieces(data) {
   let numSpots = 5;
   let totalNumSpots = 0;
+  let numRows = 5;
   // Creates five rows..
-  for (var j = 0; j < 5; j++) {
+  for (var j = 0; j < numRows; j++) {
     //each containing six spots
     for (var i = numSpots; i >= totalNumSpots; i--) {
       // Gets data from JSON file
       let image = data.puzzles.firstPuzzle.emptySpots[i];
-      // Adds a piece with a similar shape of puzzle piece to occupy the space until the real piece is dropped
+      // Adds a piece with a similar shape of puzzle piece image to occupy the space until the real piece is dropped
       let pieceHidingLayer = $('<img>').addClass(`hidingLayer${i}`).addClass("spotImage").attr({
         src: `${image}`
       }).appendTo(`#spotToPosition${i}`);
@@ -229,13 +246,13 @@ function spotsToPositionPieces(data) {
 
 // onDrop()
 //
-// On drop, reads the following code and implements it
+// On drop, implements the following code
 function onDrop(event, ui) {
 
   // If the spot has not been already filled...
   if (!($(this).hasClass("dropped"))) {
 
-    // Gets the spot id, Gets the piece first class
+    // Gets the spot id, Gets the piece first class name
     // Finds the digit embeded in the spot and the piece + assigns them to variables
     let itemId = $(this).attr("id");
     let setSpotId = findSpotId(itemId);
@@ -245,7 +262,6 @@ function onDrop(event, ui) {
     if ($(`.hidingLayer${setSpotId}`).hasClass("clicked")) {
       // Adds "dropped" class so that this spot can't be filled again
       $(this).addClass("dropped");
-
 
       // SABINE EDIT START:
       //The one we dropped AND CHECK THAT IT IS NOT ONE ALREADY DROPPED ...
@@ -276,14 +292,14 @@ function onDrop(event, ui) {
       let slides = $(".slideC");
 
       // SHOWS THE FIRST FOUR ..
-      for (let j = 0; j <= 3; j++) {
+      for (let j = 0; j <= numSlidesToShow; j++) {
         $(slides[j]).show();
       }
       // SABINE EDITS END.
     }
 
-    // Once all the pieces were dropped to the empty spots prompts the function
-    if (piecesInSlide.length === 0) {
+    // Once all the pieces were dropped to the empty spots, calls the makePuzzleFullSize function
+    if (piecesInSlide.length === allSlidesWereDropped) {
       makePuzzleFullSize();
     }
   } else {
@@ -316,11 +332,12 @@ function goNext() {
 // Once the down arrow is clicked, shows the next hidden piece on top and hides the last piece on bottom of slider
 function goPrev() {
   let slides = $(".slideC");
+  let pieceToKeep = 0;
   // Stores last piece in the slider
   let firstPiece = piecesInSlide[piecesInSlide.length - 1];
 
   // Moves along
-  for (let i = piecesInSlide.length - 1; i > 0; i--) {
+  for (let i = piecesInSlide.length - 1; i > pieceToKeep; i--) {
     piecesInSlide[i] = piecesInSlide[i - 1];
     $(slides[i]).html(piecesInSlide[i]);
   }
@@ -333,13 +350,13 @@ function goPrev() {
 
 // makePuzzleFullSize()
 //
-// Removes the slider column, reveal the pieces dropped to the puzzle board
-// checks the piece arrangment. If true display victory screen, else displays game over screen
+// Removes the slider column, reveals the pieces dropped to the puzzle board
+// checks the piece arrangment. If it is true, displays victory screen, else displays game over screen
 function makePuzzleFullSize() {
   let numPiecesFadeIn = 0;
   let totalNumPiecesFadeIn = 5;
   let fadeTime = 700;
-
+  let numRowsToFade = 6;
   // Removes light slider column
   $('.columnToRemove').remove();
   $('.column').css({
@@ -347,7 +364,7 @@ function makePuzzleFullSize() {
     "float": "none"
   });
   // Makes the rows of pieces fade in with delay
-  for (var i = 1; i < 6; i++) {
+  for (var i = 1; i < numRowsToFade; i++) {
     $(`.row${i}`).css({
       "margin-left": "7.5vw"
     });
@@ -357,7 +374,7 @@ function makePuzzleFullSize() {
     numPiecesFadeIn += 6;
     totalNumPiecesFadeIn += 6;
   }
-  // Prompts checkPuzzleArrangement function
+  // Calls checkPuzzleArrangement function
   checkPuzzleArrangement();
 }
 
@@ -366,7 +383,8 @@ function makePuzzleFullSize() {
 // Checks whether the pieces are placed in the right position or not
 function checkPuzzleArrangement() {
   let numCorrectPositionedPieces = 0;
-  for (var p = 0; p < 30; p++) {
+  for (var p = 0; p < numSlides; p++) {
+    // Gets spots and pieces ids
     let getSpotId = `spotToPosition${p}`;
     let checkSpotId = findSpotId(getSpotId);
     let getPieceId = $(`.droppedPiece${p}`).attr("id");
@@ -374,14 +392,15 @@ function checkPuzzleArrangement() {
 
     // Compare the spot and the piece ids.
     if (checkSpotId === checkPieceId) {
+      // If it is true, adds one to the numCorrectPositionedPieces variable
       numCorrectPositionedPieces++;
-      console.log("in correct spot " + numCorrectPositionedPieces);
     }
   }
   // If pieces are placed in right spot, displayes victory screen, else gameOver screen
-  if (numCorrectPositionedPieces < 30) {
+  if (numCorrectPositionedPieces < numSlides) {
+    isGameOver = true;
     gameOver();
-  } else if (numCorrectPositionedPieces === 30) {
+  } else if (numCorrectPositionedPieces === numSlides) {
     victoryScreen();
   }
 }
@@ -410,7 +429,13 @@ function gameOver() {
   setTimeout(function() {
     // Creates a pop up window
     let popUpWindow = $('<div></div>').addClass("popUpWindow").appendTo('.FirstPuzzleModels');
+    popUpWindow.css({
+      "background-color": "black"
+    });
     let message = $('<h3></h3>').addClass("message").text("Awwww, It's okay Buddy!!!").appendTo('.popUpWindow');
+    message.css({
+      "color": "white"
+    });
     let rowOfButtons = $('<div></div>').addClass("rowOfButtons").appendTo('.popUpWindow');
     // Home button container
     let leftButton = $('<div></div>').addClass("buttonPosition").attr('id', 'leftColumn').appendTo('.rowOfButtons');
@@ -474,9 +499,10 @@ function findArrayIndex(obj, list) {
 // Finds the digit placed in the spot id name in order to be used as the spot id
 function findSpotId(itemId) {
   let spotId;
-  if (itemId.length < 16) {
+  let spotImgLength = 16;
+  if (itemId.length < spotImgLength) {
     spotId = itemId.charAt(itemId.length - 1);
-  } else if (itemId.length > 15) {
+  } else if (itemId.length > spotImgLength - 1) {
     spotId = itemId.substring(itemId.length - 2, itemId.length);
   }
   return spotId;
@@ -487,10 +513,12 @@ function findSpotId(itemId) {
 // Finds the digit placed in the piece class name in order to be used as the piece id
 function findPieceId(pieceId) {
   let droppedPieceId;
-  if (pieceId.length < 10) {
-    droppedPieceId = pieceId.charAt(5);
-  } else if (pieceId.length > 9) {
-    droppedPieceId = pieceId.substring(5, pieceId.length - 3);
+  let pieceIdLength = 10;
+  let charToChoose = 5;
+  if (pieceId.length < pieceIdLength) {
+    droppedPieceId = pieceId.charAt(charToChoose);
+  } else if (pieceId.length > pieceIdLength - 1) {
+    droppedPieceId = pieceId.substring(charToChoose, pieceId.length - 3);
   }
   return droppedPieceId;
 }
@@ -530,6 +558,12 @@ function playAgainButton() {
   // Creates html element and assigns button function to
   $playAgain = $('<div></div>').attr('id', 'playAgainButton').text("Play again").appendTo("#rightColumn");
   $playAgain.button();
+  // If it's gameOver screen, changes the background color
+  if (isGameOver) {
+    $playAgain.css({
+      "background-color": "#189910"
+    });
+  }
 
   // On click, reloads the page
   $playAgain.on('click', function() {
