@@ -391,7 +391,7 @@
     {
       "question": "Where is the oldest tree of the world?",
       "answer": "California's White Mountain",
-      "clue": "Say three words!"
+      "clue": "It's more than two words!"
     },
     {
       "question": "How many days a human survive without food?",
@@ -605,7 +605,7 @@
     },
     {
       "question": "What is the nearest planet to earth?",
-      "answer": "Mercury",
+      "answer": "mercury",
       "clue": "It's only one word!"
     },
     {

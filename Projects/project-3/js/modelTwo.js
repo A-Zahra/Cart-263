@@ -65,6 +65,7 @@ let displayableAreaHeight; // Stores the height of an area that pieces can be di
 let borderLeft = 0; // Stores the value which is added to displayableAreaWidth
 let numPieces = 48; // stores total number of puzzle pieces
 let puzzlePieces; // An array which stores all puzzle pieces elements with their properties
+let numDroppedPieces = 0; // Stores number of pieces dropped to the spots on puzzle board
 let allPiecesImgAddress; // An array which stores all pieces images address
 let questionsPackage; // An array which stores all of the questions
 let totalNumQuestions; // Stores total number of questions
@@ -187,7 +188,6 @@ function dataLoaded(data) {
   }
   // Sets total number of questions which should be shown
   totalNumQuestions = data.questionsPackage.length / 5;
-  console.log(totalNumQuestions);
   // Every few seconds calls the makeQuestions function
   displayQuestion = setInterval(makeQuestions, displayTimeIntervals);
   // Then, calls the following functions
@@ -441,7 +441,8 @@ function onDrop(event, ui) {
   let pieceId = findPieceId(ui.draggable.attr('id'));
   //If the ids are equal runs the following code
   if (spotId === pieceId) {
-
+    // Adds one to the number of pieces dropped
+    numDroppedPieces++;
     // Empties spot for adding the piece to
     $(this).empty();
     // Gets the piece image source
@@ -468,9 +469,9 @@ function onDrop(event, ui) {
       "display": "flex"
     });
   }
-
-  // If both of the left and right side containers are empty ...
-  if ($('#leftSidePieces').children().length === piecesContainersContentLimit && $('#rightSidePieces').children().length === piecesContainersContentLimit) {
+  
+  // If All of the pieces were dropped...
+  if (numDroppedPieces > 47) {
     // Removes the containers, questions charts and the back button.
     $('#leftSidePieces').remove();
     $('#rightSidePieces').remove();
