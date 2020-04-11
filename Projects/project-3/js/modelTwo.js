@@ -187,7 +187,7 @@ function dataLoaded(data) {
     questionsPackage.push(data.questionsPackage[i]);
   }
   // Sets total number of questions which should be shown
-  totalNumQuestions = data.questionsPackage.length / 5;
+  totalNumQuestions = data.questionsPackage.length / 4;
   // Every few seconds calls the makeQuestions function
   displayQuestion = setInterval(makeQuestions, displayTimeIntervals);
   // Then, calls the following functions
@@ -253,7 +253,7 @@ function displayNumQuestions() {
   for (let i = 0; i < totalNumQuestions; i++) {
     let questionBar = $('<div></div>').attr('id', 'questionBar').appendTo('.questionsChart');
     questionBar.css({
-      "width": "3.6vw",
+      "width": "2.8vw",
       "height": "2vw",
       "background-color": "red",
       "display": "table",
@@ -341,7 +341,7 @@ function makePuzzlePieces() {
     // Creates puzzle pieces
     for (let i = numPiecesToShow; i < totalNumPiecesToShow; i++) {
       // Defines a vertical rectangular area of display for the pieces
-      displayableAreaHeight = Math.floor(($('.columns').height() * 0.7));
+      displayableAreaHeight = Math.floor(($('.columns').height() * 0.3));
       displayableAreaWidth = Math.floor($('.columns').width() / 4.5);
 
       // According to the column chosen increases or decreases left border value
