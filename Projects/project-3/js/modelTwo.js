@@ -70,7 +70,7 @@ let allPiecesImgAddress; // An array which stores all pieces images address
 let questionsPackage; // An array which stores all of the questions
 let totalNumQuestions; // Stores total number of questions
 let displayQuestion; // Stores the setInterval method which prompts makeQuestions function
-let displayTimeIntervals = 17000; // The value which based on that the makeQuestions functions is call every few seconds
+let displayTimeIntervals = 22000; // The value which based on that the makeQuestions functions is call every few seconds
 let questionsChart; // An array which stores displayable questions
 let rightAnswer = 0; // Stores the answer of question
 let popUpQuestion; // Stores question's pop up window
@@ -216,7 +216,7 @@ function makeQuestions() {
     // Gets the question asnwer
     rightAnswer = randomQuestionSet.answer.toUpperCase();
     // Sets the number of seconds the player will have to answer
-    seconds = 15;
+    seconds = 20;
     // Creates the element which will display the timer
     let questionTimer = $('<p></p>').addClass("questionTimer").appendTo('.popUpQuestion');
     // Runs the timer
@@ -288,7 +288,7 @@ function checkAnswer(answer) {
   if (playerAnswer === rightAnswer) {
     seconds = 1;
     clearInterval(displayQuestion);
-    displayTimeIntervals = 17000;
+    displayTimeIntervals = 22000;
     displayQuestion = setInterval(makeQuestions, displayTimeIntervals);
   } else {
     // Otherwise, just shakes the question window
