@@ -335,13 +335,23 @@ li {
   background-color: #931dff;
 }
 
-#backbutton {
+/* Div containing back and reload buttons */
+.buttons {
   position: absolute;
-  margin-top: 42vw;
-  margin-left: 3vw;
-  font-size: 1.5vw;
+  margin-top: 36.5vw;
+  margin-left: 1.5vw;
+}
+
+#backbutton, #reloadButton {
   color: white;
   background-color: gold;
+  font-size: 1.3vw;
+  margin: 1.5vw;
+  left: 0;
+  right:0;
+  top: 0;
+  bottom:0;
+  display: list-item;
 }
 
 /* Level Two elements properties starts here */

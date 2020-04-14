@@ -73,6 +73,7 @@ let pieceImage; // An array stores pieces images address
 let puzzleId; //SABINE variable to hold the puzzle id chosen (retrieved from local storage)
 let puzzles; // An array which four different puzzles are stored in
 let $backbutton; // Stores $backButton element in
+let $reloadButton; // Stores $reloadButton element in
 let $homebutton; // Stores $homekButton element in
 let $playAgain; // Stores $playAgain button element in
 let isGameOver = false; // Checks if game is over
@@ -92,7 +93,8 @@ function setup() {
   $.getJSON("data/data.json")
     .done(dataLoaded) // If there is no error, runs dataLoaded function
     .fail(dataError); // otherwise, runs the dataError function
-  backButton()
+  backButton();
+  reloadButton();
 }
 
 // dataLoaded()
@@ -446,7 +448,9 @@ function gameOver() {
   $('body').css({
     "background-image": "url('')"
   });
+  // Hides buttons
   $backbutton.hide();
+  $reloadButton.hide();
   // After 6 seconds, runs the following code
   setTimeout(function() {
     // Creates a pop up window
@@ -487,8 +491,9 @@ function victoryScreen() {
   $('body').css({
     "background-image": "url('')"
   });
-  // Hides back button
+  // Hides buttons
   $backbutton.hide();
+  $reloadButton.hide();
   // After 6 seconds, runs the following code
   setTimeout(function() {
     // Creates a pop up window
@@ -553,13 +558,27 @@ function findPieceId(pieceId) {
 //
 // Creates back button
 function backButton() {
-  $backbutton = $('<div></div>').attr('id', 'backbutton').text("back");
+  $backbutton = $('<div></div>').attr('id', 'backbutton').text("Back");
   $backbutton.button();
-  // Appends the button to FirstPuzzleModels div
-  $backbutton.appendTo(".FirstPuzzleModels");
+  // Appends the button to buttons div
+  $backbutton.appendTo(".buttons");
   // On click, goes back to main page
   $backbutton.on('click', function() {
     window.location.href = "index.html"
+  });
+}
+
+// reloadButton()
+//
+// Creates reload button
+function reloadButton() {
+  $reloadButton = $('<div></div>').attr('id', 'reloadButton').text("Reload");
+  $reloadButton.button();
+  // Appends the button to buttons div
+  $reloadButton.appendTo(".buttons");
+  // On click, reloads the page
+  $reloadButton.on('click', function() {
+    window.location.href = "modelOne.html"
   });
 }
 
