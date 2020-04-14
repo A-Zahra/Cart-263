@@ -28,8 +28,8 @@ function setup() {
   /* Displays the intro screen */
   function introScreen() {
     let introduction = $('<h1></h1>').addClass("gameTitle").text("Jigsaw Puzzle Game").appendTo('.introduction').after($('.gameLevels'));
-    $('#model1').on("click", puzzleModel1);
-    $('#model2').on("click", puzzleModel2);
+    $('.model1Title').on("click", puzzleModel1);
+    $('.model2Title').on("click", puzzleModel2);
   }
 
   // Once the model1 is clicked..
