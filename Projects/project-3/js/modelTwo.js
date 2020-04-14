@@ -341,7 +341,7 @@ function makePuzzlePieces() {
     // Creates puzzle pieces
     for (let i = numPiecesToShow; i < totalNumPiecesToShow; i++) {
       // Defines a vertical rectangular area of display for the pieces
-      displayableAreaHeight = Math.floor(($('.columns').height() * 0.3));
+      displayableAreaHeight = Math.floor(($('.columns').height() / 2));
       displayableAreaWidth = Math.floor($('.columns').width() / 4.5);
 
       // According to the column chosen increases or decreases left border value
