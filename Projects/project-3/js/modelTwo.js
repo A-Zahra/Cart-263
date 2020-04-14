@@ -623,7 +623,8 @@ function backButton() {
     "margin-left": "22vw",
     "font-size": "1.5vw",
     "color": "white",
-    "background-color": "blueviolet"
+    "background-color": "blueviolet",
+    "display": "table"
   });
   $backbutton.button();
   // Appends the button to FirstPuzzleModels div
